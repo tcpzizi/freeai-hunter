@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-20 19:53 UTC | total: 5
+Updated: 2026-09-20 21:55 UTC | total: 6
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -9,3 +9,4 @@ Updated: 2026-09-20 19:53 UTC | total: 5
 | 34.0 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
 | 13.2 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
 | 13.2 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
+| 10.6 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
