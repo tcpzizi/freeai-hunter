@@ -1,0 +1,90 @@
+model_registries:
+  openrouter: https://openrouter.ai/api/v1/models
+  huggingface: https://huggingface.co/api/models
+
+page_watch:
+  max_pages_per_run: 260
+  paths: ["/pricing", "/free", "/students", "/startups", "/credits", "/changelog"]
+  domains: [openai.com, anthropic.com, ai.google.dev, mistral.ai, groq.com,
+    cerebras.ai, together.ai, fireworks.ai, deepinfra.com, replicate.com,
+    deepseek.com, moonshot.ai, x.ai, cohere.com, ai21.com, build.nvidia.com,
+    sambanova.ai, hyperbolic.xyz, novita.ai, nebius.com, lambda.ai, runpod.io,
+    modal.com, baseten.co, openrouter.ai, huggingface.co, vercel.com,
+    perplexity.ai, poe.com, notion.com, cursor.com, windsurf.com, zed.dev,
+    warp.dev, replit.com, lovable.dev, bolt.new, v0.app, gamma.app,
+    elevenlabs.io, assemblyai.com, deepgram.com, runwayml.com, lumalabs.ai,
+    pika.art, kling.ai, suno.com, ideogram.ai, leonardo.ai, recraft.ai,
+    krea.ai, stability.ai, firecrawl.dev, tavily.com, exa.ai, serper.dev,
+    jina.ai, langfuse.com, qdrant.tech, upstash.com, e2b.dev, browserbase.com,
+    supabase.com, neon.tech]
+
+github_watch:
+  repos: [cheahjs/free-llm-api-resources, zukixa/cool-ai-stuff,
+    mnfst/awesome-free-llm-apis, open-free-llm-api/awesome-freellm-apis,
+    tatn/awesome-free-ai-apis, ripienaar/free-for-dev, 255kb/stack-on-a-budget]
+  search_queries:
+    - "free llm api in:name,description,readme"
+    - "free ai credits in:readme"
+
+rss:
+  official_blogs:
+    - https://openai.com/news/rss.xml
+    - https://www.anthropic.com/rss.xml
+    - https://blog.google/technology/ai/rss/
+    - https://developers.googleblog.com/feeds/posts/default
+    - https://mistral.ai/news/feed.xml
+    - https://groq.com/feed/
+    - https://www.together.ai/blog/rss.xml
+    - https://huggingface.co/blog/feed.xml
+    - https://blog.cloudflare.com/rss/
+    - https://github.blog/changelog/feed/
+    - https://openrouter.ai/announcements/rss
+    - https://cohere.com/blog/rss.xml
+    - https://blogs.nvidia.com/feed/
+    - https://vercel.com/atom
+    - https://elevenlabs.io/blog/rss.xml
+  news:
+    - https://techcrunch.com/category/artificial-intelligence/feed/
+    - https://venturebeat.com/category/ai/feed/
+    - https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
+    - https://the-decoder.com/feed/
+    - https://www.marktechpost.com/feed/
+    - https://tldr.tech/api/rss/ai
+    - https://bensbites.beehiiv.com/feed
+    - https://buttondown.com/ainews/rss
+    - https://simonwillison.net/atom/everything/
+  deals:
+    - https://appsumo.com/rss/
+    - https://www.producthunt.com/feed
+    - https://feeds.feedburner.com/SlickdealsnetFP
+  google_news_queries:
+    - "AI \"free credits\""
+    - "\"free API credits\" AI developers"
+    - "AI startup \"free tier\" launch"
+    - "\"no credit card\" AI trial"
+    - "AI \"free for students\""
+    - "LLM \"free access\" limited time"
+    - "AI hackathon credits sponsors"
+    - "GPU credits free researchers"
+
+reddit:
+  subreddits: [LocalLLaMA, ChatGPTCoding, ChatGPTPro, OpenAI, ClaudeAI, Bard,
+    GoogleGeminiAI, perplexity_ai, cursor, windsurf, AI_Agents, LangChain,
+    LLMDevs, SideProject, indiehackers, freebies, DiscountedProducts,
+    aipromptprogramming, StableDiffusion]
+  search_queries:
+    - "\"free credits\" AI api"
+    - "\"no credit card\" free API"
+    - "\"free for students\" AI"
+    - "free tier llm api new"
+
+hackernews:
+  queries: ["free credits", "free tier API", "free trial AI", "free API key",
+            "credits for startups AI", "free GPU"]
+
+telegram_channels: [aideals, aitoolsfree, freeaitools]
+
+bluesky:
+  queries: ["free credits AI", "free tier API launch", "no credit card AI"]
+
+devpost: https://devpost.com/api/hackathons?order_by=recently_added

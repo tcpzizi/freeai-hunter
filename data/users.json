@@ -1,0 +1,20 @@
+{
+ "users": {
+  "133695517": {
+   "decided_at": 1789924787,
+   "decided_by": 133695517,
+   "first_name": "🇮🇷Mahdi",
+   "lang": "en",
+   "last_sent": 0,
+   "min_score": 45.0,
+   "mode": "instant",
+   "mute_until": 0,
+   "note": "",
+   "requested_at": 1789924782,
+   "sent_count": 0,
+   "status": "approved",
+   "types": null,
+   "username": "MAH24500"
+  }
+ }
+}
