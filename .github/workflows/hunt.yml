@@ -14,6 +14,12 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+      - name: checkout data repo
+        uses: actions/checkout@v4
+        with:
+          repository: tcpzizi/freeai-data
+          token: ${{ secrets.DATA_REPO_TOKEN }}
+          path: data
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -25,14 +31,23 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -m src.main
-      - name: commit
+      - name: commit data
+        working-directory: data
         run: |
           git config user.name "freeai-hunter"
           git config user.email "bot@users.noreply.github.com"
-          git add -A data docs
-          git diff --quiet --cached || git commit -m "hunt: $(date -u +%FT%TZ)"
+          git add -A
+          git diff --quiet --cached || git commit -m "data: $(date -u +%FT%TZ)"
+          for i in 1 2 3; do
+            git pull --rebase --autostash -q && git push && break || sleep 6
+          done
+      - name: commit docs
+        run: |
+          git config user.name "freeai-hunter"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A docs
+          git diff --quiet --cached || git commit -m "docs: $(date -u +%FT%TZ)"
           for i in 1 2 3; do
             git pull --rebase --autostash -q && git push && break || sleep 6
           done
