@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-21 10:47 UTC | total: 9
+Updated: 2026-09-21 16:41 UTC | total: 10
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -9,6 +9,7 @@ Updated: 2026-09-21 10:47 UTC | total: 9
 | 37.6 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
 | 35.4 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 34.0 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
+| 23.1 | ycombinator.com | student | $20 | likely | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 13.2 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
 | 13.2 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
