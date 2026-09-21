@@ -38,7 +38,7 @@ jobs:
           git config user.name "freeai-hunter"
           git config user.email "bot@users.noreply.github.com"
           git add -A
-          git diff --quiet --cached || git commit -m "data: $(date -u +%FT%TZ)"
+          git diff --quiet --cached || git commit -m "hunt data: $(date -u +%FT%TZ)"
           for i in 1 2 3; do
             git pull --rebase --autostash -q && git push && break || sleep 6
           done
@@ -47,7 +47,7 @@ jobs:
           git config user.name "freeai-hunter"
           git config user.email "bot@users.noreply.github.com"
           git add -A docs
-          git diff --quiet --cached || git commit -m "docs: $(date -u +%FT%TZ)"
+          git diff --quiet --cached || git commit -m "hunt docs: $(date -u +%FT%TZ)"
           for i in 1 2 3; do
             git pull --rebase --autostash -q && git push && break || sleep 6
           done
