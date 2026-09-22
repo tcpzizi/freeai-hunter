@@ -111,6 +111,7 @@ rss:
   - https://ycombinator.com/blog/rss.xml
   - https://vercel.com/blog/rss.xml
   - https://cursor.com/atom.xml
+  - https://vercel.com/changelog/feed
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
