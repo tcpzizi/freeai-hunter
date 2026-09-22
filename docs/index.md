@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-22 07:46 UTC | total: 12
+Updated: 2026-09-22 12:55 UTC | total: 13
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -13,6 +13,7 @@ Updated: 2026-09-22 07:46 UTC | total: 12
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 28.3 | ycombinator.com | free_credits | $5 | likely | [open](https://news.ycombinator.com/item?id=49794234) |
 | 24.5 | ycombinator.com | student | $20 | likely | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
-| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
+| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
+| 12.3 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
