@@ -1,11 +1,12 @@
 # Free AI Offers
 
-Updated: 2026-09-22 20:33 UTC | total: 16
+Updated: 2026-09-22 23:21 UTC | total: 17
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
 | 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
 | 40.2 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 37.6 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
