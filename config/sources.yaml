@@ -112,6 +112,7 @@ rss:
   - https://vercel.com/blog/rss.xml
   - https://cursor.com/atom.xml
   - https://vercel.com/changelog/feed
+  - https://together.ai/blog/rss.xml
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
