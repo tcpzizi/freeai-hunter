@@ -1,11 +1,12 @@
 # Free AI Offers
 
-Updated: 2026-09-23 12:17 UTC | total: 20
+Updated: 2026-09-23 17:01 UTC | total: 22
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
 | 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
 | 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
@@ -13,6 +14,7 @@ Updated: 2026-09-23 12:17 UTC | total: 20
 | 34.0 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
+| 32.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
 | 31.9 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
 | 31.2 | assemblyai.com | free_credits | $4 | verified | [open](https://assemblyai.com/pricing) |
