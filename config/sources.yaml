@@ -79,6 +79,7 @@ page_watch:
   - ycombinator.com
   - devpost.com
   - cloudflare.com
+  - google.dev
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
@@ -113,6 +114,7 @@ rss:
   - https://cursor.com/atom.xml
   - https://vercel.com/changelog/feed
   - https://together.ai/blog/rss.xml
+  - https://windsurf.com/feed
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
