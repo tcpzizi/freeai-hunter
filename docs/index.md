@@ -1,9 +1,10 @@
 # Free AI Offers
 
-Updated: 2026-09-24 20:36 UTC | total: 29
+Updated: 2026-09-24 23:32 UTC | total: 31
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.3 | together.ai | free_credits | $9 | verified | [open](https://together.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 37.8 | windsurf.com | free_credits | $40 | verified | [open](https://windsurf.com/pricing) |
@@ -16,6 +17,7 @@ Updated: 2026-09-24 20:36 UTC | total: 29
 | 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
 | 35.4 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 34.9 | baseten.co | free_credits | $2 | verified | [open](https://baseten.co/pricing) |
+| 34.7 | ycombinator.com | free_credits | $400 | likely | [open](https://news.ycombinator.com/item?id=49836426) |
 | 34.0 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
