@@ -1,15 +1,15 @@
 # Free AI Offers
 
-Updated: 2026-09-25 21:38 UTC | total: 31
+Updated: 2026-09-26 00:14 UTC | total: 31
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 37.8 | windsurf.com | free_credits | $40 | verified | [open](https://windsurf.com/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
 | 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
-| 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
 | 35.9 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
