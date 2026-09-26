@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-26 09:56 UTC | total: 31
+Updated: 2026-09-26 14:34 UTC | total: 32
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -34,4 +34,5 @@ Updated: 2026-09-26 09:56 UTC | total: 31
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
+| 10.8 | ycombinator.com | other | $20 | likely | [open](https://news.ycombinator.com/item?id=49856213) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
