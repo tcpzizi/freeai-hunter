@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-27 18:27 UTC | total: 32
+Updated: 2026-09-27 21:42 UTC | total: 33
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -29,6 +29,7 @@ Updated: 2026-09-27 18:27 UTC | total: 32
 | 26.4 | assemblyai.com | free_credits | $4 | verified | [open](https://assemblyai.com/pricing) |
 | 25.5 | assemblyai.com | free_credits | $0 | verified | [open](https://assemblyai.com/pricing) |
 | 24.5 | ycombinator.com | student | $20 | likely | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
+| 19.6 | ycombinator.com | free_trial | ? | likely | [open](https://news.ycombinator.com/item?id=49871066) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
 | 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
