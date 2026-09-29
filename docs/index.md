@@ -1,9 +1,10 @@
 # Free AI Offers
 
-Updated: 2026-09-29 18:09 UTC | total: 42
+Updated: 2026-09-29 21:28 UTC | total: 42
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
@@ -13,7 +14,6 @@ Updated: 2026-09-29 18:09 UTC | total: 42
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
-| 35.9 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
 | 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
 | 35.9 | elevenlabs.io | free_credits | ? | verified | [open](https://elevenlabs.io/pricing) |
 | 35.9 | novita.ai | free_credits | ? | verified | [open](https://novita.ai/pricing) |
@@ -38,9 +38,9 @@ Updated: 2026-09-29 18:09 UTC | total: 42
 | 24.5 | ycombinator.com | student | $20 | likely | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 22.9 | google.com | free_credits | $400 in credits | unconfirmed | [open](https://news.google.com/rss/articles/CBMiZkFVX3lxTFBEUFpqaDZjemxCaTcxQVNQVDVlSjlEbUZ1TTMxLWp3RE5aTGpWbVBaNEpHZHh4Ui1DOXVab0VLbHZRaEIyTEdvSmp0TE9OeXJUWjNaZ1VYQ0JSU2F0NGNhNFFhczBDdw?oc=5) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
-| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
+| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
