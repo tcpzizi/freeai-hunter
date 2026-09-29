@@ -80,6 +80,7 @@ page_watch:
   - devpost.com
   - cloudflare.com
   - google.dev
+  - simonwillison.net
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
