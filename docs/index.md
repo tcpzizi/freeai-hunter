@@ -1,9 +1,10 @@
 # Free AI Offers
 
-Updated: 2026-09-29 00:01 UTC | total: 39
+Updated: 2026-09-29 05:47 UTC | total: 40
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | novita.ai | free_credits | ? | verified | [open](https://novita.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 40.2 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
