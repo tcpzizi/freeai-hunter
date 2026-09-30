@@ -1,16 +1,19 @@
 # Free AI Offers
 
-Updated: 2026-09-30 18:02 UTC | total: 43
+Updated: 2026-09-30 18:13 UTC | total: 47
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 43.5 | elevenlabs.io | free_credits | $22 | verified | [open](https://elevenlabs.io/students) |
+| 42.4 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
+| 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
+| 41.4 | cohere.com | free_credits | $3 | verified | [open](https://cohere.com/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
 | 37.8 | windsurf.com | free_credits | $40 | verified | [open](https://windsurf.com/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
 | 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
-| 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
 | 35.9 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
@@ -39,11 +42,12 @@ Updated: 2026-09-30 18:02 UTC | total: 43
 | 20.8 | anxietychecklist.com | free_trial | ? | likely | [open](https://anxietychecklist.com/) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
+| 10.6 | datastory.tech | other | ? | likely | [open](https://www.datastory.tech) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
