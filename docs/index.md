@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-30 12:37 UTC | total: 44
+Updated: 2026-09-30 18:02 UTC | total: 43
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -31,18 +31,17 @@ Updated: 2026-09-30 12:37 UTC | total: 44
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 29.9 | v0.app | student | ? | verified | [open](https://v0.app/students) |
-| 29.8 | ycombinator.com | free_credits | $29 | likely | [open](https://news.ycombinator.com/item?id=49896452) |
 | 27.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
 | 26.4 | assemblyai.com | free_credits | $4 | verified | [open](https://assemblyai.com/pricing) |
 | 25.5 | assemblyai.com | free_credits | $0 | verified | [open](https://assemblyai.com/pricing) |
 | 24.5 | ycombinator.com | student | $20 | likely | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 22.9 | google.com | free_credits | $400 in credits | unconfirmed | [open](https://news.google.com/rss/articles/CBMiZkFVX3lxTFBEUFpqaDZjemxCaTcxQVNQVDVlSjlEbUZ1TTMxLWp3RE5aTGpWbVBaNEpHZHh4Ui1DOXVab0VLbHZRaEIyTEdvSmp0TE9OeXJUWjNaZ1VYQ0JSU2F0NGNhNFFhczBDdw?oc=5) |
+| 20.8 | anxietychecklist.com | free_trial | ? | likely | [open](https://anxietychecklist.com/) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
-| 19.6 | anxietychecklist.com | free_trial | ? | likely | [open](https://anxietychecklist.com/) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
-| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
-| 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
+| 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
+| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
