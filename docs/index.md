@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-30 05:44 UTC | total: 43
+Updated: 2026-09-30 06:05 UTC | total: 43
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -39,9 +39,9 @@ Updated: 2026-09-30 05:44 UTC | total: 43
 | 22.9 | google.com | free_credits | $400 in credits | unconfirmed | [open](https://news.google.com/rss/articles/CBMiZkFVX3lxTFBEUFpqaDZjemxCaTcxQVNQVDVlSjlEbUZ1TTMxLWp3RE5aTGpWbVBaNEpHZHh4Ui1DOXVab0VLbHZRaEIyTEdvSmp0TE9OeXJUWjNaZ1VYQ0JSU2F0NGNhNFFhczBDdw?oc=5) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
-| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
+| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
