@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-09-30 06:05 UTC | total: 43
+Updated: 2026-09-30 12:37 UTC | total: 44
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -38,6 +38,7 @@ Updated: 2026-09-30 06:05 UTC | total: 43
 | 24.5 | ycombinator.com | student | $20 | likely | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 22.9 | google.com | free_credits | $400 in credits | unconfirmed | [open](https://news.google.com/rss/articles/CBMiZkFVX3lxTFBEUFpqaDZjemxCaTcxQVNQVDVlSjlEbUZ1TTMxLWp3RE5aTGpWbVBaNEpHZHh4Ui1DOXVab0VLbHZRaEIyTEdvSmp0TE9OeXJUWjNaZ1VYQ0JSU2F0NGNhNFFhczBDdw?oc=5) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
+| 19.6 | anxietychecklist.com | free_trial | ? | likely | [open](https://anxietychecklist.com/) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
 | 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
