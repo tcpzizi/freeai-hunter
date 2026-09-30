@@ -1,12 +1,14 @@
 # Free AI Offers
 
-Updated: 2026-09-30 18:13 UTC | total: 47
+Updated: 2026-09-30 22:19 UTC | total: 50
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
 | 43.5 | elevenlabs.io | free_credits | $22 | verified | [open](https://elevenlabs.io/students) |
 | 42.4 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
 | 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
+| 42.3 | bolt.new | free_credits | $9 | verified | [open](https://bolt.new/pricing) |
+| 41.8 | v0.app | free_credits | $5 | verified | [open](https://v0.app/pricing) |
 | 41.4 | cohere.com | free_credits | $3 | verified | [open](https://cohere.com/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
@@ -32,6 +34,7 @@ Updated: 2026-09-30 18:13 UTC | total: 47
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
+| 30.9 | assemblyai.com | free_credits | $2 | verified | [open](https://assemblyai.com/pricing) |
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 29.9 | v0.app | student | ? | verified | [open](https://v0.app/students) |
 | 27.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
