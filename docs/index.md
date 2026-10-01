@@ -1,11 +1,13 @@
 # Free AI Offers
 
-Updated: 2026-09-30 22:19 UTC | total: 50
+Updated: 2026-10-01 01:23 UTC | total: 53
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 44.0 | modal.com | free_credits | $30 | verified | [open](https://modal.com/startups) |
 | 43.5 | elevenlabs.io | free_credits | $22 | verified | [open](https://elevenlabs.io/students) |
 | 42.4 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
+| 42.4 | modal.com | free_credits | ? | verified | [open](https://modal.com/changelog) |
 | 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 42.3 | bolt.new | free_credits | $9 | verified | [open](https://bolt.new/pricing) |
 | 41.8 | v0.app | free_credits | $5 | verified | [open](https://v0.app/pricing) |
@@ -14,6 +16,7 @@ Updated: 2026-09-30 22:19 UTC | total: 50
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
 | 37.8 | windsurf.com | free_credits | $40 | verified | [open](https://windsurf.com/pricing) |
+| 36.7 | modal.com | student | $30 | verified | [open](https://modal.com/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
 | 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
