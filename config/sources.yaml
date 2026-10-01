@@ -81,6 +81,8 @@ page_watch:
   - cloudflare.com
   - google.dev
   - simonwillison.net
+  - datastory.tech
+  - anxietychecklist.com
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
