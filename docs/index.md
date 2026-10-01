@@ -1,9 +1,11 @@
 # Free AI Offers
 
-Updated: 2026-10-01 06:10 UTC | total: 53
+Updated: 2026-10-01 07:53 UTC | total: 54
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 41.8 | together.ai | free_credits | $5 | verified | [open](https://together.ai/pricing) |
+| 41.2 | novita.ai | free_credits | $2 | verified | [open](https://novita.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
@@ -28,7 +30,6 @@ Updated: 2026-10-01 06:10 UTC | total: 53
 | 35.1 | cohere.com | free_credits | $3 | verified | [open](https://cohere.com/pricing) |
 | 34.9 | baseten.co | free_credits | $2 | verified | [open](https://baseten.co/pricing) |
 | 34.9 | fireworks.ai | free_credits | $2 | verified | [open](https://fireworks.ai/pricing) |
-| 34.9 | novita.ai | free_credits | $2 | verified | [open](https://novita.ai/pricing) |
 | 34.0 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
@@ -48,9 +49,9 @@ Updated: 2026-10-01 06:10 UTC | total: 53
 | 20.8 | anxietychecklist.com | free_trial | ? | likely | [open](https://anxietychecklist.com/) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
