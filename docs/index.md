@@ -1,9 +1,11 @@
 # Free AI Offers
 
-Updated: 2026-10-01 07:53 UTC | total: 54
+Updated: 2026-10-01 15:31 UTC | total: 54
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
+| 42.4 | novita.ai | free_credits | ? | verified | [open](https://novita.ai/pricing) |
 | 41.8 | together.ai | free_credits | $5 | verified | [open](https://together.ai/pricing) |
 | 41.2 | novita.ai | free_credits | $2 | verified | [open](https://novita.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
@@ -16,11 +18,9 @@ Updated: 2026-10-01 07:53 UTC | total: 54
 | 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
-| 35.9 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
 | 35.9 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
 | 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
 | 35.9 | elevenlabs.io | free_credits | ? | verified | [open](https://elevenlabs.io/pricing) |
-| 35.9 | novita.ai | free_credits | ? | verified | [open](https://novita.ai/pricing) |
 | 35.9 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
 | 35.9 | modal.com | free_credits | ? | verified | [open](https://modal.com/changelog) |
 | 35.8 | together.ai | free_credits | $9 | verified | [open](https://together.ai/pricing) |
