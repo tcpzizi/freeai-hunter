@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-02 00:18 UTC | total: 57
+Updated: 2026-10-02 05:43 UTC | total: 58
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -32,6 +32,7 @@ Updated: 2026-10-02 00:18 UTC | total: 57
 | 34.9 | baseten.co | free_credits | $2 | verified | [open](https://baseten.co/pricing) |
 | 34.9 | fireworks.ai | free_credits | $2 | verified | [open](https://fireworks.ai/pricing) |
 | 34.9 | novita.ai | free_credits | $2 | verified | [open](https://novita.ai/pricing) |
+| 34.0 | github.com | free_credits | ? | verified | [open](https://github.com/imkofty/freeflare) |
 | 34.0 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
