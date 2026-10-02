@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-01 20:35 UTC | total: 56
+Updated: 2026-10-02 00:18 UTC | total: 57
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -36,6 +36,7 @@ Updated: 2026-10-01 20:35 UTC | total: 56
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
+| 31.8 | assemblyai.com | free_credits | $10 | verified | [open](https://assemblyai.com/pricing) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
 | 31.1 | modal.com | student | $30 | verified | [open](https://modal.com/pricing) |
 | 29.9 | ycombinator.com | free_api | $7 | likely | [open](https://news.ycombinator.com/item?id=49925880) |
