@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-03 10:44 UTC | total: 59
+Updated: 2026-10-03 15:00 UTC | total: 60
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -39,6 +39,7 @@ Updated: 2026-10-03 10:44 UTC | total: 59
 | 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
 | 31.1 | modal.com | student | $30 | verified | [open](https://modal.com/pricing) |
+| 30.2 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 29.9 | v0.app | student | ? | verified | [open](https://v0.app/students) |
 | 29.9 | notion.com | student | ? | verified | [open](https://notion.com/students) |
