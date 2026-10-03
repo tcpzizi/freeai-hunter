@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-03 18:45 UTC | total: 60
+Updated: 2026-10-03 21:52 UTC | total: 59
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -60,7 +60,6 @@ Updated: 2026-10-03 18:45 UTC | total: 60
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
-| 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
 | 11.2 | datastory.tech | other | ? | likely | [open](https://www.datastory.tech) |
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
