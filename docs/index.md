@@ -1,9 +1,10 @@
 # Free AI Offers
 
-Updated: 2026-10-04 16:54 UTC | total: 63
+Updated: 2026-10-04 17:08 UTC | total: 63
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
@@ -11,7 +12,6 @@ Updated: 2026-10-04 16:54 UTC | total: 63
 | 37.3 | modal.com | free_credits | $30 | verified | [open](https://modal.com/startups) |
 | 36.8 | elevenlabs.io | free_credits | $22 | verified | [open](https://elevenlabs.io/students) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
-| 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
