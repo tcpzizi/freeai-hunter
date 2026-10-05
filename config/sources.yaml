@@ -83,6 +83,7 @@ page_watch:
   - simonwillison.net
   - datastory.tech
   - anxietychecklist.com
+  - the-decoder.com
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
@@ -119,6 +120,7 @@ rss:
   - https://together.ai/blog/rss.xml
   - https://windsurf.com/feed
   - https://windsurf.com/feed.xml
+  - https://the-decoder.com/feed
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
