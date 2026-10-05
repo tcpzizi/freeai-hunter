@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-05 05:55 UTC | total: 63
+Updated: 2026-10-05 09:07 UTC | total: 63
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -55,10 +55,10 @@ Updated: 2026-10-05 05:55 UTC | total: 63
 | 20.8 | anxietychecklist.com | free_trial | ? | likely | [open](https://anxietychecklist.com/) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 15.0 | google.com | student | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi1gFBVV95cUxPSzdkaFl1Ym1RNTdlS3JLQWd1eW5wWEJsXzVVTXN4NEtabjVyZng4N2RlRHV6YThZY0lfNmJrdzBqR2VLZkllblpwclVmMm41T1E2MjhLcU5Hc3IwZnQ4TzlOSEV1QTRsUXRmaVRYM20wR3dNcmZxUEhWYllfQ3draDdXb2w0Ykw3eVJVVGIwVHp4NGpnY1lOZGxxUnhXM1hwa21LWUFndnpyd3hRT1llQXp1bXJNRGlidDhsMTg1NGJRSEhUNktJeEw4b3JIWlJEZ09UUlFB?oc=5) |
-| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
+| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
