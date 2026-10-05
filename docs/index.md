@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-05 09:07 UTC | total: 63
+Updated: 2026-10-05 18:31 UTC | total: 62
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -43,7 +43,6 @@ Updated: 2026-10-05 09:07 UTC | total: 63
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 29.9 | v0.app | student | ? | verified | [open](https://v0.app/students) |
 | 29.9 | notion.com | student | ? | verified | [open](https://notion.com/students) |
-| 28.7 | ycombinator.com | free_credits | ? | likely | [open](https://news.ycombinator.com/item?id=49759230) |
 | 27.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
 | 26.9 | assemblyai.com | free_credits | $10 | verified | [open](https://assemblyai.com/pricing) |
 | 26.4 | assemblyai.com | free_credits | $4 | verified | [open](https://assemblyai.com/pricing) |
