@@ -84,6 +84,7 @@ page_watch:
   - datastory.tech
   - anxietychecklist.com
   - the-decoder.com
+  - apple.com
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
@@ -121,6 +122,8 @@ rss:
   - https://windsurf.com/feed
   - https://windsurf.com/feed.xml
   - https://the-decoder.com/feed
+  - https://the-decoder.com/rss
+  - https://lovable.dev/blog/rss.xml
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
