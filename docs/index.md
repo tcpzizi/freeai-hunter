@@ -1,9 +1,12 @@
 # Free AI Offers
 
-Updated: 2026-10-07 09:21 UTC | total: 71
+Updated: 2026-10-07 16:39 UTC | total: 73
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 43.7 | mistral.ai | free_credits | $25 | verified | [open](https://mistral.ai/pricing) |
+| 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
+| 41.2 | huggingface.co | free_credits | $2 | verified | [open](https://huggingface.co/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
@@ -12,7 +15,6 @@ Updated: 2026-10-07 09:21 UTC | total: 71
 | 36.8 | elevenlabs.io | free_credits | $22 | verified | [open](https://elevenlabs.io/students) |
 | 36.7 | replit.com | free_credits | $20 | verified | [open](https://replit.com/pricing) |
 | 36.7 | warp.dev | free_credits | $20 | verified | [open](https://warp.dev/pricing) |
-| 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
@@ -69,8 +71,8 @@ Updated: 2026-10-07 09:21 UTC | total: 71
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
 | 11.2 | datastory.tech | other | ? | likely | [open](https://www.datastory.tech) |
-| 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
 | 11.0 | ycombinator.com | other | $5 | likely | [open](https://news.ycombinator.com/item?id=49971503) |
+| 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
 | 11.0 | theverge.com | other | $4 | likely | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
