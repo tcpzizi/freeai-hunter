@@ -85,6 +85,7 @@ page_watch:
   - anxietychecklist.com
   - the-decoder.com
   - apple.com
+  - theverge.com
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
@@ -124,6 +125,7 @@ rss:
   - https://the-decoder.com/feed
   - https://the-decoder.com/rss
   - https://lovable.dev/blog/rss.xml
+  - https://theverge.com/rss.xml
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
