@@ -126,6 +126,7 @@ rss:
   - https://the-decoder.com/rss
   - https://lovable.dev/blog/rss.xml
   - https://theverge.com/rss.xml
+  - https://theverge.com/atom.xml
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
