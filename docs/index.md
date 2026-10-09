@@ -1,10 +1,13 @@
 # Free AI Offers
 
-Updated: 2026-10-09 18:26 UTC | total: 80
+Updated: 2026-10-09 19:51 UTC | total: 81
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
+| 40.9 | novita.ai | free_credits | $1 | verified | [open](https://novita.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
 | 37.8 | windsurf.com | free_credits | $40 | verified | [open](https://windsurf.com/pricing) |
@@ -14,7 +17,6 @@ Updated: 2026-10-09 18:26 UTC | total: 80
 | 36.7 | replit.com | free_credits | $20 | verified | [open](https://replit.com/pricing) |
 | 36.7 | warp.dev | free_credits | $20 | verified | [open](https://warp.dev/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
-| 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
@@ -39,11 +41,11 @@ Updated: 2026-10-09 18:26 UTC | total: 80
 | 34.9 | together.ai | free_credits | $2 | verified | [open](https://together.ai/pricing) |
 | 34.9 | huggingface.co | free_credits | $2 | verified | [open](https://huggingface.co/pricing) |
 | 34.6 | anthropic.com | free_credits | $1 | verified | [open](https://anthropic.com/startups) |
+| 34.3 | google.dev | free_credits | $14 | likely | [open](https://ai.google.dev/pricing) |
 | 34.0 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
 | 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
-| 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 31.9 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
@@ -51,7 +53,6 @@ Updated: 2026-10-09 18:26 UTC | total: 80
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 29.9 | v0.app | student | ? | verified | [open](https://v0.app/students) |
 | 29.9 | notion.com | student | ? | verified | [open](https://notion.com/students) |
-| 28.7 | ycombinator.com | free_credits | ? | likely | [open](https://news.ycombinator.com/item?id=49759230) |
 | 27.7 | google.dev | free_credits | $1 | likely | [open](https://ai.google.dev/pricing) |
 | 27.5 | candlefeed.ai | free_api | $149 | likely | [open](https://candlefeed.ai/data/order-book/) |
 | 27.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
@@ -69,10 +70,10 @@ Updated: 2026-10-09 18:26 UTC | total: 80
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 15.0 | google.com | student | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi1gFBVV95cUxPSzdkaFl1Ym1RNTdlS3JLQWd1eW5wWEJsXzVVTXN4NEtabjVyZng4N2RlRHV6YThZY0lfNmJrdzBqR2VLZkllblpwclVmMm41T1E2MjhLcU5Hc3IwZnQ4TzlOSEV1QTRsUXRmaVRYM20wR3dNcmZxUEhWYllfQ3draDdXb2w0Ykw3eVJVVGIwVHp4NGpnY1lOZGxxUnhXM1hwa21LWUFndnpyd3hRT1llQXp1bXJNRGlidDhsMTg1NGJRSEhUNktJeEw4b3JIWlJEZ09UUlFB?oc=5) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
