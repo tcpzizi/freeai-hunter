@@ -86,6 +86,8 @@ page_watch:
   - the-decoder.com
   - apple.com
   - theverge.com
+  - staffcoder.com
+  - candlefeed.ai
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
