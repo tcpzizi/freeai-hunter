@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-11 08:53 UTC | total: 83
+Updated: 2026-10-11 15:44 UTC | total: 85
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -60,6 +60,7 @@ Updated: 2026-10-11 08:53 UTC | total: 83
 | 27.5 | candlefeed.ai | free_api | $149 | likely | [open](https://candlefeed.ai/data/order-book/) |
 | 27.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
 | 26.9 | assemblyai.com | free_credits | $10 | verified | [open](https://assemblyai.com/pricing) |
+| 26.7 | titan-ai.co | free_credits | $5 | likely | [open](https://titan-ai.co/) |
 | 26.4 | assemblyai.com | free_credits | $4 | verified | [open](https://assemblyai.com/pricing) |
 | 26.2 | assemblyai.com | free_credits | $2 | verified | [open](https://assemblyai.com/pricing) |
 | 25.5 | assemblyai.com | free_credits | $0 | verified | [open](https://assemblyai.com/pricing) |
@@ -87,3 +88,4 @@ Updated: 2026-10-11 08:53 UTC | total: 83
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
 | 7.0 | google.com | other | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMid0FVX3lxTFBDcVJyQ1p5QmV6dEc2MG9aR3k3R2RSMDdPaXc0Q1N3Z1RyalRzQjdsOFJCY2ttT3VVMDc1ZXFlaTl6MzJSalJaUHZtdmF2c05Lc0xEYTh2Qjh6WEN3dTJFLVVtY0dRR05naHZDZGE4MjlwaHJSU3pV?oc=5) |
+| 6.6 | searchyourcollection.com | other | ? | unconfirmed | [open](https://searchyourcollection.com/examples) |
