@@ -88,6 +88,7 @@ page_watch:
   - theverge.com
   - staffcoder.com
   - candlefeed.ai
+  - titan-ai.co
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
