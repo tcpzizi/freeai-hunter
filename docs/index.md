@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-12 09:50 UTC | total: 86
+Updated: 2026-10-12 19:26 UTC | total: 87
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -87,6 +87,7 @@ Updated: 2026-10-12 09:50 UTC | total: 86
 | 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
 | 11.0 | theverge.com | other | $4 | likely | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
+| 10.0 | ycombinator.com | other | $0 | likely | [open](https://news.ycombinator.com/item?id=50059096) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
 | 7.0 | google.com | other | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMid0FVX3lxTFBDcVJyQ1p5QmV6dEc2MG9aR3k3R2RSMDdPaXc0Q1N3Z1RyalRzQjdsOFJCY2ttT3VVMDc1ZXFlaTl6MzJSalJaUHZtdmF2c05Lc0xEYTh2Qjh6WEN3dTJFLVVtY0dRR05naHZDZGE4MjlwaHJSU3pV?oc=5) |
 | 7.0 | searchyourcollection.com | other | ? | unconfirmed | [open](https://searchyourcollection.com/examples) |
