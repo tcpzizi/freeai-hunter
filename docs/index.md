@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-13 21:38 UTC | total: 93
+Updated: 2026-10-14 00:41 UTC | total: 92
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -59,7 +59,6 @@ Updated: 2026-10-13 21:38 UTC | total: 93
 | 29.9 | v0.app | student | ? | verified | [open](https://v0.app/students) |
 | 29.9 | notion.com | student | ? | verified | [open](https://notion.com/students) |
 | 29.0 | google.dev | free_credits | $14 | likely | [open](https://ai.google.dev/pricing) |
-| 28.7 | ycombinator.com | free_credits | ? | likely | [open](https://news.ycombinator.com/item?id=49759230) |
 | 28.3 | titan-ai.co | free_credits | $5 | likely | [open](https://titan-ai.co/) |
 | 27.9 | google.dev | free_credits | $2 | likely | [open](https://ai.google.dev/pricing) |
 | 27.7 | google.dev | free_credits | $1 | likely | [open](https://ai.google.dev/pricing) |
