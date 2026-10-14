@@ -1,9 +1,12 @@
 # Free AI Offers
 
-Updated: 2026-10-14 10:42 UTC | total: 94
+Updated: 2026-10-14 15:34 UTC | total: 98
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 43.7 | openrouter.ai | free_credits | $25 | verified | [open](https://openrouter.ai/pricing) |
+| 42.4 | runpod.io | free_credits | ? | verified | [open](https://runpod.io/changelog) |
+| 40.9 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
@@ -52,6 +55,7 @@ Updated: 2026-10-14 10:42 UTC | total: 94
 | 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 33.9 | ycombinator.com | free_credits | $200 | likely | [open](https://news.ycombinator.com/item?id=50040444) |
 | 31.9 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
+| 31.8 | assemblyai.com | free_credits | $10 | verified | [open](https://assemblyai.com/pricing) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
 | 31.1 | modal.com | student | $30 | verified | [open](https://modal.com/pricing) |
 | 30.8 | lovable.dev | student | $25 | verified | [open](https://lovable.dev/students) |
@@ -66,7 +70,6 @@ Updated: 2026-10-14 10:42 UTC | total: 94
 | 27.7 | google.dev | free_credits | $1 | likely | [open](https://ai.google.dev/pricing) |
 | 27.5 | candlefeed.ai | free_api | $149 | likely | [open](https://candlefeed.ai/data/order-book/) |
 | 27.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
-| 26.9 | assemblyai.com | free_credits | $10 | verified | [open](https://assemblyai.com/pricing) |
 | 26.4 | assemblyai.com | free_credits | $4 | verified | [open](https://assemblyai.com/pricing) |
 | 26.2 | assemblyai.com | free_credits | $2 | verified | [open](https://assemblyai.com/pricing) |
 | 25.5 | assemblyai.com | free_credits | $0 | verified | [open](https://assemblyai.com/pricing) |
@@ -79,6 +82,7 @@ Updated: 2026-10-14 10:42 UTC | total: 94
 | 20.8 | staffcoder.com | free_trial | ? | likely | [open](https://www.staffcoder.com) |
 | 20.8 | autographmusic.com | free_trial | ? | likely | [open](https://autographmusic.com) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
+| 18.2 | usemerlin.ai | free_credits | $59 | unconfirmed | [open](https://usemerlin.ai) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
 | 18.0 | google.com | free_credits | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
