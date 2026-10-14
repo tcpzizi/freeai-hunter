@@ -1,9 +1,10 @@
 # Free AI Offers
 
-Updated: 2026-10-14 19:47 UTC | total: 97
+Updated: 2026-10-14 22:43 UTC | total: 99
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 43.3 | anthropic.com | free_credits | $20 | verified | [open](https://anthropic.com/pricing) |
 | 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 40.9 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
@@ -96,6 +97,7 @@ Updated: 2026-10-14 19:47 UTC | total: 97
 | 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
 | 11.0 | theverge.com | other | $4 | likely | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
+| 10.6 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
 | 10.6 | ycombinator.com | other | $0 | likely | [open](https://news.ycombinator.com/item?id=50059096) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
 | 7.0 | google.com | other | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMid0FVX3lxTFBDcVJyQ1p5QmV6dEc2MG9aR3k3R2RSMDdPaXc0Q1N3Z1RyalRzQjdsOFJCY2ttT3VVMDc1ZXFlaTl6MzJSalJaUHZtdmF2c05Lc0xEYTh2Qjh6WEN3dTJFLVVtY0dRR05naHZDZGE4MjlwaHJSU3pV?oc=5) |
