@@ -92,6 +92,7 @@ page_watch:
   - searchyourcollection.com
   - memorysync.io
   - autographmusic.com
+  - usemerlin.ai
 github_watch:
   repos:
   - cheahjs/free-llm-api-resources
@@ -134,6 +135,7 @@ rss:
   - https://theverge.com/rss.xml
   - https://theverge.com/atom.xml
   - https://memorysync.io/feed.xml
+  - https://runpod.io/blog/rss.xml
   news:
   - https://techcrunch.com/category/artificial-intelligence/feed/
   - https://venturebeat.com/category/ai/feed/
