@@ -1,14 +1,16 @@
 # Free AI Offers
 
-Updated: 2026-10-15 19:28 UTC | total: 102
+Updated: 2026-10-15 22:45 UTC | total: 103
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
 | 42.4 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 42.4 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
 | 40.9 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
@@ -29,7 +31,6 @@ Updated: 2026-10-15 19:28 UTC | total: 102
 | 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
 | 35.9 | elevenlabs.io | free_credits | ? | verified | [open](https://elevenlabs.io/pricing) |
 | 35.9 | novita.ai | free_credits | ? | verified | [open](https://novita.ai/pricing) |
-| 35.9 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
 | 35.9 | modal.com | free_credits | ? | verified | [open](https://modal.com/changelog) |
 | 35.9 | runwayml.com | free_credits | ? | verified | [open](https://runwayml.com/pricing) |
 | 35.9 | github.com | free_credits | $10 credit | verified | [open](https://github.com/tessaryai/tessary) |
@@ -54,7 +55,6 @@ Updated: 2026-10-15 19:28 UTC | total: 102
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
 | 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
-| 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 33.9 | ycombinator.com | free_credits | $200 | likely | [open](https://news.ycombinator.com/item?id=50040444) |
 | 31.9 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
@@ -67,6 +67,7 @@ Updated: 2026-10-15 19:28 UTC | total: 102
 | 28.7 | ycombinator.com | free_credits | ? | likely | [open](https://news.ycombinator.com/item?id=49759230) |
 | 28.3 | titan-ai.co | free_credits | $5 | likely | [open](https://titan-ai.co/) |
 | 27.9 | google.dev | free_credits | $2 | likely | [open](https://ai.google.dev/pricing) |
+| 27.7 | ycombinator.com | free_credits | $20 | likely | [open](https://news.ycombinator.com/item?id=49782955) |
 | 27.7 | google.dev | free_credits | $1 | likely | [open](https://ai.google.dev/pricing) |
 | 27.5 | candlefeed.ai | free_api | $149 | likely | [open](https://candlefeed.ai/data/order-book/) |
 | 27.2 | google.dev | free_credits | $0 | likely | [open](https://ai.google.dev/pricing) |
