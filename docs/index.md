@@ -1,12 +1,13 @@
 # Free AI Offers
 
-Updated: 2026-10-14 22:43 UTC | total: 99
+Updated: 2026-10-15 00:57 UTC | total: 99
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
 | 43.3 | anthropic.com | free_credits | $20 | verified | [open](https://anthropic.com/pricing) |
-| 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
+| 42.4 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
 | 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
+| 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 40.9 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
@@ -29,7 +30,6 @@ Updated: 2026-10-14 22:43 UTC | total: 99
 | 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
 | 35.9 | elevenlabs.io | free_credits | ? | verified | [open](https://elevenlabs.io/pricing) |
 | 35.9 | novita.ai | free_credits | ? | verified | [open](https://novita.ai/pricing) |
-| 35.9 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
 | 35.9 | modal.com | free_credits | ? | verified | [open](https://modal.com/changelog) |
 | 35.9 | runwayml.com | free_credits | ? | verified | [open](https://runwayml.com/pricing) |
 | 35.9 | github.com | free_credits | $10 credit | verified | [open](https://github.com/tessaryai/tessary) |
