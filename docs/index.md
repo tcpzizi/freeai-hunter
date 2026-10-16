@@ -1,15 +1,17 @@
 # Free AI Offers
 
-Updated: 2026-10-15 22:45 UTC | total: 103
+Updated: 2026-10-16 00:50 UTC | total: 103
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 42.4 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
 | 42.4 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 42.4 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
 | 40.9 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 40.2 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
@@ -25,7 +27,6 @@ Updated: 2026-10-15 22:45 UTC | total: 103
 | 36.7 | warp.dev | free_credits | $20 | verified | [open](https://warp.dev/pricing) |
 | 36.7 | anthropic.com | free_credits | $20 | verified | [open](https://anthropic.com/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
-| 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
 | 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
@@ -54,7 +55,6 @@ Updated: 2026-10-15 22:45 UTC | total: 103
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
 | 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
-| 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 33.9 | ycombinator.com | free_credits | $200 | likely | [open](https://news.ycombinator.com/item?id=50040444) |
 | 31.9 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
 | 31.8 | cursor.com | free_credits | $200 | verified | [open](https://cursor.com/pricing) |
