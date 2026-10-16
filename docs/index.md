@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-16 04:44 UTC | total: 103
+Updated: 2026-10-16 05:12 UTC | total: 103
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -18,11 +18,11 @@ Updated: 2026-10-16 04:44 UTC | total: 103
 | 36.7 | replit.com | free_credits | $20 | verified | [open](https://replit.com/pricing) |
 | 36.7 | warp.dev | free_credits | $20 | verified | [open](https://warp.dev/pricing) |
 | 36.7 | anthropic.com | free_credits | $20 | verified | [open](https://anthropic.com/pricing) |
+| 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
 | 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
-| 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
 | 35.9 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
 | 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
