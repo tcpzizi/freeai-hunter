@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-16 18:53 UTC | total: 108
+Updated: 2026-10-16 22:10 UTC | total: 107
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -92,14 +92,13 @@ Updated: 2026-10-16 18:53 UTC | total: 108
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
 | 18.0 | google.com | free_credits | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
 | 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
+| 16.5 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 15.0 | google.com | student | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi1gFBVV95cUxPSzdkaFl1Ym1RNTdlS3JLQWd1eW5wWEJsXzVVTXN4NEtabjVyZng4N2RlRHV6YThZY0lfNmJrdzBqR2VLZkllblpwclVmMm41T1E2MjhLcU5Hc3IwZnQ4TzlOSEV1QTRsUXRmaVRYM20wR3dNcmZxUEhWYllfQ3draDdXb2w0Ykw3eVJVVGIwVHp4NGpnY1lOZGxxUnhXM1hwa21LWUFndnpyd3hRT1llQXp1bXJNRGlidDhsMTg1NGJRSEhUNktJeEw4b3JIWlJEZ09UUlFB?oc=5) |
 | 14.7 | ycombinator.com | other | $2000 | likely | [open](https://news.ycombinator.com/item?id=50117614) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 13.0 | autographmusic.com | free_trial | ? | unconfirmed | [open](https://autographmusic.com) |
-| 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
 | 11.2 | datastory.tech | other | ? | likely | [open](https://www.datastory.tech) |
 | 11.2 | theverge.com | other | ? | likely | [open](https://www.theverge.com/tech/1008145/google-pixel-watch-1-2-free-safety-signal-emergency-access-ending) |
 | 11.2 | kodel.com.br | other | ? | likely | [open](https://face.kodel.com.br) |
