@@ -1,10 +1,12 @@
 # Free AI Offers
 
-Updated: 2026-10-16 22:10 UTC | total: 107
+Updated: 2026-10-17 00:33 UTC | total: 108
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
+| 40.9 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 40.2 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 40.2 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
@@ -23,7 +25,6 @@ Updated: 2026-10-16 22:10 UTC | total: 107
 | 36.7 | warp.dev | free_credits | $20 | verified | [open](https://warp.dev/pricing) |
 | 36.7 | anthropic.com | free_credits | $20 | verified | [open](https://anthropic.com/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
-| 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
 | 35.9 | openrouter.ai | free_credits | ? | verified | [open](https://openrouter.ai/pricing) |
@@ -52,8 +53,8 @@ Updated: 2026-10-16 22:10 UTC | total: 107
 | 34.6 | anthropic.com | free_credits | $1 | verified | [open](https://anthropic.com/startups) |
 | 34.6 | novita.ai | free_credits | $1 | verified | [open](https://novita.ai/pricing) |
 | 34.6 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
-| 34.6 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 34.6 | baseten.co | free_credits | $1 | verified | [open](https://baseten.co/pricing) |
+| 34.0 | google.dev | free_credits | ? | likely | [open](https://ai.google.dev/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
