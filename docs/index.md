@@ -1,10 +1,11 @@
 # Free AI Offers
 
-Updated: 2026-10-17 04:42 UTC | total: 109
+Updated: 2026-10-17 05:04 UTC | total: 109
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
@@ -53,7 +54,6 @@ Updated: 2026-10-17 04:42 UTC | total: 109
 | 34.6 | baseten.co | free_credits | $1 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
-| 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
 | 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
