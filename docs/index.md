@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-17 15:45 UTC | total: 104
+Updated: 2026-10-17 16:29 UTC | total: 104
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -90,10 +90,10 @@ Updated: 2026-10-17 15:45 UTC | total: 104
 | 19.3 | usemerlin.ai | free_credits | $59 | unconfirmed | [open](https://usemerlin.ai) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.7 | ycombinator.com | other | $2000 | likely | [open](https://news.ycombinator.com/item?id=50117614) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 13.0 | autographmusic.com | free_trial | ? | unconfirmed | [open](https://autographmusic.com) |
