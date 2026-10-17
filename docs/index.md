@@ -1,9 +1,10 @@
 # Free AI Offers
 
-Updated: 2026-10-17 16:29 UTC | total: 104
+Updated: 2026-10-17 18:55 UTC | total: 104
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
@@ -19,7 +20,6 @@ Updated: 2026-10-17 16:29 UTC | total: 104
 | 36.7 | warp.dev | free_credits | $20 | verified | [open](https://warp.dev/pricing) |
 | 36.7 | anthropic.com | free_credits | $20 | verified | [open](https://anthropic.com/pricing) |
 | 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
-| 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 35.9 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
@@ -92,8 +92,8 @@ Updated: 2026-10-17 16:29 UTC | total: 104
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
 | 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.7 | ycombinator.com | other | $2000 | likely | [open](https://news.ycombinator.com/item?id=50117614) |
-| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
+| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 13.0 | autographmusic.com | free_trial | ? | unconfirmed | [open](https://autographmusic.com) |
