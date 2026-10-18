@@ -1,4 +1,5 @@
 import os, json, re, httpx
+from . import dedup
 
 SCHEMA_HINT = """You extract AI freebie offers. Reply with ONLY a JSON object:
 {"is_offer":bool,
@@ -8,8 +9,22 @@ SCHEMA_HINT = """You extract AI freebie offers. Reply with ONLY a JSON object:
  "region":str|null,"signup_url":str|null,"expires_at":"YYYY-MM-DD"|null,
  "model_class":"frontier|mid|small|unknown","confidence":0.0-1.0,
  "why":"one short sentence in Persian"}
-Set is_offer=true ONLY if a user can actually get something free / trial / credits.
-Pure news, opinions, tutorials and job posts must be is_offer=false."""
+Rules:
+- is_offer=true ONLY if a user can actually get something free / trial / credits.
+  Pure news, opinions, tutorials, launches, benchmarks and job posts are is_offer=false.
+- "value" is ONLY what the user gets for free, e.g. "$300 credits",
+  "1,000 requests/day", "Pro free for 12 months". NEVER put a paid price there:
+  token prices ("$0.50 / 1M tokens"), subscription prices ("$20/month") and
+  per-seat prices are NOT offers. A pricing page that only lists paid prices
+  is is_offer=false.
+- A free plan with no dollar amount: offer_type "permanent_free_tier" and
+  describe the quota in "value" / "limits".
+- For "[PRICING CHANGE]" items look ONLY at the added lines. Report an offer
+  only if they introduce or change something free (free tier, free credits,
+  trial, student / startup program). Price increases or cuts are not offers.
+- "signup_url" is the vendor page where the user claims the offer if it appears
+  in the text (not a news article or aggregator); otherwise null.
+- "vendor" is the company giving the offer, not the site that reported it."""
 
 PROVIDERS = [("gemini", "GEMINI_API_KEY"), ("groq", "GROQ_API_KEY"),
              ("cerebras", "CEREBRAS_API_KEY"), ("openrouter", "OPENROUTER_API_KEY")]
@@ -79,4 +94,6 @@ def extract(item):
               "\nURL: " + str(item.get("url")) +
               "\nTITLE: " + str(item.get("title")) +
               "\nBODY:\n" + str(item.get("body") or "")[:6000])
-    return llm_json(prompt) or regex_fallback(item)
+    o = llm_json(prompt) or regex_fallback(item)
+    ctx = str(item.get("title") or "") + "\n" + str(item.get("body") or "")
+    return dedup.sanitize(o, ctx)

@@ -1,11 +1,10 @@
-import json, time, yaml
+import json, time
 from . import store, verify, score, publish
 
 MAX_AGE_DAYS = 90
 
 def main():
-    cfg_v = yaml.safe_load(open("config/vendors.yaml", encoding="utf-8"))
-    vend = set(cfg_v["official_domains"])
+    vend = verify.load_vendors("config/vendors.yaml")
     try:
         fb = json.load(open("data/feedback.json", encoding="utf-8"))
     except Exception:
