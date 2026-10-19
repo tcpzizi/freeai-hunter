@@ -1,10 +1,12 @@
 # Free AI Offers
 
-Updated: 2026-10-19 04:56 UTC | total: 106
+Updated: 2026-10-19 05:25 UTC | total: 106
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 40.9 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
@@ -50,12 +52,10 @@ Updated: 2026-10-19 04:56 UTC | total: 106
 | 34.6 | anthropic.com | free_credits | $1 | verified | [open](https://anthropic.com/startups) |
 | 34.6 | novita.ai | free_credits | $1 | verified | [open](https://novita.ai/pricing) |
 | 34.6 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
-| 34.6 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 34.6 | baseten.co | free_credits | $1 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | baseten.co | free_credits | $0 | verified | [open](https://baseten.co/pricing) |
 | 34.0 | anthropic.com | free_credits | $0 | verified | [open](https://anthropic.com/pricing) |
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
-| 34.0 | novita.ai | free_credits | $0 | verified | [open](https://novita.ai/pricing) |
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 31.9 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
@@ -93,9 +93,9 @@ Updated: 2026-10-19 04:56 UTC | total: 106
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
 | 18.0 | google.com | free_credits | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 13.0 | autographmusic.com | free_trial | ? | unconfirmed | [open](https://autographmusic.com) |
