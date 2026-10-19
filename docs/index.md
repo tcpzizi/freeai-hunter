@@ -1,17 +1,22 @@
 # Free AI Offers
 
-Updated: 2026-10-19 11:21 UTC | total: 85
+Updated: 2026-10-19 17:35 UTC | total: 92
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/changelog) |
+| 42.4 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
 | 40.9 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
+| 40.2 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 40.2 | novita.ai | permanent_free_tier | Free plan ($0) | verified | [open](https://novita.ai/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
 | 38.0 | anthropic.com | free_credits | $45 | likely | [open](https://anthropic.com/startups) |
+| 37.9 | bolt.new | free_credits | $216 | verified | [open](https://bolt.new/pricing) |
 | 37.3 | modal.com | free_credits | $30 | verified | [open](https://modal.com/startups) |
 | 37.0 | openrouter.ai | free_credits | $25 | verified | [open](https://openrouter.ai/pricing) |
 | 37.0 | mistral.ai | free_credits | $25 | verified | [open](https://mistral.ai/pricing) |
@@ -71,6 +76,7 @@ Updated: 2026-10-19 11:21 UTC | total: 85
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
 | 18.0 | google.com | free_credits | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
 | 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
+| 16.5 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/minimax/minimax-m3.1-flash:free) |
 | 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
@@ -84,6 +90,7 @@ Updated: 2026-10-19 11:21 UTC | total: 85
 | 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
 | 11.0 | theverge.com | other | $4 | likely | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
+| 10.6 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=50154523) |
 | 8.4 | netlumi.com | other | $249 | unconfirmed | [open](https://app.netlumi.com) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Justlora/MinimaxH3-Subtitle-Control-LoRA) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
