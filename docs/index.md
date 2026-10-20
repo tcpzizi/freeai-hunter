@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-20 05:02 UTC | total: 94
+Updated: 2026-10-20 05:23 UTC | total: 95
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -16,6 +16,7 @@ Updated: 2026-10-20 05:02 UTC | total: 94
 | 37.8 | novita.ai | permanent_free_tier | Free plan ($0) | verified | [open](https://novita.ai/pricing) |
 | 37.8 | vercel.com | permanent_free_tier | Free plan ($0) | verified | [open](https://vercel.com/pricing) |
 | 37.8 | deepinfra.com | permanent_free_tier | Free plan ($0) | verified | [open](https://deepinfra.com/pricing) |
+| 37.7 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/4342da18b98ec5f25191bf4bd61617e7f68a7a97) |
 | 37.3 | modal.com | free_credits | $30 | verified | [open](https://modal.com/startups) |
 | 37.0 | openrouter.ai | free_credits | $25 | verified | [open](https://openrouter.ai/pricing) |
 | 37.0 | mistral.ai | free_credits | $25 | verified | [open](https://mistral.ai/pricing) |
@@ -78,12 +79,12 @@ Updated: 2026-10-20 05:02 UTC | total: 94
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
 | 18.0 | google.com | free_credits | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
+| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
 | 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
 | 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/Justlora/MinimaxH3-Subtitle-Control-LoRA) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
 | 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/minimax/minimax-m3.1-flash:free) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
 | 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
