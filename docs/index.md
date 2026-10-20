@@ -1,11 +1,13 @@
 # Free AI Offers
 
-Updated: 2026-10-19 21:49 UTC | total: 92
+Updated: 2026-10-20 00:46 UTC | total: 94
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 42.4 | runwayml.com | free_credits | ? | verified | [open](https://runwayml.com/changelog) |
 | 42.3 | together.ai | free_credits | $9 | verified | [open](https://together.ai/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
+| 40.2 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
