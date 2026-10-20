@@ -45,7 +45,11 @@ def load_offers():
     data = load_json(OFFERS_F, [])
     return data if isinstance(data, list) else []
 
-DEFAULTS = {"status": "pending", "min_score": 45.0, "types": None,
+# min_score 30 = "everything" option in /settings. The old default of 45 sat
+# above the highest score the hunter actually produces (~42), so instant
+# delivery never fired for new members. Existing members keep their saved value;
+# they can change it with /settings.
+DEFAULTS = {"status": "pending", "min_score": 30.0, "types": None,
             "mode": "instant", "mute_until": 0, "sent_count": 0,
             "last_sent": 0, "note": ""}
 
@@ -69,6 +73,7 @@ def get_or_create(db, uid, tg_user):
     return u, False
 
 def prune_deliveries(d, keep_ids):
+    # kept for compatibility; no longer called by dispatch (see dispatch.py)
     for k in list(d.keys()):
         if k not in keep_ids:
             d.pop(k, None)
