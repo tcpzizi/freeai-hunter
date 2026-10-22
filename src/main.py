@@ -1,7 +1,7 @@
 import time, hashlib, json, yaml
 import urllib.parse as up
 import concurrent.futures as cf
-from . import store, filters, extract, verify, score, publish, dedup
+from . import store, filters, extract, verify, score, publish
 from .collectors import (model_registry, pagediff, github_watch, rss,
                          googlenews, reddit as rd, hackernews as hnc,
                          tgchannel, bluesky, devpost)
@@ -19,6 +19,11 @@ def canon(u):
         return up.urlunsplit(("https", host, p.path.rstrip("/"), up.urlencode(q), ""))
     except Exception:
         return u
+
+def offer_key(o, dom):
+    raw = (dom + "|" + str(o.get("offer_type")) + "|" +
+           str(o.get("value")).lower().strip())
+    return hashlib.md5(raw.encode("utf-8", "ignore")).hexdigest()[:16]
 
 def collect(cfg, c):
     raw = []
@@ -54,7 +59,8 @@ def collect(cfg, c):
 
 def run(limit_extract=40):
     cfg = yaml.safe_load(open("config/sources.yaml", encoding="utf-8"))
-    vend = verify.load_vendors("config/vendors.yaml")
+    vend = set(yaml.safe_load(open("config/vendors.yaml",
+                                   encoding="utf-8"))["official_domains"])
     c = store.conn()
     t0 = time.time()
     raw = collect(cfg, c)
@@ -81,7 +87,7 @@ def run(limit_extract=40):
     print("collected=" + str(len(raw)) + " new=" + str(len(seen_now)) +
           " candidates=" + str(len(fresh)))
 
-    made, rejected = 0, 0
+    made = 0
     for it in fresh:
         try:
             o = extract.extract(it)
@@ -89,20 +95,15 @@ def run(limit_extract=40):
             print("extract failed: " + str(e)[:120])
             continue
         if not o or not o.get("is_offer"):
-            if o and o.get("reject_reason"):
-                rejected += 1
             continue
         o["signup_url"] = o.get("signup_url") or it["url"]
         dom = verify.domain(o["signup_url"])
         if not dom:
             continue
-        oid = dedup.offer_key(o, dom, o["signup_url"])
-        prev = c.execute("SELECT created_at,sources FROM offers WHERE id=?",
+        oid = offer_key(o, dom)
+        prev = c.execute("SELECT corroborations,created_at FROM offers WHERE id=?",
                          (oid,)).fetchone()
-        # corroboration = distinct source families, not "seen again next hour"
-        srcs = dedup.load_sources(prev["sources"]) if prev else set()
-        srcs.add(dedup.source_family(it.get("source")))
-        corr = max(1, len(srcs))
+        corr = (prev["corroborations"] + 1) if prev else 1
         try:
             status, v = verify.verify(o, vend, corr)
         except Exception as e:
@@ -122,7 +123,6 @@ def run(limit_extract=40):
             "expires_at": o.get("expires_at"), "model_class": o.get("model_class"),
             "why": o.get("why"), "score": sc, "verify_status": status,
             "verify": json.dumps(v, ensure_ascii=False), "corroborations": corr,
-            "sources": json.dumps(sorted(srcs)),
             "created_at": prev["created_at"] if prev else int(time.time()),
             "status": "active"})
         made += 1
@@ -133,8 +133,7 @@ def run(limit_extract=40):
     publish.build(c)
     c.commit()
     c.close()
-    print("done in " + str(round(time.time() - t0)) + "s, offers touched=" + str(made) +
-          ", unit-price rejects=" + str(rejected))
+    print("done in " + str(round(time.time() - t0)) + "s, offers touched=" + str(made))
 
 if __name__ == "__main__":
     run()

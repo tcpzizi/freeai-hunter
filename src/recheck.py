@@ -1,10 +1,11 @@
-import json, time
+import json, time, yaml
 from . import store, verify, score, publish
 
 MAX_AGE_DAYS = 90
 
 def main():
-    vend = verify.load_vendors("config/vendors.yaml")
+    cfg_v = yaml.safe_load(open("config/vendors.yaml", encoding="utf-8"))
+    vend = set(cfg_v["official_domains"])
     try:
         fb = json.load(open("data/feedback.json", encoding="utf-8"))
     except Exception:
@@ -34,9 +35,7 @@ def main():
                     new_status, status = "archived", "expired"
             except Exception:
                 pass
-        # permanent free tiers do not expire by age
-        if (r["offer_type"] != "permanent_free_tier" and
-                (now - (r["created_at"] or now)) > MAX_AGE_DAYS * 86400):
+        if (now - (r["created_at"] or now)) > MAX_AGE_DAYS * 86400:
             new_status = "archived"
         sc = score.score(o, status)
         if status != r["verify_status"] or new_status != r["status"]:

@@ -1,12 +1,5 @@
 # Free AI Offers
 
-Updated: 2026-10-19 07:05 UTC | total: 84
-
-| Score | Vendor | Type | Value | Verify | Link |
-|---|---|---|---|---|---|
-| 40.9 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
-| 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
-| 40.2 | novita.ai | permanent_free_tier | Free plan ($0) | verified | [open](https://novita.ai/pricing) |
 Updated: 2026-10-20 05:23 UTC | total: 95
 
 | Score | Vendor | Type | Value | Verify | Link |
@@ -16,7 +9,6 @@ Updated: 2026-10-20 05:23 UTC | total: 95
 | 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
 | 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
-| 38.0 | anthropic.com | free_credits | $45 | likely | [open](https://anthropic.com/startups) |
 | 38.0 | anthropic.com | free_credits | $45 | verified | [open](https://anthropic.com/startups) |
 | 37.8 | baseten.co | permanent_free_tier | Free plan ($0) | verified | [open](https://baseten.co/pricing) |
 | 37.8 | anthropic.com | permanent_free_tier | Free plan ($0) | verified | [open](https://anthropic.com/pricing) |
@@ -54,12 +46,6 @@ Updated: 2026-10-20 05:23 UTC | total: 95
 | 35.1 | cohere.com | free_credits | $3 | verified | [open](https://cohere.com/pricing) |
 | 34.9 | baseten.co | free_credits | $2 | verified | [open](https://baseten.co/pricing) |
 | 34.9 | huggingface.co | free_credits | $2 | verified | [open](https://huggingface.co/pricing) |
-| 34.6 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
-| 34.0 | baseten.co | permanent_free_tier | Free plan ($0) | verified | [open](https://baseten.co/pricing) |
-| 34.0 | anthropic.com | permanent_free_tier | Free plan ($0) | verified | [open](https://anthropic.com/pricing) |
-| 34.0 | together.ai | permanent_free_tier | Free plan ($0) | verified | [open](https://together.ai/pricing) |
-| 34.0 | vercel.com | permanent_free_tier | Free plan ($0) | verified | [open](https://vercel.com/pricing) |
-| 34.0 | deepinfra.com | permanent_free_tier | Free plan ($0) | verified | [open](https://deepinfra.com/pricing) |
 | 34.6 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 34.6 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
 | 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
@@ -70,8 +56,6 @@ Updated: 2026-10-20 05:23 UTC | total: 95
 | 31.1 | modal.com | student | $30 | verified | [open](https://modal.com/pricing) |
 | 30.9 | usemerlin.ai | free_credits | $59 | likely | [open](https://usemerlin.ai) |
 | 30.8 | lovable.dev | student | $25 | verified | [open](https://lovable.dev/students) |
-| 30.3 | the-decoder.com | permanent_free_tier | Free plan ($0) | likely | [open](https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs/) |
-| 30.3 | ycombinator.com | permanent_free_tier | Free plan ($0) | likely | [open](https://news.ycombinator.com/item?id=50146784) |
 | 30.3 | google.dev | permanent_free_tier | Free plan ($0) | likely | [open](https://ai.google.dev/pricing) |
 | 30.3 | the-decoder.com | permanent_free_tier | Free plan ($0) | likely | [open](https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs/) |
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
@@ -80,12 +64,6 @@ Updated: 2026-10-20 05:23 UTC | total: 95
 | 29.3 | ycombinator.com | free_credits | $20 | likely | [open](https://news.ycombinator.com/item?id=49782955) |
 | 29.0 | google.dev | free_credits | $14 | likely | [open](https://ai.google.dev/pricing) |
 | 28.7 | ycombinator.com | free_credits | ? | likely | [open](https://news.ycombinator.com/item?id=49759230) |
-| 28.3 | ycombinator.com | free_credits | $5 | likely | [open](https://news.ycombinator.com/item?id=49794234) |
-| 28.3 | titan-ai.co | free_credits | $5 | likely | [open](https://titan-ai.co/) |
-| 27.5 | candlefeed.ai | free_api | $149 | likely | [open](https://candlefeed.ai/data/order-book/) |
-| 27.2 | google.dev | permanent_free_tier | Free plan ($0) | likely | [open](https://ai.google.dev/pricing) |
-| 26.9 | assemblyai.com | free_credits | $10 | verified | [open](https://assemblyai.com/pricing) |
-| 25.5 | assemblyai.com | permanent_free_tier | Free plan ($0) | verified | [open](https://assemblyai.com/pricing) |
 | 28.4 | assemblyai.com | permanent_free_tier | Free plan ($0) | verified | [open](https://assemblyai.com/pricing) |
 | 28.3 | ycombinator.com | free_credits | $5 | likely | [open](https://news.ycombinator.com/item?id=49794234) |
 | 28.3 | titan-ai.co | free_credits | $5 | likely | [open](https://titan-ai.co/) |
@@ -101,9 +79,6 @@ Updated: 2026-10-20 05:23 UTC | total: 95
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
 | 18.0 | google.com | free_credits | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
-| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
-| 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
-| 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
 | 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
 | 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
@@ -122,6 +97,5 @@ Updated: 2026-10-20 05:23 UTC | total: 95
 | 11.0 | theverge.com | other | $4 | likely | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
 | 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
 | 8.4 | netlumi.com | other | $249 | unconfirmed | [open](https://app.netlumi.com) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Justlora/MinimaxH3-Subtitle-Control-LoRA) |
 | 7.0 | ai-rete-rag.com | other | ? | unconfirmed | [open](https://ai-rete-rag.com/) |
 | 7.0 | hypermass.io | other | ? | unconfirmed | [open](https://docs.hypermass.io/docs/cli/) |

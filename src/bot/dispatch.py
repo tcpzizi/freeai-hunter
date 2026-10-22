@@ -54,9 +54,7 @@ def dispatch(mode="instant", max_per_user=8):
             u["last_sent"] = int(time.time())
             counter[uid] = counter.get(uid, 0) + 1
             time.sleep(0.08)
-    # NOTE: deliveries are intentionally NOT pruned. Pruning dropped the record
-    # of an offer as soon as it fell out of the published list (or got a new id),
-    # so it was re-sent later. The file stays small (ids + user ids only).
+    store.prune_deliveries(deliv, set(str(o.get("id")) for o in offers))
     store.save_deliv(deliv)
     store.save_users(db)
     print("dispatch[" + mode + "]: " + str(sum(counter.values())) +
