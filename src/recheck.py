@@ -34,7 +34,9 @@ def main():
                     new_status, status = "archived", "expired"
             except Exception:
                 pass
-        if (now - (r["created_at"] or now)) > MAX_AGE_DAYS * 86400:
+        # permanent free tiers do not expire by age
+        if (r["offer_type"] != "permanent_free_tier" and
+                (now - (r["created_at"] or now)) > MAX_AGE_DAYS * 86400):
             new_status = "archived"
         sc = score.score(o, status)
         if status != r["verify_status"] or new_status != r["status"]:
