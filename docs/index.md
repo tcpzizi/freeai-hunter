@@ -1,13 +1,13 @@
 # Free AI Offers
 
-Updated: 2026-10-29 18:34 UTC | total: 137
+Updated: 2026-10-29 19:45 UTC | total: 143
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
+| 44.7 | baseten.co | permanent_free_tier | Free plan ($0) | verified | [open](https://baseten.co/pricing) |
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
-| 37.8 | baseten.co | permanent_free_tier | Free plan ($0) | verified | [open](https://baseten.co/pricing) |
 | 37.8 | vercel.com | permanent_free_tier | Free plan ($0) | verified | [open](https://vercel.com/pricing) |
 | 37.3 | modal.com | free_credits | $30 | verified | [open](https://modal.com/startups) |
 | 36.8 | elevenlabs.io | free_credits | $22 | verified | [open](https://elevenlabs.io/students) |
@@ -84,6 +84,8 @@ Updated: 2026-10-29 18:34 UTC | total: 137
 | 11.2 | datastory.tech | other | ? | likely | [open](https://www.datastory.tech) |
 | 11.2 | theverge.com | other | ? | likely | [open](https://www.theverge.com/tech/1008145/google-pixel-watch-1-2-free-safety-signal-emergency-access-ending) |
 | 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
+| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/akhaliq/Pika-H3-Flex-Turbo-LoRA) |
+| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Pika-Labs/Pika-H3-Flex) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/A4_v3) |
 | 7.0 | ycombinator.com | other | ? | unconfirmed | [open](https://news.ycombinator.com/item?id=49777627) |
 | 7.0 | github.com | other | ? | unconfirmed | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
@@ -122,5 +124,3 @@ Updated: 2026-10-29 18:34 UTC | total: 137
 | 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SkillFi24/zelmoria-flux.2-9b-base) |
 | 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Slavakoch/morocam_style_LoRA) |
 | 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SofaMatush/marginalia_style_LoRA) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/DongShanHu/Qwen-Image-Edit-2511-Multiple-Angles-LoRA) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Gameblamer/Flux_Lustly.ai_Uncensored_nsfw_v1) |
