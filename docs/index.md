@@ -1,10 +1,10 @@
 # Free AI Offers
 
-Updated: 2026-10-29 21:49 UTC | total: 60
+Updated: 2026-10-29 21:55 UTC | total: 37
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
-| 44.7 | baseten.co | permanent_free_tier | Free plan ($0) | verified | [open](https://baseten.co/pricing) |
+| 37.8 | baseten.co | permanent_free_tier | Free plan ($0) | verified | [open](https://baseten.co/pricing) |
 | 37.8 | assemblyai.com | permanent_free_tier | Free plan ($0) | verified | [open](https://assemblyai.com/pricing) |
 | 37.8 | vercel.com | permanent_free_tier | Free plan ($0) | verified | [open](https://vercel.com/pricing) |
 | 34.9 | huggingface.co | free_credits | $2 | verified | [open](https://huggingface.co/pricing) |
@@ -38,29 +38,6 @@ Updated: 2026-10-29 21:49 UTC | total: 60
 | 17.0 | deepinfra.com | free_credits | $0 | unconfirmed | [open](https://deepinfra.com/pricing) |
 | 15.3 | ycombinator.com | student | $20 | unconfirmed | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 13.8 | apple.com | free_trial | $49 | unconfirmed | [open](https://apps.apple.com/us/app/halo-personal-ai/id6783715054) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/akhaliq/Pika-H3-Flex-Turbo-LoRA) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Pika-Labs/Pika-H3-Flex) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Assfnjk/MiniMax-H3-Turbo-Lora) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Darkidd/realfff) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Nekodeus/neko-alpha3-sdxl-v1) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Nekodeus/neko-alpha4-sdxl-v1) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Poij3012/Wan2.2-I2V_General-NSFW-LoRA) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Potiron/boston-ivy-flux) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Potiron/clematis-armandii-flux) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Potiron/english-ivy-flux) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Potiron/wisteria-flux) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Sasha0202/interior_design_LoRA) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Sasha0202/schiele_portrait_LoRA) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Satoshikox/slop-in-the-face-flux-lora) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SkillFi24/sylveris-flux.2-klein-9b-base) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SkillFi24/velmira-flux.2-klein-9b-base) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SkillFi24/zelmoria-flux.2-9b-base) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Slavakoch/morocam_style_LoRA) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SofaMatush/marginalia_style_LoRA) |
 | 6.8 | theverge.com | other | $4 | unconfirmed | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
 | 6.7 | simonwillison.net | other | $1 | unconfirmed | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
-| 6.6 | ycombinator.com | other | ? | unconfirmed | [open](https://news.ycombinator.com/item?id=50290334) |
-| 6.6 | github.com | other | ? | unconfirmed | [open](https://github.com/mnfst/awesome-free-llm-apis/commit/be2ef92b557d9a18c651c00d33e8eedca79c5368) |
-| 6.6 | github.com | other | ? | unconfirmed | [open](https://github.com/mnfst/awesome-free-llm-apis/commit/f49e523a77dbbb98032ca589ca796700fc565689) |
-| 6.6 | github.com | other | ? | unconfirmed | [open](https://github.com/mnfst/awesome-free-llm-apis/commit/7c8748c781b5eb6b5aba95f7bce40e59bccde849) |
 | 5.9 | netlumi.com | other | $249 | unverifiable | [open](https://app.netlumi.com) |
