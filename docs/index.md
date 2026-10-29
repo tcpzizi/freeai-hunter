@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-29 11:13 UTC | total: 133
+Updated: 2026-10-29 14:21 UTC | total: 137
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -20,6 +20,7 @@ Updated: 2026-10-29 11:13 UTC | total: 133
 | 35.4 | v0.app | free_credits | $5 | verified | [open](https://v0.app/pricing) |
 | 34.9 | huggingface.co | free_credits | $2 | verified | [open](https://huggingface.co/pricing) |
 | 34.6 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
+| 34.0 | anthropic.com | free_credits | ? | likely | [open](https://anthropic.com/startups) |
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 31.1 | modal.com | student | $30 | verified | [open](https://modal.com/pricing) |
 | 30.8 | lovable.dev | student | $25 | verified | [open](https://lovable.dev/students) |
@@ -47,7 +48,6 @@ Updated: 2026-10-29 11:13 UTC | total: 133
 | 20.0 | anthropic.com | free_credits | $100 | unconfirmed | [open](https://anthropic.com/pricing) |
 | 20.0 | github.com | free_api | ? | unconfirmed | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/4342da18b98ec5f25191bf4bd61617e7f68a7a97) |
 | 19.3 | usemerlin.ai | free_credits | $59 | unconfirmed | [open](https://usemerlin.ai) |
-| 19.0 | anthropic.com | free_credits | $45 | unconfirmed | [open](https://anthropic.com/startups) |
 | 18.9 | together.ai | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://together.ai/pricing) |
 | 18.9 | novita.ai | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://novita.ai/pricing) |
 | 18.9 | deepinfra.com | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://deepinfra.com/pricing) |
@@ -69,6 +69,7 @@ Updated: 2026-10-29 11:13 UTC | total: 133
 | 17.7 | titan-ai.co | free_credits | $5 | unconfirmed | [open](https://titan-ai.co/) |
 | 17.5 | cohere.com | free_credits | $3 | unconfirmed | [open](https://cohere.com/pricing) |
 | 17.3 | together.ai | free_credits | $1 | unconfirmed | [open](https://together.ai/pricing) |
+| 17.0 | devpost.com | free_credits | ? | unconfirmed | [open](https://codegeist2026.devpost.com/) |
 | 17.0 | together.ai | free_credits | $0 | unconfirmed | [open](https://together.ai/pricing) |
 | 17.0 | deepinfra.com | free_credits | $0 | unconfirmed | [open](https://deepinfra.com/pricing) |
 | 15.3 | ycombinator.com | student | $20 | unconfirmed | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
@@ -79,8 +80,10 @@ Updated: 2026-10-29 11:13 UTC | total: 133
 | 13.0 | staffcoder.com | free_trial | ? | unconfirmed | [open](https://www.staffcoder.com) |
 | 13.0 | autographmusic.com | free_trial | ? | unconfirmed | [open](https://autographmusic.com) |
 | 12.6 | google.com | free_credits | ? | unverifiable | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
+| 11.9 | google.com | free_credits | ? | unverifiable | [open](https://news.google.com/rss/articles/CBMijgFBVV95cUxNYmFWSnY0U3FWQk4xa3hxSTRxM3dYd3NOMEN2NHhzY19nOThhZXg0Y1FudHU5VmhFeDFEd1RYMWo3dk9GbUp6ck82MHNxazJhNzhxZkVSQXVnTVM5Qk1UcWt3YUZ0R1hmWTdpTzhHUXQ5YjVyd2c4Rkk2bFU2VW5XUF9lRHNmbFlBMzFxR3pn?oc=5) |
 | 11.2 | datastory.tech | other | ? | likely | [open](https://www.datastory.tech) |
 | 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
+| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/A4_v3) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Slavakoch/morocam_style_LoRA) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SofaMatush/marginalia_style_LoRA) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SkillFi24/sylveris-flux.2-klein-9b-base) |
@@ -121,6 +124,3 @@ Updated: 2026-10-29 11:13 UTC | total: 133
 | 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Assfnjk/MiniMax-H3-Turbo-Lora) |
 | 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Darkidd/realfff) |
 | 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/DongShanHu/Qwen-Image-Edit-2511-Multiple-Angles-LoRA) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Gameblamer/Flux_Lustly.ai_Uncensored_nsfw_v1) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/GlurpRain/Arriana) |
-| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/GlurpRain/Siobhan) |
