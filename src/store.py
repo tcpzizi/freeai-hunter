@@ -30,14 +30,23 @@ CREATE TABLE IF NOT EXISTS candidate_sources(
   url TEXT PRIMARY KEY, kind TEXT, found_via TEXT, added_at INTEGER
 );
 CREATE TABLE IF NOT EXISTS meta(k TEXT PRIMARY KEY, v TEXT);
+-- candidates waiting for the LLM. An item leaves this table only once it was
+-- actually judged; overflow and failures stay here for the next run.
+CREATE TABLE IF NOT EXISTS extract_queue(
+  item_id TEXT PRIMARY KEY, payload TEXT, priority REAL,
+  hard_signal INTEGER DEFAULT 0, tries INTEGER DEFAULT 0, last_error TEXT,
+  queued_at INTEGER, last_try INTEGER
+);
 CREATE INDEX IF NOT EXISTS ix_offers_domain ON offers(domain);
 CREATE INDEX IF NOT EXISTS ix_offers_status ON offers(status);
 """
+
 
 def _ensure_columns(c):
     cols = {r[1] for r in c.execute("PRAGMA table_info(offers)")}
     if "sources" not in cols:
         c.execute("ALTER TABLE offers ADD COLUMN sources TEXT")
+
 
 def conn():
     pathlib.Path(DB).parent.mkdir(parents=True, exist_ok=True)
@@ -46,10 +55,14 @@ def conn():
     c.executescript(SCHEMA)
     _ensure_columns(c)
     migrate_dedup_v2(c)
+    migrate_cc_v1(c)
+    migrate_edu_v1(c)
     return c
+
 
 def seen(c, item_id):
     return c.execute("SELECT 1 FROM items WHERE id=?", (item_id,)).fetchone() is not None
+
 
 def put_item(c, it):
     now = int(time.time())
@@ -62,6 +75,7 @@ def put_item(c, it):
                int(it.get("published_at") or now), now, now,
                float(it.get("prefilter") or 0)))
 
+
 def snapshot(c, key, payload):
     h = hashlib.sha256(payload.encode("utf-8", "ignore")).hexdigest()
     row = c.execute("SELECT hash,payload FROM snapshots WHERE key=?", (key,)).fetchone()
@@ -73,16 +87,96 @@ def snapshot(c, key, payload):
         return False, None
     return (row["hash"] != h), row["payload"]
 
+
+def meta_get(c, k):
+    r = c.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
+    return r["v"] if r else None
+
+
+def meta_set(c, k, v):
+    c.execute("INSERT OR REPLACE INTO meta(k,v) VALUES(?,?)", (k, str(v)))
+
+
+# ------------------------------------------------------------ extract queue
+QUEUE_MAX_AGE_DAYS = 7
+_PAYLOAD_KEYS = ("id", "url", "canon_url", "title", "source", "source_type",
+                 "source_url", "published_at", "prefilter", "hard_signal")
+
+
+def enqueue(c, it):
+    """Add a candidate (keeps the first entry if it is already queued)."""
+    payload = {k: it.get(k) for k in _PAYLOAD_KEYS if it.get(k) is not None}
+    payload["body"] = (it.get("body") or "")[:8000]
+    c.execute("""INSERT INTO extract_queue(item_id,payload,priority,hard_signal,tries,
+                 queued_at) VALUES(?,?,?,?,0,?) ON CONFLICT(item_id) DO NOTHING""",
+              (it["id"], json.dumps(payload, ensure_ascii=False, default=str),
+               float(it.get("prefilter") or 0), 1 if it.get("hard_signal") else 0,
+               int(time.time())))
+
+
+def next_batch(c, limit):
+    """Best candidates first: hard signals, then fewest failures, then score."""
+    out = []
+    rows = c.execute("SELECT item_id, payload FROM extract_queue ORDER BY hard_signal DESC, "
+                     "tries ASC, priority DESC, queued_at ASC LIMIT ?", (int(limit),))
+    for r in list(rows):
+        try:
+            out.append(json.loads(r["payload"]))
+        except Exception:
+            dequeue(c, r["item_id"])  # unreadable entry would block the queue
+    return out
+
+
+def dequeue(c, item_id):
+    c.execute("DELETE FROM extract_queue WHERE item_id=?", (item_id,))
+
+
+def retry_later(c, item_id, error="", count=True):
+    """Keep the item for the next run. count=False for outages that are not the
+    item's fault (no LLM answered), so they do not use up its tries."""
+    c.execute("UPDATE extract_queue SET tries=tries+?, last_error=?, last_try=? "
+              "WHERE item_id=?", (1 if count else 0, str(error)[:200],
+                                  int(time.time()), item_id))
+
+
+def prune_queue(c, max_tries, max_age_days=QUEUE_MAX_AGE_DAYS):
+    """Drop entries that failed too often or waited too long. Returns the count."""
+    old = int(time.time()) - int(max_age_days * 86400)
+    cur = c.execute("DELETE FROM extract_queue WHERE tries>=? OR queued_at<?",
+                    (int(max_tries), old))
+    return cur.rowcount
+
+
+def queue_size(c):
+    return c.execute("SELECT COUNT(*) FROM extract_queue").fetchone()[0]
+
+
+def backfill_queue(c, threshold, days=3, cap=300):
+    """One-off recovery: before the queue existed, candidates past the per-run
+    limit were saved as 'seen' and never extracted. Re-queue recent ones that
+    passed the prefilter and never produced an offer."""
+    since = int(time.time()) - int(days * 86400)
+    rows = list(c.execute(
+        "SELECT i.* FROM items i WHERE i.prefilter>=? AND i.first_seen>=? "
+        "AND NOT EXISTS (SELECT 1 FROM offers o WHERE o.item_id=i.id) "
+        "AND NOT EXISTS (SELECT 1 FROM extract_queue q WHERE q.item_id=i.id) "
+        "ORDER BY i.prefilter DESC, i.first_seen DESC LIMIT ?",
+        (float(threshold), since, int(cap))))
+    for r in rows:
+        enqueue(c, dict(r))
+    return len(rows)
+
+
 OFFER_COLS = ["id","item_id","vendor","domain","offer_type","target","value","limits",
               "requires_cc","requires_edu","region","signup_url","source_url",
               "expires_at","model_class","why","score","verify_status","verify",
               "corroborations","created_at","updated_at","status","sources"]
-
 # descriptive fields follow the best-scoring sighting; in SQLite every RHS below
 # sees the OLD row, so the CASE compares against the pre-update score.
 _BETTER = "excluded.score >= COALESCE(offers.score,0)"
 _FOLLOW = ["item_id", "vendor", "target", "value", "limits", "signup_url",
-           "source_url", "model_class", "why", "requires_cc", "requires_edu", "region"]
+           "source_url", "model_class", "why", "region"]
+
 
 def upsert_offer(c, row):
     now = int(time.time())
@@ -95,14 +189,19 @@ def upsert_offer(c, row):
            "verify_status=excluded.verify_status", "verify=excluded.verify",
            "corroborations=excluded.corroborations", "sources=excluded.sources",
            "updated_at=excluded.updated_at", "status=excluded.status",
-           "expires_at=COALESCE(excluded.expires_at,expires_at)"]
+           "expires_at=COALESCE(excluded.expires_at,expires_at)",
+           # unknown (NULL) never replaces a known yes/no
+           "requires_cc=CASE WHEN " + _BETTER + " THEN COALESCE(excluded.requires_cc,"
+           "requires_cc) ELSE COALESCE(requires_cc,excluded.requires_cc) END",
+           "requires_edu=CASE WHEN " + _BETTER + " THEN COALESCE(excluded.requires_edu,"
+           "requires_edu) ELSE COALESCE(requires_edu,excluded.requires_edu) END"]
     upd += [k + "=CASE WHEN " + _BETTER + " THEN excluded." + k + " ELSE " + k + " END"
             for k in _FOLLOW]
     c.execute("INSERT INTO offers(" + ",".join(OFFER_COLS) + ") VALUES(" + ph + ") "
               "ON CONFLICT(id) DO UPDATE SET " + ", ".join(upd), vals)
 
-# ---------------------------------------------------------------- migration
 
+# ---------------------------------------------------------------- migration
 def _merge(dst, src):
     if isinstance(dst, list) and isinstance(src, list):
         return dst + [x for x in src if x not in dst]
@@ -111,6 +210,7 @@ def _merge(dst, src):
             dst[k] = _merge(dst[k], v) if k in dst else v
         return dst
     return dst
+
 
 def _remap_json(path, remap):
     try:
@@ -129,6 +229,7 @@ def _remap_json(path, remap):
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(d, f, ensure_ascii=False, indent=1, sort_keys=True)
     return n
+
 
 def migrate_dedup_v2(c):
     """One-off: re-key offers with the stable v2 key, merge duplicates, drop
@@ -167,7 +268,7 @@ def migrate_dedup_v2(c):
                     "created_at": min((m[0]["created_at"] or now) for m in members),
                     "score": max((m[0]["score"] or 0) for m in members),
                     "status": "active" if any(m[0]["status"] == "active"
-                                              for m in members) else best["status"]})
+                                               for m in members) else best["status"]})
         for m in members:
             c.execute("DELETE FROM offers WHERE id=?", (m[0]["id"],))
             if m[0]["id"] != nid:
@@ -183,3 +284,26 @@ def migrate_dedup_v2(c):
     print("migrate dedup_v2: " + str(len(rows)) + " offers -> " + str(len(groups)) +
           " (merged " + str(merged) + ", junk " + str(len(junk)) + "), remapped " +
           str(nd) + " deliveries / " + str(nf) + " feedback")
+
+
+def migrate_cc_v1(c):
+    """One-off: stored card values could not be trusted (unknown was saved as 0,
+    and "No credit card required" pages as 1). Reset them to unknown; hunt and
+    recheck fill them again from the vendor pages."""
+    if c.execute("SELECT 1 FROM meta WHERE k='cc_v1'").fetchone():
+        return
+    n = c.execute("UPDATE offers SET requires_cc=NULL WHERE requires_cc IS NOT NULL").rowcount
+    c.execute("INSERT OR REPLACE INTO meta(k,v) VALUES('cc_v1',?)", (str(int(time.time())),))
+    c.commit()
+    print("migrate cc_v1: reset card requirement on " + str(n) + " offers")
+
+
+def migrate_edu_v1(c):
+    """One-off: a stored 0 meant either "no school email needed" or "not stated".
+    Reset those to unknown (1 came from an explicit answer and is kept)."""
+    if c.execute("SELECT 1 FROM meta WHERE k='edu_v1'").fetchone():
+        return
+    n = c.execute("UPDATE offers SET requires_edu=NULL WHERE requires_edu=0").rowcount
+    c.execute("INSERT OR REPLACE INTO meta(k,v) VALUES('edu_v1',?)", (str(int(time.time())),))
+    c.commit()
+    print("migrate edu_v1: reset school-email requirement on " + str(n) + " offers")

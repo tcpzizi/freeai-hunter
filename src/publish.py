@@ -5,10 +5,11 @@ FIELDS = ["id", "vendor", "domain", "offer_type", "target", "value", "limits",
           "expires_at", "model_class", "why", "score", "verify_status",
           "corroborations", "created_at", "updated_at", "status"]
 
+
 def rows(c):
     out = []
     q = ("SELECT * FROM offers WHERE status='active' AND "
-         "verify_status NOT IN ('dead_link','expired','suspicious') "
+         "verify_status NOT IN ('dead_link','expired','suspicious','not_offer') "
          "ORDER BY score DESC, updated_at DESC LIMIT 400")
     for r in c.execute(q):
         d = {k: r[k] for k in FIELDS}
@@ -18,6 +19,7 @@ def rows(c):
             d["verify"] = {}
         out.append(d)
     return out
+
 
 def build(c):
     data = rows(c)
@@ -29,7 +31,6 @@ def build(c):
              "likely": sum(1 for d in data if d["verify_status"] == "likely")}
     with open("data/stats.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(stats, f, ensure_ascii=False, indent=1)
-
     pathlib.Path("docs").mkdir(exist_ok=True)
     lines = ["# Free AI Offers", "",
              "Updated: " + time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()) +

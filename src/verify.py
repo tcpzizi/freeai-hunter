@@ -4,7 +4,6 @@ from . import dedup
 
 _EX = tldextract.TLDExtract(suffix_list_urls=(), fallback_to_snapshot=True)
 UA = {"User-Agent": "Mozilla/5.0 (compatible; freeai-hunter/1.0)"}
-
 SCAM = re.compile(r"(free[- ]?(gift|key|token)[- ]?generator|100% working|"
                   r"unlimited chatgpt plus free|linkvertise|adf\.ly|cutt\.ly|"
                   r"shorte\.st)", re.I)
@@ -21,14 +20,21 @@ CLAIM = re.compile(
     r"\bfree\b[^.\n]{0,40}\b(students?|startups?|educators?)\b|"
     r"startups? program|for startups|student (plan|pack|discount|offer|program)|"
     r"\$0(?![.,]?\d)|\bfree forever\b)", re.I)
-CC_REQ = re.compile(r"(credit card required|card details required|"
-                    r"billing information required|add a payment method)", re.I)
+CC_REQ = re.compile(r"(credit card (is )?required|card details (are )?required|"
+                    r"billing information (is )?required|add a payment method|"
+                    r"payment method (is )?required|requires? a (valid )?(credit|debit) card)",
+                    re.I)
+# "No credit card required" contains "credit card required": strip these first
+NO_CC = re.compile(r"(no (credit |debit |payment )?cards? (is |are )?(required|needed|necessary)|"
+                   r"no credit card|without (a |any )?(credit |debit )?card|"
+                   r"(credit |debit )?card (is )?not required|"
+                   r"no payment (method|details|info(rmation)?) (is )?(required|needed))", re.I)
 GONE = re.compile(r"(offer (has )?(expired|ended)|no longer available|"
                   r"promotion .{0,20}ended|this domain is for sale|"
                   r"waitlist is closed)", re.I)
-BLOCKED = {401, 403, 429, 503}      # bot walls / rate limits, not dead links
+BLOCKED = {401, 403, 429, 503}  # bot walls / rate limits, not dead links
 DEAD = {404, 410}
-THIN_WORDS = 80                     # fewer words = JS shell, can't judge claim
+THIN_WORDS = 80  # fewer words = JS shell, can't judge claim
 
 
 def domain(url):
@@ -90,22 +96,65 @@ def page_text(html):
     return re.sub(r"\s+", " ", text)[:200000]
 
 
+EDU_REQ = re.compile(r"(\.edu (email|e-mail|address|account)|"
+                     r"(school|university|college|student|academic) (email|e-mail|address) "
+                     r"(is )?(required|needed)|verify (your )?(student|academic) status|"
+                     r"student verification|proof of (enrollment|student status)|"
+                     r"requires? (a |an )?(valid )?(student|school|university|\.edu) "
+                     r"(email|e-mail|id)|github student developer pack)", re.I)
+# "No .edu email required" contains ".edu email": strip these first
+NO_EDU = re.compile(r"(no (\.edu|student|school|university|academic) (email|e-mail|address|"
+                    r"verification|id) (is )?(required|needed|necessary)|"
+                    r"without (a |an )?(\.edu|student|school|university) (email|e-mail|address)|"
+                    r"(\.edu|student|school|university) (email|e-mail) (is )?not required|"
+                    r"(any|personal) email (address )?works)", re.I)
+
+
+def edu_status(text):
+    """Same three answers as cc_status, for a school / .edu email requirement."""
+    text = str(text or "")
+    no = bool(NO_EDU.search(text))
+    yes = bool(EDU_REQ.search(NO_EDU.sub(" ", text)))
+    if yes != no:
+        return yes
+    return None
+
+
+def cc_status(text):
+    """True: the page says a card is needed. False: it says no card is needed.
+    None: it says neither, or both (e.g. one plan each). The old check returned
+    True/False only, so "not mentioned" was stored as "no card needed", and
+    "No credit card required" itself matched "credit card required"."""
+    text = str(text or "")
+    no = bool(NO_CC.search(text))
+    yes = bool(CC_REQ.search(NO_CC.sub(" ", text)))
+    if yes != no:
+        return yes
+    return None
+
+
 def value_on_page(value, text):
-    """None if value has no $ amount to check, else whether that amount appears."""
-    amt = dedup.amount_of(value)
-    if not amt:
+    """None if value has no $ amount (or is $0). True only when the page shows the
+    amount as something you get; False when it is missing or not clearly free.
+    (The old check accepted the amount anywhere, so a $100/mo plan price
+    "verified" a $100 credit claim.)"""
+    verdict = dedup.price_verdict(value, text, use_value=False)
+    if verdict in (None, "zero"):
         return None
-    return any(dedup._num(m) == amt for m in dedup.AMOUNT.finditer(text))
+    return verdict == "free"
 
 
 def verify(offer, vendors, corroborations=1):
     vend = _vend(vendors)
     url = offer.get("signup_url") or offer.get("url")
     v = {"http": None, "claim_found": False, "value_found": None, "thin_page": False,
-         "cc_required": None, "domain": None, "final_url": None,
+         "cc_required": None, "edu_required": None, "domain": None, "final_url": None,
          "domain_age_days": None, "official_domain": False, "platform": False,
-         "scam_flag": False, "corroborations": corroborations,
+         "scam_flag": False, "price_verdict": None, "corroborations": corroborations,
          "checked_at": int(time.time())}
+    if dedup.needs_value(offer.get("offer_type")) and not dedup.has_value(offer.get("value")):
+        v["reject_reason"] = "no_value"
+        return "not_offer", v
     if not url:
         return "unverifiable", v
     v["scam_flag"] = bool(SCAM.search(url))
@@ -117,12 +166,21 @@ def verify(offer, vendors, corroborations=1):
         text = page_text(r.text)
         v["thin_page"] = len(text.split()) < THIN_WORDS
         v["claim_found"] = bool(CLAIM.search(text))
-        v["value_found"] = value_on_page(offer.get("value"), text)
-        v["cc_required"] = bool(CC_REQ.search(text))
+        v["price_verdict"] = dedup.price_verdict(offer.get("value"), text, use_value=False)
+        v["value_found"] = (None if v["price_verdict"] in (None, "zero")
+                            else v["price_verdict"] == "free")
+        v["cc_required"] = cc_status(text)
+        v["edu_required"] = edu_status(text)
         v["scam_flag"] = v["scam_flag"] or bool(SCAM.search(text))
         if r.status_code < 400 and GONE.search(text):
             v["final_url"] = final
             return "expired", v
+        # the page shows this amount as a price, or as a credit that needs a paid plan
+        if r.status_code < 400 and v["price_verdict"] in ("paid", "perk"):
+            v["final_url"] = final
+            v["reject_reason"] = ("unit_price" if v["price_verdict"] == "paid"
+                                  else "paid_plan_perk")
+            return "not_offer", v
     except httpx.ConnectError as e:
         v["error"] = "connect: " + str(e)[:180]
     except Exception as e:
@@ -134,7 +192,6 @@ def verify(offer, vendors, corroborations=1):
     if not v["official_domain"] and not v["platform"]:
         v["domain_age_days"] = domain_age_days(v["domain"])
     age = v["domain_age_days"]
-
     if v["scam_flag"]:
         return "suspicious", v
     if v["http"] in DEAD or (v["http"] and v["http"] >= 500 and v["http"] not in BLOCKED):
@@ -148,7 +205,7 @@ def verify(offer, vendors, corroborations=1):
     if v["official_domain"] and claim_ok:
         return "verified", v
     if v["official_domain"] and v["claim_found"]:
-        return "likely", v          # official page, but the $ amount isn't on it
+        return "likely", v  # official page, but the $ amount isn't shown as free
     if corroborations >= 2 and v["claim_found"]:
         return "likely", v
     if not v["platform"] and claim_ok and age is not None and age > 180:

@@ -1,6 +1,9 @@
 import time
 from . import api, store, render
 
+HIDDEN = ("suspicious", "dead_link", "expired", "not_offer")
+
+
 def eligible(u, o):
     if u.get("status") != "approved":
         return False
@@ -10,13 +13,14 @@ def eligible(u, o):
         return False
     if o.get("status") and o["status"] != "active":
         return False
-    if o.get("verify_status") in ("suspicious", "dead_link", "expired"):
+    if o.get("verify_status") in HIDDEN:
         return False
     if u.get("types"):
         allowed = [t.strip() for t in str(u["types"]).split(",")]
         if o.get("offer_type") not in allowed:
             return False
     return True
+
 
 def dispatch(mode="instant", max_per_user=8):
     db = store.load_users()
@@ -61,6 +65,7 @@ def dispatch(mode="instant", max_per_user=8):
     store.save_users(db)
     print("dispatch[" + mode + "]: " + str(sum(counter.values())) +
           " messages to " + str(len(counter)) + " users")
+
 
 if __name__ == "__main__":
     import sys

@@ -44,6 +44,9 @@ def offer_text(o):
         warn.append("منطقه: " + str(o["region"]))
     if warn:
         L.append("⚠️ " + e(" · ".join(warn)))
+    # say "no card" only when the vendor page itself said so, never on a guess
+    elif v.get("cc_required") is False:
+        L.append("💳 بدون نیاز به کارت بانکی")
     meta = [BADGE.get(o.get("verify_status"), "")]
     if (o.get("corroborations") or 1) > 1:
         meta.append(str(o["corroborations"]) + " منبع مستقل")

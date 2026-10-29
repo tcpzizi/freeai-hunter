@@ -6,32 +6,37 @@ for _x in (os.getenv("ADMIN_IDS", "") or "").replace(" ", "").split(","):
     if _x.isdigit():
         ADMINS.add(int(_x))
 
+HIDDEN = ("suspicious", "dead_link", "expired", "not_offer")
+
 WELCOME_PENDING = ("سلام {name} 👋\n\n"
- "این بات آفرهای <b>رایگان و تریالی هوش مصنوعی</b> را رصد می‌کند: "
- "API رایگان، کردیت هدیه، فری‌تیر دائمی، پلن دانشجویی و استارتاپی.\n\n"
- "⏳ درخواست عضویت شما ثبت و برای <b>تایید ادمین</b> ارسال شد.\n"
- "به‌محض تایید، همین‌جا خبردار می‌شوید.")
-WELCOME_OK = ("🎉 عضویت شما <b>تایید</b> شد!\n\n"
- "از این پس هر آفر جدید مستقیم به پیویتان می‌آید.\n"
- "• /settings تنظیم حداقل امتیاز و نوع آفر\n"
- "• /latest آفرهای داغ فعلی\n"
- "• /mute 12h سکوت موقت\n"
- "• /stop لغو عضویت")
+                   "این بات آفرهای **رایگان و تریالی هوش مصنوعی** را رصد می‌کند: "
+                   "API رایگان، کردیت هدیه، فری‌تیر دائمی، پلن دانشجویی و استارتاپی.\n\n"
+                   "⏳ درخواست عضویت شما ثبت و برای **تایید ادمین** ارسال شد.\n"
+                   "به‌محض تایید، همین‌جا خبردار می‌شوید.")
+WELCOME_OK = ("🎉 عضویت شما **تایید** شد!\n\n"
+              "از این پس هر آفر جدید مستقیم به پیویتان می‌آید.\n"
+              "• /settings تنظیم حداقل امتیاز و نوع آفر\n"
+              "• /latest آفرهای داغ فعلی\n"
+              "• /mute 12h سکوت موقت\n"
+              "• /stop لغو عضویت")
 STATUS_FA = {"pending": "⏳ در انتظار تایید ادمین", "approved": "✅ فعال",
              "rejected": "❌ رد شده", "blocked": "🚫 مسدود", "left": "خارج شده"}
 
+
 def is_admin(uid):
     return uid in ADMINS
+
 
 def review_kb(uid):
     return [[{"text": "✅ تایید", "callback_data": "ap:" + str(uid)},
              {"text": "❌ رد", "callback_data": "rj:" + str(uid)},
              {"text": "🚫 بلاک", "callback_data": "bl:" + str(uid)}]]
 
+
 def notify_admins_new(u, uid):
     uname = ("@" + u["username"]) if u.get("username") else "—"
-    txt = ("🆕 <b>درخواست عضویت جدید</b>\nنام: " + str(u.get("first_name", "")) +
-           "\nیوزرنیم: " + uname + "\nآیدی: <code>" + str(uid) + "</code>\nزمان: " +
+    txt = ("🆕 **درخواست عضویت جدید**\nنام: " + str(u.get("first_name", "")) +
+           "\nیوزرنیم: " + uname + "\nآیدی: `" + str(uid) + "`\nزمان: " +
            time.strftime("%Y-%m-%d %H:%M", time.gmtime(u.get("requested_at", 0))) + " UTC")
     if not ADMINS:
         print("WARNING: ADMIN_IDS is empty, nobody to notify")
@@ -41,16 +46,18 @@ def notify_admins_new(u, uid):
         except Exception as e:
             print("admin notify failed " + str(a) + ": " + str(e)[:100])
 
+
 def active_offers():
     out = []
     for o in store.load_offers():
         if o.get("status") and o["status"] != "active":
             continue
-        if o.get("verify_status") in ("suspicious", "dead_link", "expired"):
+        if o.get("verify_status") in HIDDEN:
             continue
         out.append(o)
     out.sort(key=lambda x: (-(x.get("score") or 0), -(x.get("updated_at") or 0)))
     return out
+
 
 def send_top(uid, n=5):
     for o in active_offers()[:n]:
@@ -61,6 +68,7 @@ def send_top(uid, n=5):
         except Exception as e:
             print("send_top failed: " + str(e)[:100])
         time.sleep(0.2)
+
 
 def cmd_start(db, uid, msg):
     u, is_new = store.get_or_create(db, uid, msg.get("from", {}))
@@ -76,12 +84,13 @@ def cmd_start(db, uid, msg):
     if is_new:
         notify_admins_new(u, uid)
 
+
 def cmd_status(db, uid, msg):
     u = db["users"].get(str(uid))
     if not u:
         return api.send(uid, "هنوز عضو نشده‌اید. /start را بزنید.")
-    t = ["وضعیت: <b>" + STATUS_FA.get(u["status"], u["status"]) + "</b>",
-         "حداقل امتیاز: <code>" + str(u["min_score"]) + "</code>",
+    t = ["وضعیت: **" + STATUS_FA.get(u["status"], u["status"]) + "**",
+         "حداقل امتیاز: `" + str(u["min_score"]) + "`",
          "نوع آفرها: " + str(u["types"] or "همه"),
          "حالت: " + ("فوری" if u.get("mode") == "instant" else "خلاصه روزانه"),
          "آفرهای ارسال‌شده: " + str(u.get("sent_count", 0))]
@@ -90,6 +99,7 @@ def cmd_status(db, uid, msg):
                  time.strftime("%m-%d %H:%M", time.gmtime(u["mute_until"])) + " UTC")
     api.send(uid, "\n".join(t))
 
+
 def cmd_latest(db, uid, msg):
     u = db["users"].get(str(uid))
     if not u or u["status"] != "approved":
@@ -97,6 +107,7 @@ def cmd_latest(db, uid, msg):
     if not active_offers():
         return api.send(uid, "فعلاً آفر فعالی در لیست نیست.")
     send_top(uid, 5)
+
 
 SET_KB = [[{"text": "۳۰ (همه‌چیز)", "callback_data": "set:score:30"},
            {"text": "۴۵ (متعادل)", "callback_data": "set:score:45"},
@@ -109,8 +120,10 @@ SET_KB = [[{"text": "۳۰ (همه‌چیز)", "callback_data": "set:score:30"},
           [{"text": "⚡️ فوری", "callback_data": "set:mode:instant"},
            {"text": "🗓 خلاصه روزانه", "callback_data": "set:mode:digest"}]]
 
+
 def cmd_settings(db, uid, msg):
     api.send(uid, "⚙️ تنظیمات اعلان‌ها:", SET_KB)
+
 
 def cmd_mute(db, uid, msg):
     u = db["users"].get(str(uid))
@@ -124,19 +137,22 @@ def cmd_mute(db, uid, msg):
     u["mute_until"] = int(time.time()) + hours * 3600
     api.send(uid, "🔇 تا " + str(hours) + " ساعت آینده پیامی نمی‌فرستم.")
 
+
 def cmd_stop(db, uid, msg):
     u = db["users"].get(str(uid))
     if u:
         u["status"] = "left"
     api.send(uid, "عضویت شما لغو شد. هر وقت خواستید /start بزنید. 👋")
 
+
 def cmd_help(db, uid, msg):
     txt = ("دستورها:\n/start عضویت\n/status وضعیت\n/latest آفرهای داغ\n"
            "/settings تنظیمات\n/mute 12h سکوت موقت\n/stop لغو عضویت")
     if is_admin(uid):
-        txt += ("\n\n<b>ادمین</b>:\n/pending صف تایید\n/users آمار\n"
+        txt += ("\n\n**ادمین**:\n/pending صف تایید\n/users آمار\n"
                 "/approve ID\n/broadcast متن")
     api.send(uid, txt)
+
 
 def cmd_pending(db, uid, msg):
     if not is_admin(uid):
@@ -146,8 +162,9 @@ def cmd_pending(db, uid, msg):
         return api.send(uid, "صف تایید خالی است ✅")
     for k, u in p[:20]:
         api.send(uid, "⏳ " + str(u.get("first_name", "")) + " (@" +
-                 str(u.get("username") or "—") + ") <code>" + k + "</code>",
+                 str(u.get("username") or "—") + ") `" + k + "`",
                  review_kb(k))
+
 
 def cmd_users(db, uid, msg):
     if not is_admin(uid):
@@ -157,6 +174,7 @@ def cmd_users(db, uid, msg):
         cnt[u.get("status")] = cnt.get(u.get("status"), 0) + 1
     api.send(uid, "👥 " + " · ".join(str(k) + ": " + str(v) for k, v in cnt.items()) +
              "\nجمع: " + str(len(db["users"])))
+
 
 def cmd_approve(db, uid, msg):
     if not is_admin(uid):
@@ -169,6 +187,7 @@ def cmd_approve(db, uid, msg):
             api.send(uid, "✅ " + t + " تایید شد.")
         else:
             api.send(uid, "کاربر " + t + " پیدا نشد.")
+
 
 def cmd_broadcast(db, uid, msg):
     if not is_admin(uid):
@@ -189,6 +208,7 @@ def cmd_broadcast(db, uid, msg):
         except Exception:
             pass
     api.send(uid, "ارسال شد به " + str(ok) + " کاربر.")
+
 
 def decide(db, key, status, by):
     u = db["users"].get(str(key))
@@ -212,10 +232,12 @@ def decide(db, key, status, by):
             pass
     return u
 
+
 CMDS = {"start": cmd_start, "status": cmd_status, "latest": cmd_latest,
         "settings": cmd_settings, "mute": cmd_mute, "stop": cmd_stop,
         "help": cmd_help, "pending": cmd_pending, "users": cmd_users,
         "approve": cmd_approve, "broadcast": cmd_broadcast}
+
 
 def handle_message(db, msg):
     frm = msg.get("from") or {}
@@ -241,6 +263,7 @@ def handle_message(db, msg):
     else:
         api.send(uid, "دستور ناشناس. /help")
 
+
 def handle_callback(db, cb):
     uid = (cb.get("from") or {}).get("id")
     data = cb.get("data") or ""
@@ -258,8 +281,8 @@ def handle_callback(db, cb):
         fa = {"approved": "✅ تایید", "rejected": "❌ رد", "blocked": "🚫 بلاک"}[new]
         api.answer_cb(cb["id"], fa)
         try:
-            api.edit(chat, mid, (m.get("text") or "") + "\n\n<b>" + fa +
-                     "</b> توسط <code>" + str(uid) + "</code>")
+            api.edit(chat, mid, (m.get("text") or "") + "\n\n**" + fa +
+                     "** توسط `" + str(uid) + "`")
         except Exception:
             pass
         return
