@@ -1,102 +1,86 @@
 # Free AI Offers
 
-Updated: 2026-10-29 10:04 UTC | total: 135
+Updated: 2026-10-29 11:13 UTC | total: 133
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
 | 40.8 | vercel.com | free_api | $20 | verified | [open](https://vercel.com/changelog/mem0-joins-the-vercel-marketplace) |
 | 40.0 | cursor.com | free_credits | $100 | verified | [open](https://cursor.com/pricing) |
-| 40.0 | anthropic.com | free_credits | $100 | verified | [open](https://anthropic.com/pricing) |
-| 39.9 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 39.9 | cloudflare.com | free_api | ? | verified | [open](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
-| 38.0 | anthropic.com | free_credits | $45 | verified | [open](https://anthropic.com/startups) |
 | 37.8 | baseten.co | permanent_free_tier | Free plan ($0) | verified | [open](https://baseten.co/pricing) |
-| 37.8 | anthropic.com | permanent_free_tier | Free plan ($0) | verified | [open](https://anthropic.com/pricing) |
-| 37.8 | together.ai | permanent_free_tier | Free plan ($0) | verified | [open](https://together.ai/pricing) |
-| 37.8 | novita.ai | permanent_free_tier | Free plan ($0) | verified | [open](https://novita.ai/pricing) |
 | 37.8 | vercel.com | permanent_free_tier | Free plan ($0) | verified | [open](https://vercel.com/pricing) |
-| 37.8 | deepinfra.com | permanent_free_tier | Free plan ($0) | verified | [open](https://deepinfra.com/pricing) |
-| 37.7 | github.com | free_api | ? | verified | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/4342da18b98ec5f25191bf4bd61617e7f68a7a97) |
 | 37.3 | modal.com | free_credits | $30 | verified | [open](https://modal.com/startups) |
-| 37.0 | openrouter.ai | free_credits | $25 | verified | [open](https://openrouter.ai/pricing) |
-| 37.0 | mistral.ai | free_credits | $25 | verified | [open](https://mistral.ai/pricing) |
 | 36.8 | elevenlabs.io | free_credits | $22 | verified | [open](https://elevenlabs.io/students) |
 | 36.7 | replit.com | free_credits | $20 | verified | [open](https://replit.com/pricing) |
-| 35.9 | devpost.com | free_credits | ? | verified | [open](https://amazonappdev2026.devpost.com/) |
-| 35.9 | lovable.dev | free_credits | ? | verified | [open](https://lovable.dev/changelog) |
 | 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/pricing) |
 | 35.9 | fireworks.ai | free_credits | ? | verified | [open](https://fireworks.ai/pricing) |
-| 35.9 | windsurf.com | free_credits | ? | verified | [open](https://windsurf.com/changelog) |
-| 35.9 | huggingface.co | free_credits | ? | verified | [open](https://huggingface.co/changelog) |
-| 35.9 | novita.ai | free_credits | ? | verified | [open](https://novita.ai/pricing) |
 | 35.9 | elevenlabs.io | free_credits | ? | verified | [open](https://elevenlabs.io/pricing) |
-| 35.9 | lumalabs.ai | free_credits | ? | verified | [open](https://lumalabs.ai/pricing) |
-| 35.9 | modal.com | free_credits | ? | verified | [open](https://modal.com/changelog) |
-| 35.9 | github.com | free_credits | ? | verified | [open](https://github.com/imkofty/freeflare) |
-| 35.9 | runwayml.com | free_credits | ? | verified | [open](https://runwayml.com/pricing) |
-| 35.9 | github.com | free_credits | $10 credit | verified | [open](https://github.com/tessaryai/tessary) |
-| 35.9 | runpod.io | free_credits | ? | verified | [open](https://runpod.io/changelog) |
 | 35.9 | v0.app | free_credits | ? | verified | [open](https://v0.app/changelog) |
-| 35.9 | anthropic.com | free_credits | ? | verified | [open](https://anthropic.com/startups) |
-| 35.9 | vercel.com | free_credits | ? | verified | [open](https://vercel.com/changelog) |
-| 35.9 | runwayml.com | free_credits | ? | verified | [open](https://runwayml.com/changelog) |
-| 35.8 | together.ai | free_credits | $9 | verified | [open](https://together.ai/pricing) |
 | 35.4 | zed.dev | free_credits | $5 | verified | [open](https://zed.dev/pricing) |
 | 35.4 | v0.app | free_credits | $5 | verified | [open](https://v0.app/pricing) |
-| 35.1 | cohere.com | free_credits | $3 | verified | [open](https://cohere.com/pricing) |
-| 34.9 | baseten.co | free_credits | $2 | verified | [open](https://baseten.co/pricing) |
 | 34.9 | huggingface.co | free_credits | $2 | verified | [open](https://huggingface.co/pricing) |
-| 34.6 | together.ai | free_credits | $1 | verified | [open](https://together.ai/pricing) |
 | 34.6 | modal.com | free_credits | $1 | verified | [open](https://modal.com/pricing) |
-| 34.0 | together.ai | free_credits | $0 | verified | [open](https://together.ai/pricing) |
 | 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
-| 34.0 | deepinfra.com | free_credits | $0 | verified | [open](https://deepinfra.com/pricing) |
-| 32.1 | bolt.new | free_credits | $216 | verified | [open](https://bolt.new/pricing) |
-| 31.9 | ycombinator.com | free_api | ? | likely | [open](https://news.ycombinator.com/item?id=49760942) |
 | 31.1 | modal.com | student | $30 | verified | [open](https://modal.com/pricing) |
-| 30.9 | usemerlin.ai | free_credits | $59 | likely | [open](https://usemerlin.ai) |
 | 30.8 | lovable.dev | student | $25 | verified | [open](https://lovable.dev/students) |
+| 30.3 | anthropic.com | permanent_free_tier | Free plan ($0) | likely | [open](https://anthropic.com/pricing) |
 | 30.3 | google.dev | permanent_free_tier | Free plan ($0) | likely | [open](https://ai.google.dev/pricing) |
-| 30.3 | the-decoder.com | permanent_free_tier | Free plan ($0) | likely | [open](https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs/) |
 | 29.9 | elevenlabs.io | student | ? | verified | [open](https://elevenlabs.io/students) |
 | 29.9 | v0.app | student | ? | verified | [open](https://v0.app/students) |
 | 29.9 | notion.com | student | ? | verified | [open](https://notion.com/students) |
-| 29.3 | ycombinator.com | free_credits | $20 | likely | [open](https://news.ycombinator.com/item?id=49782955) |
+| 29.6 | openrouter.ai | free_credits | $25 | likely | [open](https://openrouter.ai/pricing) |
+| 29.6 | mistral.ai | free_credits | $25 | likely | [open](https://mistral.ai/pricing) |
 | 29.0 | google.dev | free_credits | $14 | likely | [open](https://ai.google.dev/pricing) |
-| 28.7 | ycombinator.com | free_credits | ? | likely | [open](https://news.ycombinator.com/item?id=49759230) |
+| 28.7 | windsurf.com | free_credits | ? | likely | [open](https://windsurf.com/changelog) |
+| 28.7 | runwayml.com | free_credits | ? | likely | [open](https://runwayml.com/pricing) |
+| 28.7 | anthropic.com | free_credits | ? | likely | [open](https://anthropic.com/startups) |
+| 28.7 | runwayml.com | free_credits | ? | likely | [open](https://runwayml.com/changelog) |
 | 28.4 | assemblyai.com | permanent_free_tier | Free plan ($0) | verified | [open](https://assemblyai.com/pricing) |
-| 28.3 | ycombinator.com | free_credits | $5 | likely | [open](https://news.ycombinator.com/item?id=49794234) |
-| 28.3 | titan-ai.co | free_credits | $5 | likely | [open](https://titan-ai.co/) |
+| 27.9 | baseten.co | free_credits | $2 | likely | [open](https://baseten.co/pricing) |
 | 27.5 | candlefeed.ai | free_api | $149 | likely | [open](https://candlefeed.ai/data/order-book/) |
 | 26.9 | assemblyai.com | free_credits | $10 | verified | [open](https://assemblyai.com/pricing) |
-| 24.5 | ycombinator.com | student | $20 | likely | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
-| 22.1 | apple.com | free_trial | $49 | likely | [open](https://apps.apple.com/us/app/halo-personal-ai/id6783715054) |
-| 21.6 | memorysync.io | free_credits | ? | likely | [open](https://memorysync.io/try) |
+| 25.6 | bolt.new | free_credits | $216 | likely | [open](https://bolt.new/pricing) |
 | 20.8 | anxietychecklist.com | free_trial | ? | likely | [open](https://anxietychecklist.com/) |
-| 20.8 | staffcoder.com | free_trial | ? | likely | [open](https://www.staffcoder.com) |
-| 20.8 | autographmusic.com | free_trial | ? | likely | [open](https://autographmusic.com) |
+| 20.0 | ycombinator.com | free_api | ? | unconfirmed | [open](https://news.ycombinator.com/item?id=49760942) |
+| 20.0 | github.com | free_api | ? | unconfirmed | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/855d3f83b5be90342d243a0ce4f4ade7d248bf88) |
 | 20.0 | recalld.ai | free_api | ? | unconfirmed | [open](https://recalld.ai/) |
+| 20.0 | anthropic.com | free_credits | $100 | unconfirmed | [open](https://anthropic.com/pricing) |
+| 20.0 | github.com | free_api | ? | unconfirmed | [open](https://github.com/open-free-llm-api/awesome-freellm-apis/commit/4342da18b98ec5f25191bf4bd61617e7f68a7a97) |
+| 19.3 | usemerlin.ai | free_credits | $59 | unconfirmed | [open](https://usemerlin.ai) |
+| 19.0 | anthropic.com | free_credits | $45 | unconfirmed | [open](https://anthropic.com/startups) |
+| 18.9 | together.ai | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://together.ai/pricing) |
+| 18.9 | novita.ai | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://novita.ai/pricing) |
+| 18.9 | deepinfra.com | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://deepinfra.com/pricing) |
+| 18.9 | the-decoder.com | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs/) |
+| 18.3 | ycombinator.com | free_credits | $20 | unconfirmed | [open](https://news.ycombinator.com/item?id=49782955) |
+| 18.0 | ycombinator.com | free_credits | ? | unconfirmed | [open](https://news.ycombinator.com/item?id=49759230) |
+| 18.0 | devpost.com | free_credits | ? | unconfirmed | [open](https://amazonappdev2026.devpost.com/) |
+| 18.0 | huggingface.co | free_credits | ? | unconfirmed | [open](https://huggingface.co/changelog) |
 | 18.0 | parkourlabs.io | free_credits | ? | unconfirmed | [open](https://note.parkourlabs.io/) |
+| 18.0 | novita.ai | free_credits | ? | unconfirmed | [open](https://novita.ai/pricing) |
+| 18.0 | lumalabs.ai | free_credits | ? | unconfirmed | [open](https://lumalabs.ai/pricing) |
+| 18.0 | github.com | free_credits | ? | unconfirmed | [open](https://github.com/imkofty/freeflare) |
 | 18.0 | opper.ai | free_credits | ? | unconfirmed | [open](https://opper.ai/jevman-benchmark/) |
-| 18.0 | google.com | free_credits | ? | unconfirmed | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
-| 16.5 | huggingface.co | other | ? | verified | [open](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
+| 18.0 | github.com | free_credits | $10 credit | unconfirmed | [open](https://github.com/tessaryai/tessary) |
+| 18.0 | runpod.io | free_credits | ? | unconfirmed | [open](https://runpod.io/changelog) |
+| 18.0 | vercel.com | free_credits | ? | unconfirmed | [open](https://vercel.com/changelog) |
+| 17.9 | together.ai | free_credits | $9 | unconfirmed | [open](https://together.ai/pricing) |
+| 17.7 | ycombinator.com | free_credits | $5 | unconfirmed | [open](https://news.ycombinator.com/item?id=49794234) |
+| 17.7 | titan-ai.co | free_credits | $5 | unconfirmed | [open](https://titan-ai.co/) |
+| 17.5 | cohere.com | free_credits | $3 | unconfirmed | [open](https://cohere.com/pricing) |
+| 17.3 | together.ai | free_credits | $1 | unconfirmed | [open](https://together.ai/pricing) |
+| 17.0 | together.ai | free_credits | $0 | unconfirmed | [open](https://together.ai/pricing) |
+| 17.0 | deepinfra.com | free_credits | $0 | unconfirmed | [open](https://deepinfra.com/pricing) |
+| 15.3 | ycombinator.com | student | $20 | unconfirmed | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 14.0 | cloudflare.com | other | ? | verified | [open](https://blog.cloudflare.com/bot-preference-sync/) |
-| 14.0 | github.com | other | ? | verified | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
-| 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
-| 14.0 | huggingface.co | other | ? | verified | [open](https://huggingface.co/Justlora/MinimaxH3-Subtitle-Control-LoRA) |
-| 14.0 | openrouter.ai | other | ? | verified | [open](https://openrouter.ai/minimax/minimax-m3.1-flash:free) |
+| 13.8 | apple.com | free_trial | $49 | unconfirmed | [open](https://apps.apple.com/us/app/halo-personal-ai/id6783715054) |
+| 13.5 | memorysync.io | free_credits | ? | unconfirmed | [open](https://memorysync.io/try) |
 | 13.0 | getwarble.com | free_trial | ? | unconfirmed | [open](https://www.getwarble.com/) |
-| 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=49777627) |
+| 13.0 | staffcoder.com | free_trial | ? | unconfirmed | [open](https://www.staffcoder.com) |
+| 13.0 | autographmusic.com | free_trial | ? | unconfirmed | [open](https://autographmusic.com) |
+| 12.6 | google.com | free_credits | ? | unverifiable | [open](https://news.google.com/rss/articles/CBMi0gJBVV95cUxQS1dCdFhrc09WakwtNElmSGIzekVuLTl2ek9VemRQQWNwVEsyT3hBeU5jQTN6eW9ySXM5dl9MZW1qMFlfU0xjc0dsMkxjeUFkd1hsUGQ1TF9aN0FJaS1ZSUxRQURPRnVuSUI0MHNUa3c0NnVwUjc1WXcweXlxRnZrbHY4czA5TVJYbmhuMzBfNkk3VlpRcUJyZXVubXpHdi1kOXpuS2JFcm1YUmFrcXhfMVVPbS1pTkh0RFZGUkFCd2Jhd05VbkJzeWVmbGFKaFNqZUNFLU9iT1V3Z0h0OUNmdWRaMjVwUmFQRm96MUZvU052S3FHY1BzcWxrakFGaTNBcUNQcE1VU2t6U2Q0VGpPS2Z4bFFta1JWWWdiWjdkdGFISmZJT3NuT3RIeHNTWjBZZm15UWJlM3dJVkNGaHhSMG9MVGpXUGlURDIxRXlLV0YwUQ?oc=5) |
 | 11.2 | datastory.tech | other | ? | likely | [open](https://www.datastory.tech) |
-| 11.2 | theverge.com | other | ? | likely | [open](https://www.theverge.com/tech/1008145/google-pixel-watch-1-2-free-safety-signal-emergency-access-ending) |
-| 11.2 | searchyourcollection.com | other | ? | likely | [open](https://searchyourcollection.com/examples) |
-| 11.2 | kodel.com.br | other | ? | likely | [open](https://face.kodel.com.br) |
-| 11.2 | ycombinator.com | other | ? | likely | [open](https://news.ycombinator.com/item?id=50154523) |
 | 11.0 | the-decoder.com | other | $5 | likely | [open](https://the-decoder.com/googles-new-gemini-tiers-cut-free-users-to-its-weakest-model-and-lock-5-month-subscribers-out-of-pro/) |
-| 11.0 | theverge.com | other | $4 | likely | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
-| 10.8 | simonwillison.net | other | $1 | likely | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
-| 8.4 | netlumi.com | other | $249 | unconfirmed | [open](https://app.netlumi.com) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Slavakoch/morocam_style_LoRA) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SofaMatush/marginalia_style_LoRA) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/SkillFi24/sylveris-flux.2-klein-9b-base) |
@@ -112,15 +96,31 @@ Updated: 2026-10-29 10:04 UTC | total: 135
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Nekodeus/neko-alpha4-sdxl-v1) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Poij3012/Wan2.2-I2V_General-NSFW-LoRA) |
 | 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Nekodeus/neko-alpha3-sdxl-v1) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Mike0021/qwen-image-edit-2511-pbr-lora) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Nekodeus/neko-alpha1-sdxl-v1) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Nekodeus/neko-alpha2-sdxl-v1) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Marcellus-Zhao/TTT2Reel-Wan2.2-TI2V-5B) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Mariaiaia/frid_style_LoRA) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/MelkorTheDeveleper/hailey) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/LGirrbach/ssr-merge-experiments) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/GlurpRain/Arriana) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/GlurpRain/Siobhan) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Jatin1999/patent-style-lora) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/DongShanHu/Qwen-Image-Edit-2511-Multiple-Angles-LoRA) |
-| 8.3 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Gameblamer/Flux_Lustly.ai_Uncensored_nsfw_v1) |
+| 7.0 | ycombinator.com | other | ? | unconfirmed | [open](https://news.ycombinator.com/item?id=49777627) |
+| 7.0 | github.com | other | ? | unconfirmed | [open](https://github.com/ripienaar/free-for-dev/commit/ffe76c73e20bc7deabc2c2c5206ee738f445e888) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AiMamis/Jenny_Lorenzo) |
+| 7.0 | openrouter.ai | other | ? | unconfirmed | [open](https://openrouter.ai/stealth/space-bunny-alpha) |
+| 7.0 | theverge.com | other | ? | unconfirmed | [open](https://www.theverge.com/tech/1008145/google-pixel-watch-1-2-free-safety-signal-emergency-access-ending) |
+| 7.0 | searchyourcollection.com | other | ? | unconfirmed | [open](https://searchyourcollection.com/examples) |
+| 7.0 | hypermass.io | other | ? | unconfirmed | [open](https://docs.hypermass.io/docs/cli/) |
+| 7.0 | kodel.com.br | other | ? | unconfirmed | [open](https://face.kodel.com.br) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
+| 7.0 | openrouter.ai | other | ? | unconfirmed | [open](https://openrouter.ai/minimax/minimax-m3.1-flash:free) |
+| 7.0 | ycombinator.com | other | ? | unconfirmed | [open](https://news.ycombinator.com/item?id=50154523) |
+| 7.0 | openrouter.ai | other | ? | unconfirmed | [open](https://openrouter.ai/recursive/flint-v1.0:free) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/A2) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/A3) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/A4_v2) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/Atetermira) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/Nonstila) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/Nonstila2) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/AF552/a4) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Afredbilli/Zass-fake) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Amador1989/MicrobikiniKrea2) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Apropramate/ukiyoe_style_LoRA) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Assfnjk/MiniMax-H3-Turbo-Lora) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Darkidd/realfff) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/DongShanHu/Qwen-Image-Edit-2511-Multiple-Angles-LoRA) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/Gameblamer/Flux_Lustly.ai_Uncensored_nsfw_v1) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/GlurpRain/Arriana) |
+| 7.0 | huggingface.co | other | ? | unconfirmed | [open](https://huggingface.co/GlurpRain/Siobhan) |
