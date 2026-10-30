@@ -52,7 +52,10 @@ PERK_HEAD = re.compile(
     r"accounts?|customers?|seats?|plans?)\b[^$.]{0,30}$"
     r"|\b" + _BARE_TIER + r"\b\W{0,3}$"
     r"|\b(?:subscribers?|paid\s+plans?)\b[^$.]{0,40}$"
-    r"|\b(?:upgrade|subscribe)\s+(?:to|and|for)\b[^$.]{0,40}$", re.I)
+    r"|\b(?:upgrade|subscribe)\s+(?:to|and|for)\b[^$.]{0,40}$"
+    # "PRO plan includes $2", "Team gets $20", "Enterprise comes with $"
+    r"|\b" + _BARE_TIER + r"\b[^$.]{0,40}\b(?:includes?|included|gets?|receives?|"
+    r"unlocks?|comes?\s+with|has|have|with)\b[^$.]{0,25}$", re.I)
 PERK_TAIL = re.compile(
     r"^[^$.]{0,50}?\b(?:for|to|with|on)\s+(?:all\s+|the\s+|your\s+)?" + _PAID_TIER + r"\b"
     r"|^[^$.]{0,50}?\b(?:per\s+seat|each\s+seat|included\s+(?:in|with)\s+(?:the\s+|your\s+)?"

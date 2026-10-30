@@ -57,6 +57,7 @@ def conn():
     migrate_dedup_v2(c)
     migrate_cc_v1(c)
     migrate_edu_v1(c)
+    migrate_zero_v1(c)
     return c
 
 
@@ -307,3 +308,33 @@ def migrate_edu_v1(c):
     c.execute("INSERT OR REPLACE INTO meta(k,v) VALUES('edu_v1',?)", (str(int(time.time())),))
     c.commit()
     print("migrate edu_v1: reset school-email requirement on " + str(n) + " offers")
+
+
+def migrate_zero_v1(c):
+    """One-off: old rows saved as free_credits / free_api / other with a $0 value
+    are really free plans. Archive them when the same site already has a
+    permanent_free_tier row, otherwise turn them into one."""
+    if c.execute("SELECT 1 FROM meta WHERE k='zero_v1'").fetchone():
+        return
+    from . import dedup
+    now = int(time.time())
+    rows = list(c.execute("SELECT id, domain, value FROM offers WHERE status='active' "
+                          "AND offer_type IN ('free_credits','free_api','other')"))
+    archived = converted = 0
+    for r in rows:
+        if dedup.amount_of(r["value"]) != 0:
+            continue
+        twin = c.execute("SELECT 1 FROM offers WHERE domain=? AND status='active' AND "
+                         "offer_type='permanent_free_tier' AND id<>?",
+                         (r["domain"], r["id"])).fetchone()
+        if twin:
+            c.execute("UPDATE offers SET status='archived', verify_status='not_offer', "
+                      "updated_at=? WHERE id=?", (now, r["id"]))
+            archived += 1
+        else:
+            c.execute("UPDATE offers SET offer_type='permanent_free_tier', "
+                      "value='Free plan ($0)', updated_at=? WHERE id=?", (now, r["id"]))
+            converted += 1
+    c.execute("INSERT OR REPLACE INTO meta(k,v) VALUES('zero_v1',?)", (str(now),))
+    c.commit()
+    print("migrate zero_v1: " + str(archived) + " archived, " + str(converted) + " converted")
