@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-10-30 06:03 UTC | total: 37
+Updated: 2026-10-30 08:36 UTC | total: 34
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -9,7 +9,6 @@ Updated: 2026-10-30 06:03 UTC | total: 37
 | 37.8 | vercel.com | permanent_free_tier | Free plan ($0) | verified | [open](https://vercel.com/pricing) |
 | 34.9 | huggingface.co | free_credits | $2 | verified | [open](https://huggingface.co/pricing) |
 | 34.2 | bolt.new | free_credits | $216 | likely | [open](https://bolt.new/pricing) |
-| 34.0 | vercel.com | free_credits | $0 | verified | [open](https://vercel.com/pricing) |
 | 30.3 | anthropic.com | permanent_free_tier | Free plan ($0) | likely | [open](https://anthropic.com/pricing) |
 | 30.3 | google.dev | permanent_free_tier | Free plan ($0) | likely | [open](https://ai.google.dev/pricing) |
 | 29.9 | notion.com | student | ? | verified | [open](https://notion.com/students) |
@@ -34,8 +33,6 @@ Updated: 2026-10-30 06:03 UTC | total: 37
 | 17.7 | ycombinator.com | free_credits | $5 | unconfirmed | [open](https://news.ycombinator.com/item?id=49794234) |
 | 17.7 | titan-ai.co | free_credits | $5 | unconfirmed | [open](https://titan-ai.co/) |
 | 17.3 | together.ai | free_credits | $1 | unconfirmed | [open](https://together.ai/pricing) |
-| 17.0 | together.ai | free_credits | $0 | unconfirmed | [open](https://together.ai/pricing) |
-| 17.0 | deepinfra.com | free_credits | $0 | unconfirmed | [open](https://deepinfra.com/pricing) |
 | 15.3 | ycombinator.com | student | $20 | unconfirmed | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 13.8 | apple.com | free_trial | $49 | unconfirmed | [open](https://apps.apple.com/us/app/halo-personal-ai/id6783715054) |
 | 6.8 | theverge.com | other | $4 | unconfirmed | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
