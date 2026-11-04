@@ -149,7 +149,7 @@ def cmd_help(db, uid, msg):
     txt = ("دستورها:\n/start عضویت\n/status وضعیت\n/latest آفرهای داغ\n"
            "/settings تنظیمات\n/mute 12h سکوت موقت\n/stop لغو عضویت")
     if is_admin(uid):
-        txt += ("\n\n**ادمین**:\n/pending صف تایید\n/users آمار\n"
+        txt += ("\n\n<b>ادمین</b>:\n/pending صف تایید\n/users آمار\n"
                 "/approve ID\n/broadcast متن")
     api.send(uid, txt)
 
