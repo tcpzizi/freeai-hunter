@@ -1,4 +1,4 @@
-import os, re, time
+import html, os, re, time
 from . import api, store, render
 
 ADMINS = set()
@@ -9,11 +9,11 @@ for _x in (os.getenv("ADMIN_IDS", "") or "").replace(" ", "").split(","):
 HIDDEN = ("suspicious", "dead_link", "expired", "not_offer")
 
 WELCOME_PENDING = ("سلام {name} 👋\n\n"
-                   "این بات آفرهای **رایگان و تریالی هوش مصنوعی** را رصد می‌کند: "
+                   "این بات آفرهای <b>رایگان و تریالی هوش مصنوعی</b> را رصد می‌کند: "
                    "API رایگان، کردیت هدیه، فری‌تیر دائمی، پلن دانشجویی و استارتاپی.\n\n"
-                   "⏳ درخواست عضویت شما ثبت و برای **تایید ادمین** ارسال شد.\n"
+                   "⏳ درخواست عضویت شما ثبت و برای <b>تایید ادمین</b> ارسال شد.\n"
                    "به‌محض تایید، همین‌جا خبردار می‌شوید.")
-WELCOME_OK = ("🎉 عضویت شما **تایید** شد!\n\n"
+WELCOME_OK = ("🎉 عضویت شما <b>تایید</b> شد!\n\n"
               "از این پس هر آفر جدید مستقیم به پیویتان می‌آید.\n"
               "• /settings تنظیم حداقل امتیاز و نوع آفر\n"
               "• /latest آفرهای داغ فعلی\n"
@@ -34,8 +34,8 @@ def review_kb(uid):
 
 
 def notify_admins_new(u, uid):
-    uname = ("@" + u["username"]) if u.get("username") else "—"
-    txt = ("🆕 **درخواست عضویت جدید**\nنام: " + str(u.get("first_name", "")) +
+    uname = ("@" + html.escape(str(u["username"]))) if u.get("username") else "—"
+    txt = ("🆕 **درخواست عضویت جدید**\nنام: " + html.escape(str(u.get("first_name", ""))) +
            "\nیوزرنیم: " + uname + "\nآیدی: `" + str(uid) + "`\nزمان: " +
            time.strftime("%Y-%m-%d %H:%M", time.gmtime(u.get("requested_at", 0))) + " UTC")
     if not ADMINS:
@@ -80,7 +80,7 @@ def cmd_start(db, uid, msg):
         u["status"] = "pending"
         u["requested_at"] = int(time.time())
         is_new = True
-    api.send(uid, WELCOME_PENDING.format(name=u.get("first_name") or ""))
+    api.send(uid, WELCOME_PENDING.format(name=html.escape(str(u.get("first_name") or ""))))
     if is_new:
         notify_admins_new(u, uid)
 
@@ -89,9 +89,9 @@ def cmd_status(db, uid, msg):
     u = db["users"].get(str(uid))
     if not u:
         return api.send(uid, "هنوز عضو نشده‌اید. /start را بزنید.")
-    t = ["وضعیت: **" + STATUS_FA.get(u["status"], u["status"]) + "**",
-         "حداقل امتیاز: `" + str(u["min_score"]) + "`",
-         "نوع آفرها: " + str(u["types"] or "همه"),
+    t = ["وضعیت: <b>" + html.escape(str(STATUS_FA.get(u["status"], u["status"]))) + "</b>",
+         "حداقل امتیاز: <code>" + html.escape(str(u["min_score"])) + "</code>",
+         "نوع آفرها: " + html.escape(str(u["types"] or "همه")),
          "حالت: " + ("فوری" if u.get("mode") == "instant" else "خلاصه روزانه"),
          "آفرهای ارسال‌شده: " + str(u.get("sent_count", 0))]
     if (u.get("mute_until") or 0) > time.time():
@@ -161,8 +161,8 @@ def cmd_pending(db, uid, msg):
     if not p:
         return api.send(uid, "صف تایید خالی است ✅")
     for k, u in p[:20]:
-        api.send(uid, "⏳ " + str(u.get("first_name", "")) + " (@" +
-                 str(u.get("username") or "—") + ") `" + k + "`",
+        api.send(uid, "⏳ " + html.escape(str(u.get("first_name", ""))) + " (@" +
+                 html.escape(str(u.get("username") or "—")) + ") <code>" + html.escape(str(k)) + "</code>",
                  review_kb(k))
 
 
@@ -200,7 +200,7 @@ def cmd_broadcast(db, uid, msg):
         if u.get("status") != "approved":
             continue
         try:
-            api.send(int(key), "📢 " + parts[1])
+            api.send(int(key), "📢 " + html.escape(parts[1]))
             ok += 1
             time.sleep(0.08)
         except api.Blocked:
