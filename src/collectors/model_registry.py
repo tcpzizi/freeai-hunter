@@ -50,8 +50,8 @@ def huggingface(c):
         for mid in sorted(set(ids) - set(json.loads(old))):
             u = "https://huggingface.co/" + mid
             out.append({"id": "hf:" + mid, "url": u, "canon_url": u,
-                "title": "[HF serverless] " + mid + " available on free inference",
-                "body": "Hugging Face serverless inference free tier: new warm model.",
+                "title": "[HF serverless] " + mid + " is warm (pricing unverified)",
+                "body": "Hugging Face reports this model as warm for serverless inference. Warm status does not establish that inference is free; verify current pricing and account requirements before treating it as a free offer.",
                 "source": "hf-registry", "source_type": "registry",
                 "published_at": int(time.time()), "prefilter": 6.0,
                 "hard_signal": True})

@@ -1,7 +1,13 @@
 import re, time, difflib, httpx
 import concurrent.futures as cf
 from selectolax.parser import HTMLParser
-from ..store import snapshot
+from ..store import snapshot, meta_get, meta_set
+
+def snapshot_cursor(c, key):
+    return meta_get(c, key)
+
+def set_snapshot_cursor(c, key, value):
+    meta_set(c, key, value)
 
 FREE_RE = re.compile(r"(free|no credit card|trial|credits?|students?|startup|"
                      r"\$\d+|rate limit|quota|per (day|minute|month))", re.I)
@@ -30,7 +36,14 @@ def fetch(url):
         return url, None
 
 def watch(c, domains, paths, max_pages=260):
-    urls = [("https://" + d.strip("/") + p) for d in domains for p in paths][:max_pages]
+    all_urls = sorted({("https://" + d.strip("/") + p) for d in domains for p in paths})
+    if not all_urls:
+        return []
+    # Persist a cursor in SQLite so the page cap cannot starve later domains.
+    cursor = int(snapshot_cursor(c, "pagediff_cursor") or 0) % len(all_urls)
+    count = min(max(1, int(max_pages)), len(all_urls))
+    urls = [all_urls[(cursor + i) % len(all_urls)] for i in range(count)]
+    set_snapshot_cursor(c, "pagediff_cursor", (cursor + count) % len(all_urls))
     results = []
     with cf.ThreadPoolExecutor(12) as ex:
         for f in cf.as_completed([ex.submit(fetch, u) for u in urls]):

@@ -15,20 +15,28 @@ def main():
         wait = int(max(1, min(25, deadline - time.time())))
         try:
             ups = api.get_updates(offset, timeout=wait)
+        except api.Fatal:
+            # Authentication, webhook conflicts and exhausted HTTP retries are
+            # not recoverable by spinning until the scheduled job times out.
+            raise
         except Exception as e:
-            print("getUpdates: " + str(e)[:150])
+            print("getUpdates transient error: " + str(e)[:150])
             time.sleep(3)
             continue
         for up in ups:
-            offset = up["update_id"] + 1
             try:
                 if "message" in up:
                     handlers.handle_message(db, up["message"])
                 elif "callback_query" in up:
                     handlers.handle_callback(db, up["callback_query"])
+                # Advance only after successful handling. If a Telegram API or
+                # storage operation fails, this update is replayed next run.
+                offset = up["update_id"] + 1
                 handled += 1
             except Exception as e:
-                print("handler error: " + str(e)[:150])
+                print("handler error (update " + str(up.get("update_id")) + "): " +
+                      str(e)[:150])
+                break
         if ups:
             store.save_users(db)
             store.save_state({"offset": offset})
