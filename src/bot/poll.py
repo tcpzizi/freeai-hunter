@@ -15,8 +15,12 @@ def main():
         wait = int(max(1, min(25, deadline - time.time())))
         try:
             ups = api.get_updates(offset, timeout=wait)
+        except api.Fatal:
+            # Authentication, webhook conflicts and exhausted HTTP retries are
+            # not recoverable by spinning until the scheduled job times out.
+            raise
         except Exception as e:
-            print("getUpdates: " + str(e)[:150])
+            print("getUpdates transient error: " + str(e)[:150])
             time.sleep(3)
             continue
         for up in ups:
