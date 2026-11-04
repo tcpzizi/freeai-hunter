@@ -35,8 +35,8 @@ def review_kb(uid):
 
 def notify_admins_new(u, uid):
     uname = ("@" + html.escape(str(u["username"]))) if u.get("username") else "—"
-    txt = ("🆕 **درخواست عضویت جدید**\nنام: " + html.escape(str(u.get("first_name", ""))) +
-           "\nیوزرنیم: " + uname + "\nآیدی: `" + str(uid) + "`\nزمان: " +
+    txt = ("🆕 <b>درخواست عضویت جدید</b>\nنام: " + html.escape(str(u.get("first_name", ""))) +
+           "\nیوزرنیم: " + uname + "\nآیدی: <code>" + str(uid) + "</code>\nزمان: " +
            time.strftime("%Y-%m-%d %H:%M", time.gmtime(u.get("requested_at", 0))) + " UTC")
     if not ADMINS:
         print("WARNING: ADMIN_IDS is empty, nobody to notify")
