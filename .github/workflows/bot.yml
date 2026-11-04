@@ -38,6 +38,16 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add -A
           git diff --quiet --cached || git commit -m "bot: $(date -u +%FT%TZ)"
+          pushed=false
           for i in 1 2 3; do
-            git pull --rebase --autostash -q && git push && break || sleep 6
+            if git pull --rebase --autostash -q && git push; then
+              pushed=true
+              break
+            fi
+            echo "Push attempt $i failed; retrying..."
+            sleep $((i * 5))
           done
+          if [ "$pushed" != "true" ]; then
+            echo "::error::Unable to push persisted data after 3 attempts"
+            exit 1
+          fi
