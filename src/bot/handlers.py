@@ -281,8 +281,8 @@ def handle_callback(db, cb):
         fa = {"approved": "✅ تایید", "rejected": "❌ رد", "blocked": "🚫 بلاک"}[new]
         api.answer_cb(cb["id"], fa)
         try:
-            api.edit(chat, mid, (m.get("text") or "") + "\n\n**" + fa +
-                     "** توسط `" + str(uid) + "`")
+            api.edit(chat, mid, html.escape(m.get("text") or "") + "\n\n<b>" + fa +
+                     "</b> توسط <code>" + str(uid) + "</code>")
         except Exception:
             pass
         return
