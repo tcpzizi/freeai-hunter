@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-11-05 01:53 UTC | total: 34
+Updated: 2026-11-05 07:02 UTC | total: 34
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -23,17 +23,17 @@ Updated: 2026-11-05 01:53 UTC | total: 34
 | 18.9 | novita.ai | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://novita.ai/pricing) |
 | 18.9 | deepinfra.com | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://deepinfra.com/pricing) |
 | 18.9 | the-decoder.com | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs/) |
+| 18.3 | ycombinator.com | free_credits | $20 | unconfirmed | [open](https://news.ycombinator.com/item?id=49782955) |
 | 18.0 | github.com | free_credits | $10 credit | unconfirmed | [open](https://github.com/tessaryai/tessary) |
 | 17.9 | together.ai | free_credits | $9 | unconfirmed | [open](https://together.ai/pricing) |
+| 17.7 | ycombinator.com | free_credits | $5 | unconfirmed | [open](https://news.ycombinator.com/item?id=49794234) |
 | 17.7 | titan-ai.co | free_credits | $5 | unconfirmed | [open](https://titan-ai.co/) |
 | 17.3 | together.ai | free_credits | $1 | unconfirmed | [open](https://together.ai/pricing) |
 | 15.3 | ycombinator.com | student | $20 | unconfirmed | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
 | 13.8 | apple.com | free_trial | $49 | unconfirmed | [open](https://apps.apple.com/us/app/halo-personal-ai/id6783715054) |
 | 13.2 | baseten.co | permanent_free_tier | Free plan ($0) | unverifiable | [open](https://baseten.co/pricing) |
 | 13.2 | google.dev | permanent_free_tier | Free plan ($0) | unverifiable | [open](https://ai.google.dev/pricing) |
-| 12.8 | ycombinator.com | free_credits | $20 | unverifiable | [open](https://news.ycombinator.com/item?id=49782955) |
 | 12.7 | google.dev | free_credits | $14 | unverifiable | [open](https://ai.google.dev/pricing) |
-| 12.4 | ycombinator.com | free_credits | $5 | unverifiable | [open](https://news.ycombinator.com/item?id=49794234) |
 | 12.2 | baseten.co | free_credits | $2 | unverifiable | [open](https://baseten.co/pricing) |
 | 6.8 | theverge.com | other | $4 | unconfirmed | [open](https://www.theverge.com/ai-artificial-intelligence/1005451/google-gemini-free-flash-lite-only) |
 | 6.7 | simonwillison.net | other | $1 | unconfirmed | [open](https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/) |
