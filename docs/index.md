@@ -1,6 +1,6 @@
 # Free AI Offers
 
-Updated: 2026-11-07 16:29 UTC | total: 34
+Updated: 2026-11-07 17:47 UTC | total: 32
 
 | Score | Vendor | Type | Value | Verify | Link |
 |---|---|---|---|---|---|
@@ -23,10 +23,8 @@ Updated: 2026-11-07 16:29 UTC | total: 34
 | 18.9 | novita.ai | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://novita.ai/pricing) |
 | 18.9 | deepinfra.com | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://deepinfra.com/pricing) |
 | 18.9 | the-decoder.com | permanent_free_tier | Free plan ($0) | unconfirmed | [open](https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs/) |
-| 18.3 | ycombinator.com | free_credits | $20 | unconfirmed | [open](https://news.ycombinator.com/item?id=49782955) |
 | 18.0 | github.com | free_credits | $10 credit | unconfirmed | [open](https://github.com/tessaryai/tessary) |
 | 17.9 | together.ai | free_credits | $9 | unconfirmed | [open](https://together.ai/pricing) |
-| 17.7 | ycombinator.com | free_credits | $5 | unconfirmed | [open](https://news.ycombinator.com/item?id=49794234) |
 | 17.7 | titan-ai.co | free_credits | $5 | unconfirmed | [open](https://titan-ai.co/) |
 | 17.3 | together.ai | free_credits | $1 | unconfirmed | [open](https://together.ai/pricing) |
 | 15.3 | ycombinator.com | student | $20 | unconfirmed | [open](https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack/) |
