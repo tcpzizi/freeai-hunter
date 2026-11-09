@@ -8,11 +8,11 @@ permissions:
 # Shared with recheck and expand: all three read and write the same binary
 # data/state.sqlite and git cannot merge it, so they must take turns. The bot
 # is deliberately NOT in this group - it never touches the database.
-# queue: max keeps every scheduled run that is waiting instead of dropping the
-# older ones, so a backlog delays hunting but never silently cancels it.
+# A single pending slot is enough here: the next cron tick replaces a run that
+# is still waiting, which is what we want when GitHub delays runs by minutes.
 concurrency:
   group: freeai-db
-  queue: max
+  cancel-in-progress: false
 jobs:
   hunt:
     runs-on: ubuntu-latest

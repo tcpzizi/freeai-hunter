@@ -9,7 +9,7 @@ permissions:
 # (candidate_sources) before it touches config/sources.yaml.
 concurrency:
   group: freeai-db
-  queue: max
+  cancel-in-progress: false
 jobs:
   expand:
     runs-on: ubuntu-latest
