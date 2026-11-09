@@ -60,14 +60,24 @@ def _mirror_put(path, payload, token, repo):
     return False
 
 
-def mirror_public(data):
-    """Copy the public JSON into the public repo. Returns the paths written."""
+def mirror_public(data, site=None):
+    """Copy the public JSON into the public repo. Returns the paths written.
+
+    `site` is the small state block the site renders (updated_at, availability,
+    shifts, tools). It is merged into the two github-pages files, which are the
+    ones docs/site/index.html reads.
+    """
     if not MIRROR_TOKEN:
         print("mirror: no PUBLIC_MIRROR_TOKEN (the Worker can still read data/ from DATA_REPO)")
         return []
     written = []
     for path, shape in MIRROR_FILES:
-        payload = data if shape == "bare" else {"offers": data, "updated_at": int(time.time())}
+        if shape == "bare":
+            payload = data
+        else:
+            payload = dict(site or {})
+            payload["offers"] = data
+            payload["updated_at"] = int(time.time())
         if _mirror_put(path, payload, MIRROR_TOKEN, MIRROR_REPO):
             written.append(path)
     return written
@@ -144,19 +154,8 @@ def build(c):
         lines.append("| " + " | ".join(x.replace("|", "/") for x in cells) + " |")
     with open("docs/index.md", "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
-    mirrored = mirror_public(data)
     copied = snapshot(c)
-    print("published: " + str(len(data)) + " offers, " + str(copied) + " in docs/, "
-          + str(len(mirrored)) + " mirrored to the public repo")
-
-    # The public mirror is a hard requirement, not a nicety: the site and the
-    # Cloudflare Worker have nothing else to read (the data repo is private).
-    # When GitHub refuses, this raises, hunt goes red, and src/main.py keeps the
-    # previous docs/ files instead of publishing an empty list.
-    # A configured mirror that silently does nothing is the failure that made
-    # the Worker blind in the first place, so the workflows set
-    # PUBLIC_MIRROR_REQUIRED=1 and a rejected push turns the run red. Local runs
-    # (and the test suite) stay quiet.
-    if not mirrored and os.getenv("PUBLIC_MIRROR_REQUIRED") == "1":
-        raise RuntimeError("public mirror failed: nothing could be written to " + MIRROR_REPO
-                           + (" (PUBLIC_MIRROR_TOKEN is not set)" if not MIRROR_TOKEN else ""))
+    print("published: " + str(len(data)) + " offers, " + str(copied) + " in docs/")
+    # The push to the public repo is a separate step (python -m src.publish_mirror)
+    # on purpose: it runs after the data commit, so a rejected push is visible
+    # without throwing away the run's work.

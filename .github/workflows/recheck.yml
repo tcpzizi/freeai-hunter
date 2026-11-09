@@ -28,16 +28,23 @@ jobs:
       - run: pip install -r requirements.txt
       - name: run recheck
         env:
-          PUBLIC_MIRROR_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
-          PUBLIC_MIRROR_REPO: tcpzizi/freeai-hunter
-          PUBLIC_MIRROR_BRANCH: main
-          PUBLIC_MIRROR_REQUIRED: "1"
+
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python -m src.recheck
       - name: commit data
         run: |
           bash scripts/commit-data.sh data "recheck: $(date -u +%FT%TZ)" state.sqlite offers.json stats.json
+      # The site and the Cloudflare Worker can only read the public repo, so the
+      # JSON is pushed there over the contents API. This runs after the data
+      # commit on purpose: a rejected push fails here, not in the middle of the
+      # run, so the run's data is still saved.
+      - name: publish to the public repo
+        env:
+          PUBLIC_MIRROR_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
+          PUBLIC_MIRROR_REPO: tcpzizi/freeai-hunter
+          PUBLIC_MIRROR_BRANCH: main
+        run: python -m src.publish_mirror
       # recheck re-scores and re-verifies offers, so the public copy must be
       # refreshed here too or the Worker keeps announcing stale verification.
       - name: commit docs

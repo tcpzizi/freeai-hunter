@@ -26,10 +26,11 @@
   شکل `{"offers": [...]}` که صفحه‌های سایت می‌خوانند
 - `docs/sites.json` — همان لیست، برای ورکری که یک فایل می‌خواهد
 - `docs/index.md` — جدول مارک‌داون آفرها
-`src/publish.py` علاوه بر نوشتن روی دیسک، همین فایل‌ها را با contents API به ریپوی
-عمومی push می‌کند (`PUBLIC_MIRROR_TOKEN`، `PUBLIC_MIRROR_REPO`، `PUBLIC_MIRROR_REQUIRED=1`).
-این کار عمداً با API انجام می‌شود: `actions/checkout` روی همین ریپو برای `contents`
-فقط‌خواندنی است، پس کامیت کردن `docs/` از ورک‌فلو هرگز موفق نمی‌شد.
+`src/publish_mirror.py` همین فایل‌ها را با contents API به ریپوی عمومی push می‌کند
+(`PUBLIC_MIRROR_TOKEN`، `PUBLIC_MIRROR_REPO`، `PUBLIC_MIRROR_BRANCH`) و به‌صورت مرحلهٔ
+جداگانه **بعد از** کامیت داده اجرا می‌شود؛ اگر push رد شود فقط همان مرحله قرمز می‌شود
+و دادهٔ اجرا از دست نمی‌رود. با API انجام می‌شود چون `actions/checkout` روی همین ریپو
+برای `contents` فقط‌خواندنی است و کامیت کردن `docs/` از ورک‌فلو هرگز کار نمی‌کرد.
 
 - `docs/site/index.html` و `docs/site/guide-worker.html` — صفحهٔ عمومی سایت (آفرها،
   وضعیت دسترسی، راهنمای داشبوردی Worker) که همین دو فایل JSON را می‌خواند و

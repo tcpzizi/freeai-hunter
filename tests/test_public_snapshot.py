@@ -130,23 +130,37 @@ class Mirror(unittest.TestCase):
              mock.patch.object(publish.httpx, "put", fake_put):
             self.assertEqual(publish.mirror_public([{"id": "o1"}]), [])
 
-    def test_a_missing_mirror_fails_the_run_only_when_required(self):
-        import sqlite3
-        c = sqlite3.connect(":memory:")
-        c.row_factory = sqlite3.Row
-        c.execute("CREATE TABLE offers (id TEXT, status TEXT, verify_status TEXT, score REAL,"
-                  " updated_at TEXT)")
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.dict("os.environ", {}):
-            old = os.getcwd()
-            os.chdir(tmp)
-            try:
-                with mock.patch.object(publish, "MIRROR_TOKEN", ""):
-                    # local runs: quiet
-                    publish.build(c)
-                    # a workflow that expects the mirror: loud
-                    with mock.patch.dict("os.environ", {"PUBLIC_MIRROR_REQUIRED": "1"}):
-                        with self.assertRaises(RuntimeError):
-                            publish.build(c)
-            finally:
-                os.chdir(old)
-        c.close()
+    def test_a_missing_token_is_reported_but_not_a_failure(self):
+        from src import publish_mirror
+        with mock.patch.object(publish, "MIRROR_TOKEN", ""):
+            self.assertEqual(publish_mirror.main(), 2)
+
+    def test_a_rejected_push_fails_the_step(self):
+        from src import publish_mirror
+
+        def fake_get(url, **kw):
+            return self.R(404, {})
+
+        def fake_put(url, **kw):
+            return self.R(403, {"message": "no"})
+
+        with mock.patch.object(publish, "MIRROR_TOKEN", "tok"), \
+             mock.patch.object(publish_mirror, "load_rows", return_value=[]), \
+             mock.patch.object(publish.httpx, "get", fake_get), \
+             mock.patch.object(publish.httpx, "put", fake_put):
+            self.assertEqual(publish_mirror.main(), 1, "a stale public copy must turn the step red")
+
+    def test_a_good_push_reports_what_it_wrote(self):
+        from src import publish_mirror
+
+        def fake_get(url, **kw):
+            return self.R(404, {})
+
+        def fake_put(url, **kw):
+            return self.R(201, {})
+
+        with mock.patch.object(publish, "MIRROR_TOKEN", "tok"), \
+             mock.patch.object(publish_mirror, "load_rows", return_value=[{"id": "o1", "vendor": "v"}]), \
+             mock.patch.object(publish.httpx, "get", fake_get), \
+             mock.patch.object(publish.httpx, "put", fake_put):
+            self.assertEqual(publish_mirror.main(), 0)
