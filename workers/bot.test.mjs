@@ -387,7 +387,7 @@ test("admin routes require the secret; /health does not and leaks nothing", asyn
   const health = await worker.fetch(new Request("https://x/health"), env(kv), { waitUntil: () => {} });
   assert.equal(health.status, 200);
   const body = await health.text();
-  assert.match(body, /ok v8/);
+  assert.match(body, /ok v9/);
   assert.ok(!body.includes("123456"));
 });
 
@@ -679,6 +679,76 @@ test("the default repo is the public one, so an unset DATA_REPO still works", as
   assert.equal(out.data_repo, "tcpzizi/freeai-hunter");
   assert.ok(seen.some(u => u.includes("raw.githubusercontent.com/tcpzizi/freeai-hunter/main/docs/offers.json")), seen.join(" "));
 });
+/* ---- v9: the KV "Unknown response type" crash ---------------------- */
+
+test("KV reads never pass the ttl in the type position (v8 threw on every cron)", async () => {
+  worker = await load();
+  const kv = makeKV();
+  // Workers KV: get(key, type?, options?). Anything but a known type string is
+  // rejected, which is what happened to v8's get(key, 60).
+  const TYPES = ["text", "json", "arrayBuffer", "stream"];
+  const strict = {
+    ...kv,
+    async get(k, type, opts) {
+      if (type !== undefined && !TYPES.includes(type)) {
+        throw new Error('Unknown response type. Possible types are "text", "arrayBuffer", "json", and "stream".');
+      }
+      if (opts && typeof opts !== "object") throw new Error("bad options");
+      return kv.get(k);
+    },
+    store: kv.store, stats: kv.stats
+  };
+  kv.store.set("user:7", { value: approvedUser(7) });
+  globalThis.fetch = makeFetch({ offers: [offer(1)], telegram: { handler: () => ok({ message_id: 1 }) } }).fetch;
+
+  // a cron tick is exactly what used to fail: fetchOffers -> cache read, then
+  // the dispatch cache reads
+  let done = null;
+  await worker.scheduled({ cron: "0 * * * *" }, env(strict), { waitUntil: p => { done = p; } });
+  const stats = await done;
+  assert.equal(stats.sent, 1, "the cron run still delivers");
+
+  const errors = [...kv.store.keys()].filter(k => k.startsWith("err:"));
+  assert.deepEqual(errors, [], "no KV read may fail, so no error keys are written");
+});
+
+test("a failing cache read is logged, and the offers still go out", async () => {
+  worker = await load();
+  const kv = makeKV();
+  kv.store.set("user:7", { value: approvedUser(7) });
+  const writes = [];
+  const partial = {
+    ...kv, store: kv.store, stats: kv.stats,
+    async get(k, type, opts) {
+      // only the Persian-text cache is broken; users and offers are fine
+      if (String(k).startsWith("fa:")) throw new Error("KV_ERROR: network");
+      return kv.get(k, type, opts);
+    },
+    async put(k, v, o) { writes.push(k); return kv.put(k, v, o); }
+  };
+  globalThis.fetch = makeFetch({ offers: [offer(1)], telegram: { handler: () => ok({ message_id: 1 }) } }).fetch;
+  const body = await (await worker.fetch(new Request("https://x/dispatch?key=hook-secret"), env(partial), { waitUntil: () => {} })).json();
+  assert.equal(body.sent, 1, "a cache miss must not stop delivery");
+  assert.ok(writes.some(k => k.startsWith("err:")), "the KV failure is logged once");
+});
+
+test("a completely broken KV degrades instead of recursing (no OOM)", async () => {
+  worker = await load();
+  const dead = {
+    async get() { throw new Error("KV_ERROR: network"); },
+    async put() { throw new Error("KV_ERROR: network"); },
+    async delete() { throw new Error("KV_ERROR: network"); },
+    async list() { throw new Error("KV_ERROR: network"); }
+  };
+  globalThis.fetch = makeFetch({ offers: [offer(1)] }).fetch;
+  // v9's first draft had logErr -> kvApi -> logErr here and ran out of memory.
+  const res = await worker.fetch(new Request("https://x/dispatch?key=hook-secret"), env(dead), { waitUntil: () => {} });
+  const body = await res.json();
+  assert.equal(res.status, 200);
+  assert.equal(body.users, 0, "with no KV there is no user list, but the request still answers");
+  const health = await (await worker.fetch(new Request("https://x/health"), env(dead), { waitUntil: () => {} })).text();
+  assert.match(health, /ok v9/);
+});
 
 test("bot.paste.js is the current bot.js (dashboard copy stays in sync)", async () => {
   const { readFileSync } = await import("node:fs");
@@ -687,7 +757,7 @@ test("bot.paste.js is the current bot.js (dashboard copy stays in sync)", async 
   // dashboard files must be self-contained
   assert.ok(!/^\s*import\s/m.test(paste), "no import statements");
   assert.ok(!/^\s*export\s/m.test(paste.replace(/export default \{[\s\S]*$/, "")), "only the default export");
-  assert.match(paste, /const VERSION = "v8"/);
+  assert.match(paste, /const VERSION = "v9"/);
   assert.match(paste, /export default \{/);
   try {
     execFileSync(process.execPath, [new URL("./tools/build-paste.mjs", import.meta.url).pathname, "--check"], { stdio: "pipe" });

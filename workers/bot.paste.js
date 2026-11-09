@@ -31,7 +31,7 @@
  * =================================================================== */
 
 /* =====================================================================
- * freeai-hunter — Telegram bot on Cloudflare Workers (v8)
+ * freeai-hunter — Telegram bot on Cloudflare Workers (v9)
  *
  * Source of truth: workers/bot.js (this file is generated from it)
  * Compatibility:  compatibility_date >= 2023-03-01  (needs ctx.waitUntil)
@@ -111,11 +111,25 @@
  *   5.  DEFAULT_REPO is this public repo. tcpzizi/freeai-data is private, so a
  *       GH_TOKEN without explicit Contents: read on it returns 401/403 and the
  *       bot goes blind while every other secret still shows ✅.
+ *
+ * What v9 changes vs v8. The live Worker showed two errors that v8 introduced:
+ *
+ *   1.  "Unknown response type. Possible types are text, arrayBuffer, json and
+ *       stream" on every cron tick. KV.get is positional - get(key, type,
+ *       options) - and v8 called get(key, 60) in three places, so the ttl was
+ *       read as a response type and every cached read failed. A run therefore
+ *       announced itself as "no offers" and wrote an error key each time.
+ *   2.  A failing KV made logErr recurse (kvApi logged through logErr, which
+ *       called kvApi), which ends in an out-of-memory crash instead of an
+ *       error. logErr now talks to KV directly and can never throw.
+ *
+ *   3.  A cron tick now leaves the last good list in KV and logs which source
+ *       it used, so a blind hour is visible in the logs, not just in /diag.
  * =================================================================== */
 
 /* ================= end of paste instructions ================= */
 
-const VERSION = "v8";
+const VERSION = "v9";
 
 /* ------------------------------ limits ----------------------------- */
 
@@ -216,16 +230,28 @@ function newRun(e) {
 function kvApi(e, run) {
   const kv = e.KV;
   const budget = run?.budget || new Budget({ http: 1e9, kv: 1e9 });
-  const wrap = fn => async (...args) => {
+  // KV.get is positional: get(key, type?, options?). v8 called
+  // get(key, 60) in three places, and the runtime read the 60 as a response
+  // type: "Unknown response type. Possible types are text, arrayBuffer, json
+  // and stream." Every cached read then failed and each failure wrote a log
+  // key. v9 uses get(key) or get(key, "text", { cacheTtl }) only.
+  const getText = (key, cacheTtl) => cacheTtl ? get(key, "text", { cacheTtl }) : get(key);
+  const kvErr = async (where, err) => {
+    // A failed KV read must not cascade into "cannot read offers". logErr is
+    // gated (one write per source per minute) and never re-enters kvApi.
+    await logErr(e, "kv:" + where, err, run);
+    return null;
+  };
+  const wrap = fn => async (...rest) => {
     if (!budget.takeKv(1)) return null;
-    try { return await fn(...args); } catch (err) { await logErr(e, "kv", err); return null; }
+    try { return await fn(...rest); } catch (err) { return kvErr("call", err); }
   };
   const get = wrap(kv.get.bind(kv));
   return {
     get,
-    // JSON helper: null instead of throwing
+    // JSON helper: one read, null instead of throwing
     async getJson(key, cacheTtl) {
-      const raw = await get(key, cacheTtl ? { cacheTtl } : undefined);
+      const raw = await getText(key, cacheTtl);
       if (!raw) return null;
       try { return JSON.parse(raw); } catch (_) { return null; }
     },
@@ -245,7 +271,7 @@ function kvApi(e, run) {
     async getAll(keys, cacheTtl) {
       const out = new Map();
       for (const k of keys) {
-        const raw = await get(k, cacheTtl ? { cacheTtl } : undefined);
+        const raw = await getText(k, cacheTtl);
         if (raw) out.set(k, raw);
       }
       return out;
@@ -342,16 +368,25 @@ async function answerCallback(e, cqId, text = "", alert = false, run) {
 
 /* ------------------------------ errors ------------------------------ */
 
+/* Error log.
+ *
+ * This is the one function that talks to KV directly: going through kvApi()
+ * here would mean a failing KV calls logErr, which calls kvApi, which fails...
+ * (v9's first draft did exactly that and ran out of memory). It also never
+ * throws: a log is not worth losing a message over. */
 async function logErr(e, where, err, run) {
-  const kvm = kvApi(e, run);
-  // A burst of failures (e.g. Telegram down) must not burn the daily KV write
-  // quota: at most one stored error per source per minute.
-  const gate = "errgate:" + String(where).slice(0, 40);
-  if (await kvm.get(gate, CACHE_TTL_S)) return;
-  const msg = String(err?.message || err || "").slice(0, 500);
-  const key = `err:${nowSec()}:${Math.random().toString(36).slice(2, 7)}`;
-  await kvm.putJson(key, { where, msg, at: new Date().toISOString() }, { expirationTtl: ERR_TTL });
-  await kvm.put(gate, "1", { expirationTtl: 60 });
+  try {
+    const kv = e.KV;
+    if (!kv || (run && run.budget.kvLeft <= 0)) return;
+    const gate = "errgate:" + String(where).slice(0, 40);
+    // A burst of failures (Telegram down, GitHub down) must not burn the free
+    // plan's 1,000 writes: at most one stored error per source per minute.
+    if (await kv.get(gate)) return;
+    const msg = String(err?.message || err || "").slice(0, 500);
+    const key = `err:${nowSec()}:${Math.random().toString(36).slice(2, 7)}`;
+    await kv.put(key, JSON.stringify({ where, msg, at: new Date().toISOString() }), { expirationTtl: ERR_TTL });
+    await kv.put(gate, "1", { expirationTtl: 60 });
+  } catch (_) { /* logging must never be the reason a run fails */ }
 }
 
 async function notifyAdmins(e, run, text) {
@@ -678,7 +713,7 @@ async function fetchOffers(e, run) {
 async function alertAdminsOnce(e, run, kind, text) {
   const kvm = kvApi(e, run);
   const key = "alert:" + String(kind).slice(0, 60);
-  if (await kvm.get(key, CACHE_TTL_S)) return false;
+  if (await kvm.get(key)) return false;
   await kvm.put(key, String(Date.now()), { expirationTtl: 6 * 3600 });
   await notifyAdmins(e, run, text);
   return true;
@@ -1261,7 +1296,7 @@ async function onMessage(e, msg, run) {
       // Each press costs up to 4 LLM calls and 4 sends; without this a single
       // user can exhaust the free tier.
       const kvm = kvApi(e, run);
-      const stamp = await kvm.get("latest:" + from.id, CACHE_TTL_S);
+      const stamp = await kvm.get("latest:" + from.id);
       if (stamp && Date.now() - Number(stamp) < LATEST_COOLDOWN_MS) {
         const mins = Math.ceil((LATEST_COOLDOWN_MS - (Date.now() - Number(stamp))) / 60000);
         await say(e, chat, `همین حالا لیست را فرستادم. ${mins} دقیقهٔ دیگر دوباره امتحان کنید.`, {}, run);
@@ -1739,7 +1774,11 @@ export default {
     const run = newRun(env);
     const job = (async () => {
       const stats = await dispatch(env, run);
-      console.log("cron", event?.cron || "-", JSON.stringify(stats));
+      // A run that cannot read the data still leaves the last good copy in KV
+      // for /latest, /why and /preview, and the admins have already been told
+      // (once per six hours) by fetchOffers().
+      console.log("cron", event?.cron || "-", JSON.stringify(stats),
+        "source=" + (run.source ? (run.source.ok ? "ok" : "failed:" + run.source.status) : "not-read"));
       return stats;
     })();
     (ctx && typeof ctx.waitUntil === "function") ? ctx.waitUntil(job) : await job;

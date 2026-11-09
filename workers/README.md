@@ -1,4 +1,4 @@
-# بات تلگرام روی Cloudflare Workers (v8)
+# بات تلگرام روی Cloudflare Workers (v9)
 
 نسخهٔ ورکر همان `bot.js` است؛ نسخهٔ پایتونی بات در `src/bot/` برای اجرای روی
 GitHub Actions می‌ماند. این دو مستقل‌اند و می‌توانید فقط یکی را فعال نگه دارید.
@@ -42,7 +42,7 @@ GitHub Actions می‌ماند. این دو مستقل‌اند و می‌توا
    - چون کد در URL است، بعد از یک‌بار استفاده یک `ADMIN_SECRET` تازه بگذارید.
    - `https://<worker>/webhookinfo?key=<ADMIN_SECRET>` نشان می‌دهد تلگرام چه URLی
      را ثبت کرده و چند آپدیت در انتظار است.
-7. سلامت و آمار: `https://<worker>/health` (باید `ok v8` بدهد) و
+7. سلامت و آمار: `https://<worker>/health` (باید `ok v9` بدهد) و
    `https://<worker>/diag?key=<ADMIN_SECRET>`.
    اگر `source.ok` برابر `false` بود، همان‌جا `source.hint` می‌گوید چه کاری در داشبورد لازم است.
    برای یک تست یک‌خطی: `https://<worker>/selftest?key=<ADMIN_SECRET>`.
@@ -104,7 +104,7 @@ fetch صفحه + یک LLM. اگر همه از کش بخوانند، همان ۲�
 | مسیر | دسترسی | کار |
 |---|---|---|
 | `POST /tg` | فقط با هدر `x-telegram-bot-api-secret-token` | وبهوک تلگرام |
-| `GET /health` | آزاد | پاسخ `ok v8`، هیچ رمزی برنمی‌گرداند |
+| `GET /health` | آزاد | پاسخ `ok v9`، هیچ رمزی برنمی‌گرداند |
 | `GET /setup?key=` | ادمین | setWebhook + setMyCommands |
 | `GET /diag?key=` | ادمین | آفرها، کاربران، بودجهٔ اجرا، `source` (ریپو + علت خطا)، آخرین خطا |
 | `GET /selftest?key=` | ادمین | یک تست: `raw.githubusercontent` (بدون توکن) و contents API (با `GH_TOKEN`) |
@@ -153,6 +153,21 @@ node --test workers/bot.test.mjs     # ۲۳ تست، بدون شبکه
    «تازه» می‌شد و دوباره ارسال می‌شد.
 8. وقتی گیت‌هاب ۴۰۳ می‌داد، دیسپچ بی‌صدا هیچ کاری نمی‌کرد؛ حالا نسخهٔ آخر از KV
    استفاده می‌شود.
+
+## v9: دو خطایی که در اجرای واقعی دیده شد
+
+1. **`Unknown response type. Possible types are text, arrayBuffer, json and stream`**
+   — نسخهٔ v8 در سه جا `KV.get(key, 60)` صدا می‌زد؛ اما امضای KV این است:
+   `get(key, type?, options?)`، پس عدد ۶۰ به‌عنوان «نوع پاسخ» خوانده می‌شد و هر
+   خواندن کش شکست می‌خورد. حالا فقط `get(key)` یا
+   `get(key, "text", { cacheTtl })` استفاده می‌شود.
+2. **لوپ بی‌پایان در لاگ خطا** — `logErr` از `kvApi` استفاده می‌کرد و `kvApi`
+   خطاها را با `logErr` ثبت می‌کرد؛ با KV خراب این دو همدیگر را صدا می‌زدند.
+   حالا `logErr` مستقیم با KV کار می‌کند و هرگز throw نمی‌کند.
+
+راه‌حل عملی برای `http 401 (GH_TOKEN rejected)` هم همان چیزی است که در بخش قبل
+آمد: `GH_TOKEN` را حذف کنید و بگذارید ورکر نسخهٔ عمومی `docs/offers.json` را
+بخواند.
 
 ## نکته‌هایی که روی پلن رایگان باید بدانید
 

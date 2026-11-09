@@ -3,7 +3,7 @@ generated data lives in a private repo they cannot read.
 
 Run from the repo root:  python -m unittest discover -s tests -t . -v
 """
-import json, os, pathlib, tempfile, unittest
+import json, os, pathlib, sqlite3, tempfile, unittest
 from unittest import mock
 from src import store, publish
 
@@ -41,7 +41,8 @@ class PublicSnapshot(unittest.TestCase):
         self.tmp.cleanup()
 
     def test_publish_writes_the_public_copies(self):
-        publish.build(self.c)
+        with mock.patch.object(publish, "MIRROR_TOKEN", ""):
+            publish.build(self.c)
         root = pathlib.Path(self.tmp.name)
         bare = json.loads((root / "docs/offers.json").read_text(encoding="utf-8"))
         self.assertIsInstance(bare, list)
@@ -54,7 +55,8 @@ class PublicSnapshot(unittest.TestCase):
         self.assertEqual(json.loads((root / "docs/sites.json").read_text(encoding="utf-8"))[0]["id"], "o1")
 
     def test_the_public_copy_carries_no_internal_status(self):
-        publish.build(self.c)
+        with mock.patch.object(publish, "MIRROR_TOKEN", ""):
+            publish.build(self.c)
         root = pathlib.Path(self.tmp.name)
         for name in ("docs/offers.json", "docs/sites.json"):
             data = json.loads((root / name).read_text(encoding="utf-8"))
@@ -64,5 +66,87 @@ class PublicSnapshot(unittest.TestCase):
     def test_the_worker_default_path_exists_in_the_snapshot(self):
         """The Worker reads docs/offers.json from the public repo; publish must
         keep writing exactly that path."""
-        publish.build(self.c)
+        with mock.patch.object(publish, "MIRROR_TOKEN", ""):
+            publish.build(self.c)
         self.assertTrue((pathlib.Path(self.tmp.name) / "docs/offers.json").is_file())
+
+
+class Mirror(unittest.TestCase):
+    """publish.py pushes the public JSON through the contents API: a workflow's
+    plain checkout of the public repo is read-only for contents, so a git commit
+    of docs/ from there could never work."""
+
+    def setUp(self):
+        self.calls = []
+
+    class R:
+        def __init__(self, code, body):
+            self.status_code = code
+            self._body = body
+            self.text = str(body)
+
+        def json(self):
+            return self._body
+
+
+    def test_no_token_means_no_push_and_no_crash(self):
+        with mock.patch.object(publish, "MIRROR_TOKEN", ""):
+            self.assertEqual(publish.mirror_public([{"id": "o1"}]), [])
+
+    def test_a_new_file_is_created_and_an_existing_one_updated(self):
+        gets, puts_ = [], []
+
+        def fake_get(url, **kw):
+            gets.append((url, kw))
+            return self.R(200, {"sha": "abc123"})
+
+        def fake_put(url, **kw):
+            puts_.append((url, kw))
+            return self.R(201, {})
+
+        with mock.patch.object(publish, "MIRROR_TOKEN", "tok"), \
+             mock.patch.object(publish.httpx, "get", fake_get), \
+             mock.patch.object(publish.httpx, "put", fake_put):
+            written = publish.mirror_public([{"id": "o1"}])
+        self.assertEqual(len(written), 4)
+        puts = [("PUT", u, kw.get("json"), kw.get("headers")) for u, kw in puts_]
+        self.assertTrue(puts)
+        # the update carries the sha it read, and the token travels in the header
+        self.assertEqual(puts[0][2]["sha"], "abc123")
+        self.assertIn("Bearer tok", puts[0][3]["authorization"])
+        import base64, json
+        body = json.loads(base64.b64decode(puts[0][2]["content"]).decode("utf-8"))
+        self.assertEqual(body[0]["id"], "o1", "docs/offers.json is the bare list")
+
+    def test_a_rejected_push_is_reported_not_swallowed(self):
+        def fake_get(url, **kw):
+            return self.R(404, {})
+
+        def fake_put(url, **kw):
+            return self.R(403, {"message": "no"})
+
+        with mock.patch.object(publish, "MIRROR_TOKEN", "tok"), \
+             mock.patch.object(publish.httpx, "get", fake_get), \
+             mock.patch.object(publish.httpx, "put", fake_put):
+            self.assertEqual(publish.mirror_public([{"id": "o1"}]), [])
+
+    def test_a_missing_mirror_fails_the_run_only_when_required(self):
+        import sqlite3
+        c = sqlite3.connect(":memory:")
+        c.row_factory = sqlite3.Row
+        c.execute("CREATE TABLE offers (id TEXT, status TEXT, verify_status TEXT, score REAL,"
+                  " updated_at TEXT)")
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.dict("os.environ", {}):
+            old = os.getcwd()
+            os.chdir(tmp)
+            try:
+                with mock.patch.object(publish, "MIRROR_TOKEN", ""):
+                    # local runs: quiet
+                    publish.build(c)
+                    # a workflow that expects the mirror: loud
+                    with mock.patch.dict("os.environ", {"PUBLIC_MIRROR_REQUIRED": "1"}):
+                        with self.assertRaises(RuntimeError):
+                            publish.build(c)
+            finally:
+                os.chdir(old)
+        c.close()

@@ -32,6 +32,13 @@ jobs:
       - run: pip install -r requirements.txt
       - name: run hunter
         env:
+          # publish.py pushes docs/*.json to this public repo over the contents
+          # API: the JSON is generated in the private data repo, and the site
+          # and the Cloudflare Worker can only read the public copy.
+          PUBLIC_MIRROR_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
+          PUBLIC_MIRROR_REPO: tcpzizi/freeai-hunter
+          PUBLIC_MIRROR_BRANCH: main
+          PUBLIC_MIRROR_REQUIRED: "1"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
