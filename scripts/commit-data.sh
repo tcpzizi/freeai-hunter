@@ -29,6 +29,10 @@ shift 2
 paths=("$@")
 
 cd "$dir" || { echo "::error::no such directory: $dir"; exit 1; }
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "::error::$dir is not a git checkout (did the checkout step fail?)"
+  exit 1
+fi
 
 git config user.name "${GIT_AUTHOR_NAME:-freeai-hunter}"
 git config user.email "${GIT_AUTHOR_EMAIL:-bot@users.noreply.github.com}"
