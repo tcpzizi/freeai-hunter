@@ -152,6 +152,64 @@ def queue_size(c):
     return c.execute("SELECT COUNT(*) FROM extract_queue").fetchone()[0]
 
 
+# ---------------------------------------------------------------- retention
+# data/state.sqlite is committed to the data repo, so every byte we keep here is
+# copied into git again on every run (48 commits a day). Nothing ever deleted
+# from `items` or `snapshots`, and every item carried up to 8 KB of article
+# text that only one one-off migration ever read, so the file grew without a
+# ceiling for as long as the project exists. These limits bound it.
+ITEM_KEEP_DAYS = float(os.getenv("ITEM_KEEP_DAYS", "45"))
+SNAPSHOT_KEEP_DAYS = float(os.getenv("SNAPSHOT_KEEP_DAYS", "14"))
+BODY_KEEP_DAYS = float(os.getenv("BODY_KEEP_DAYS", "7"))
+
+
+def prune_history(c, item_days=None, snapshot_days=None, body_days=None,
+                  vacuum=True):
+    """Drop what nothing reads any more and shrink the file. Returns a dict of
+    counts so the caller can log it.
+
+    Bodies are kept for a short window because backfill_queue() (which only
+    looks at the last few days) needs them to re-queue a candidate, and because
+    migrate_dedup_v2() reads them once per database. After that, an old item is
+    only a dedup tombstone, and its other columns are a few hundred bytes."""
+    now = int(time.time())
+    item_days = ITEM_KEEP_DAYS if item_days is None else item_days
+    snapshot_days = SNAPSHOT_KEEP_DAYS if snapshot_days is None else snapshot_days
+    body_days = BODY_KEEP_DAYS if body_days is None else body_days
+    body_cut = now - int(body_days * 86400)
+    item_cut = now - int(item_days * 86400)
+    snap_cut = now - int(snapshot_days * 86400)
+    counts = {}
+    # clear first: a row emptied of its body is much cheaper to delete later
+    counts["bodies"] = c.execute(
+        "UPDATE items SET body='' WHERE length(body)>0 AND first_seen<?",
+        (body_cut,)).rowcount
+    counts["items"] = c.execute("DELETE FROM items WHERE first_seen<?",
+                               (item_cut,)).rowcount
+    counts["snapshots"] = c.execute("DELETE FROM snapshots WHERE fetched_at<?",
+                                    (snap_cut,)).rowcount
+    c.commit()
+    if vacuum:
+        counts["vacuum"] = vacuum_db(c)
+    return counts
+
+
+def vacuum_db(c):
+    """Rewrite the file so deleted pages are actually released. SQLite cannot do
+    this inside a transaction, so commit first; failure is not worth a run."""
+    c.commit()
+    before = os.path.getsize(DB) if os.path.exists(DB) else 0
+    try:
+        c.execute("VACUUM")
+        c.commit()
+    except sqlite3.OperationalError as e:
+        print("vacuum skipped: " + str(e)[:120])
+        return before
+    after = os.path.getsize(DB) if os.path.exists(DB) else 0
+    print("db " + str(before // 1024) + " KB -> " + str(after // 1024) + " KB after vacuum")
+    return after
+
+
 def backfill_queue(c, threshold, days=3, cap=300):
     """One-off recovery: before the queue existed, candidates past the per-run
     limit were saved as 'seen' and never extracted. Re-queue recent ones that

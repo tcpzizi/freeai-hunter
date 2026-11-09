@@ -5,8 +5,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+# Its own group: the bot only writes data/users.json, data/bot_state.json,
+# data/deliveries.json and data/feedback.json, so a slow hunt run must never
+# make the bot wait (and vice versa). Default queue (single) is what we want
+# here: if a poll is still pending when the next cron fires, the newest poll
+# replaces it - an old poll window is worthless.
 concurrency:
-  group: repo-write
+  group: freeai-bot
   cancel-in-progress: false
 jobs:
   bot:
@@ -29,15 +34,18 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           ADMIN_IDS: ${{ secrets.ADMIN_IDS }}
-          RUN_SECONDS: "500"
+          # 7 minutes of polling leaves room inside the 10-minute slot for
+          # checkout + pip + commit, so one run ends before the next cron tick
+          # instead of every run waiting behind the previous one.
+          RUN_SECONDS: "420"
         run: python -m src.bot.poll
       - name: commit data
-        working-directory: data
-        run: |
-          git config user.name "freeai-bot"
-          git config user.email "bot@users.noreply.github.com"
-          git add -A
-          git diff --quiet --cached || git commit -m "bot: $(date -u +%FT%TZ)"
-          for i in 1 2 3; do
-            git pull --rebase --autostash -q && git push && break || sleep 6
-          done
+        # Also runs when polling fails: the Telegram offset and the user list
+        # must land anyway, otherwise the next poll re-fetches updates that the
+        # callers already acted on (or misses them once they expire).
+        if: always()
+        env:
+          GIT_AUTHOR_NAME: freeai-bot
+        run: >
+          bash scripts/commit-data.sh data "bot: $(date -u +%FT%TZ)"
+          users.json bot_state.json deliveries.json feedback.json
