@@ -3,30 +3,57 @@
 نسخهٔ ورکر همان `bot.js` است؛ نسخهٔ پایتونی بات در `src/bot/` برای اجرای روی
 GitHub Actions می‌ماند. این دو مستقل‌اند و می‌توانید فقط یکی را فعال نگه دارید.
 
-## نصب
+## نصب بدون ترمینال (فقط از داشبورد Cloudflare)
+
+نیازی به `wrangler` و `npx` نیست؛ اولین چهار خط راهنمای قبلی همه معادل داشبوردی
+دارند:
+
+| کار | معادل داشبورد |
+|---|---|
+| `wrangler kv namespace create BOT_KV` | Workers & Pages → KV → **Create a namespace** → نام: `freeai-hunter-bot`. اگر Worker را با کد چسبانده (Quick edit) ساخته‌اید، در **Settings → Bindings → Add → KV namespace**، Variable name را `KV` و همین namespace را انتخاب کنید. اگر با روش «Connect to Git / wrangler.toml» deploy می‌کنید، `id` را از صفحهٔ namespace بردارید و در `wrangler.toml` بگذارید. |
+| `wrangler secret put X` | Worker → **Settings → Variables and Secrets** → **Add** → نوع **Secret** → نام دقیقاً `X` → مقدار → Save. (در UI، Secret decrypt هم لازم نیست.) |
+| `wrangler deploy` | اگر کد را در داشبورد چسبانده‌اید: همان‌جا **Deploy / Save and Deploy**. اگر مخزن را وصل کرده‌اید: با هر push به `main` خودش deploy می‌شود. |
+| `curl .../setup` | فقط یک آدرس را در مرورگر باز کنید (بخش بعد). |
+| `curl .../diag` | همان آدرس را با `/diag` باز کنید؛ JSON برمی‌گردد. |
+| `node --test workers/bot.test.mjs` | لازم نیست محلی اجرا شود: ورک‌فلوی `workers-tests` در GitHub Actions روی هر push تست‌ها را اجرا می‌کند (بخش تست). |
+
+### گام‌به‌گام در داشبورد
+
+1. **ساخت Worker**: Workers & Pages → Create → Workers → نام مثلاً `freeai-bot`.
+   اگر از قبل دارید، همان را باز کنید: Workers & Pages → `freeai-bot` → Edit code.
+2. محتوای کامل `workers/bot.js` را در ادیتور کدِ داشبورد جای‌گذاری کنید و
+   **Deploy** بزنید.
+3. **Settings → Bindings → Add → KV namespace**: Variable name = `KV`،
+   namespace ساخته‌شده را انتخاب کنید. (`KV` بزرگ و دقیقاً همین؛ کد دنبال
+   `env.KV` می‌گردد.)
+4. **Settings → Variables and Secrets** این‌ها را به‌عنوان **Secret** اضافه کنید:
+   `TELEGRAM_BOT_TOKEN`، `ADMIN_IDS`، `ADMIN_SECRET`، `WEBHOOK_SECRET`،
+   `GH_TOKEN` (و اختیاری `GEMINI_API_KEY`، `GROQ_API_KEY`).
+   `DATA_REPO` می‌تواند Secret یا Variable معمولی باشد (مقدار `tcpzizi/freeai-data`).
+5. **Settings → Trigger Events → Cron Triggers** (اگر می‌خواهید هر ساعت خودکار
+   ارسال شود): `0 * * * *`.
+6. یک‌بار وبهوک را ثبت کنید: در مرورگر
+   `https://freeai-bot.<your-subdomain>.workers.dev/setup?key=<ADMIN_SECRET>`
+   را باز کنید. باید `{"ok":true,...}` ببینید. اگر `false` بود، پیام `description`
+   تلگرام را بخوانید (معمولاً رمز اشتباه یا توکن نامعتبر).
+   - چون کد در URL است، بعد از یک‌بار استفاده یک `ADMIN_SECRET` تازه بگذارید.
+   - `https://<worker>/webhookinfo?key=<ADMIN_SECRET>` نشان می‌دهد تلگرام چه URLی
+     را ثبت کرده و چند آپدیت در انتظار است.
+7. سلامت و آمار: `https://<worker>/health` (باید `ok v7` بدهد) و
+   `https://<worker>/diag?key=<ADMIN_SECRET>`.
+8. **بدون باز کردن URL هم می‌شود**: در تلگرام به خود بات `/start` بزنید؛ اگر
+   وبهوک از قبل روی همین Worker باشد کار می‌کند، ولی برای ثبت یا تغییر وبهوک
+   همان گام ۶ لازم است.
+
+### اگر `curl` و ترمینال را ترجیح می‌دهید
 
 ```bash
 cd workers
 npx wrangler kv namespace create BOT_KV        # id را در wrangler.toml بگذارید
-npx wrangler secret put TELEGRAM_BOT_TOKEN
-npx wrangler secret put ADMIN_IDS              # مثلاً 12345678,98765432
-npx wrangler secret put ADMIN_SECRET           # یک رمز تصادفی برای مسیرهای ادمین
-npx wrangler secret put WEBHOOK_SECRET         # Telegram از همین برای secret_token استفاده می‌کند
-npx wrangler secret put GH_TOKEN               # برای اینکه rate limit گیت‌هاب نخورید
-npx wrangler secret put GEMINI_API_KEY         # اختیاری
-npx wrangler secret put GROQ_API_KEY           # اختیاری
+npx wrangler secret put TELEGRAM_BOT_TOKEN     # و بقیهٔ secretها
 npx wrangler deploy
+curl "https://<worker>/setup?key=$ADMIN_SECRET"
 ```
-
-بعد یک‌بار وبهوک و منوی دستورها را ثبت کنید (به‌جای فرستادن لینک حاوی رمز در چت):
-
-```bash
-curl "https://freeai-bot.<account>.workers.dev/setup?key=$ADMIN_SECRET"
-curl "https://freeai-bot.<account>.workers.dev/diag?key=$ADMIN_SECRET"
-```
-
-`/setup` همان `setWebhook` + `setMyCommands` را انجام می‌دهد. اگر وبهوک قبلاً روی
-جای دیگری بود، همین کافی است؛ ورکر v6 هم `drop_pending_updates` می‌فرستد.
 
 ## سقف‌های پلن رایگان که کد با آن‌ها کار می‌کند
 
@@ -69,6 +96,10 @@ fetch صفحه + یک LLM. اگر همه از کش بخوانند، همان ۲�
 `/diag` `/errors` `/clearerrors` `/broadcast <متن>`
 
 ## تست
+
+نیازی به نصب چیزی روی سیستم خودتان نیست: ورک‌فلوی `workers-tests` در همان
+ریپوی GitHub روی هر push که `workers/` را تغییر دهد اجرا می‌شود (تب Actions →
+workers-tests). محلی هم اگر Node ۲۲+ دارید:
 
 ```bash
 node --test workers/bot.test.mjs     # ۲۳ تست، بدون شبکه
