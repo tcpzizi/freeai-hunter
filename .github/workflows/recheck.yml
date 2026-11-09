@@ -34,6 +34,8 @@ jobs:
       - name: commit data
         run: |
           bash scripts/commit-data.sh data "recheck: $(date -u +%FT%TZ)" state.sqlite offers.json stats.json
+      # recheck re-scores and re-verifies offers, so the public copy must be
+      # refreshed here too or the Worker keeps announcing stale verification.
       - name: commit docs
         run: |
           bash scripts/commit-data.sh . "recheck docs: $(date -u +%FT%TZ)" docs

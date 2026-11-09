@@ -42,6 +42,9 @@ jobs:
       - name: commit data
         run: |
           bash scripts/commit-data.sh data "hunt data: $(date -u +%FT%TZ)" state.sqlite offers.json stats.json
+      # The Cloudflare Worker and GitHub Pages read the public repo, so the
+      # same JSON files are copied into docs/ here (src/publish.py writes the
+      # bare list and both wrapped shapes the site accepts).
       - name: commit docs
         run: |
           bash scripts/commit-data.sh . "hunt docs: $(date -u +%FT%TZ)" docs

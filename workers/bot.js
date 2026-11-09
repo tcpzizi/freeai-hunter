@@ -1,5 +1,5 @@
 /* =====================================================================
- * freeai-hunter — Telegram bot on Cloudflare Workers (v7)
+ * freeai-hunter — Telegram bot on Cloudflare Workers (v8)
  *
  * Deployed with:  wrangler deploy        (see wrangler.toml / README)
  * Compatibility:  compatibility_date >= 2023-03-01  (needs ctx.waitUntil)
@@ -16,7 +16,7 @@
  *   GET  /diag?key=SECRET          read-only status numbers
  * Admin paths (?key=SECRET or Authorization: Bearer SECRET):
  *   /dispatch   /raw   /preview   /errors   /clearerrors   /recache
- *   /deletewebhook  /setwebhook
+ *   /deletewebhook  /setwebhook   /selftest
  *
  * What v7 changes vs v6. Every item below was reproduced by running the v6
  * file against mocked Telegram/GitHub/KV (see bot.test.mjs):
@@ -58,9 +58,30 @@
  * Not a bug, checked: `ctx.waitUntil` does reach the handler (the runtime
  * passes ctx as the third argument), so v6's fire-and-forget webhook worked;
  * v7 keeps it but tolerates a missing ctx.
+ *
+ * What v8 changes vs v7. The /diag that prompted it reported `آفرها: 0` with
+ * `GH_TOKEN: ✅` and only one line of guessing ("401 (GH_TOKEN rejected)") for
+ * a failure whose real cause was a token that could not read a repo it was not
+ * meant to read:
+ *
+ *   1.  The token check is honest: 401 is described as "the token is not valid
+ *       or has expired", 403 as "this token may not read this repo", 404 as
+ *       "wrong DATA_REPO". They are different dashboard fixes.
+ *   2.  A failed read now tells the admins, once per six hours, with the fix in
+ *       the same message - instead of sitting in a KV log that only /diag or
+ *       /errors shows.
+ *   3.  /diag (and /diag JSON) gained a `source` block: which repo was read,
+ *       whether it worked and, if not, the hint. "offers: 0" is finally
+ *       distinguishable from "the token is broken".
+ *   4.  `GET /selftest?key=SECRET` answers that question in one request: it
+ *       tries the raw.githubusercontent URL (no token, no rate limit) and the
+ *       contents API with GH_TOKEN and returns both statuses plus the fix.
+ *   5.  DEFAULT_REPO is this public repo. tcpzizi/freeai-data is private, so a
+ *       GH_TOKEN without explicit Contents: read on it returns 401/403 and the
+ *       bot goes blind while every other secret still shows ✅.
  * =================================================================== */
 
-const VERSION = "v7";
+const VERSION = "v8";
 
 /* ------------------------------ limits ----------------------------- */
 
@@ -109,7 +130,12 @@ const retryAfter = res => {
 // Telegram only accepts A-Z a-z 0-9 _ - in secret_token
 const tgSecret = s => String(s || "").trim().replace(/[^A-Za-z0-9_-]/g, "_").slice(0, 250);
 
-const normRepo = r => String(r || "tcpzizi/freeai-data")
+// The default is a public repo on purpose: the bot only needs one public JSON
+// file, and tcpzizi/freeai-data is private, so a GH_TOKEN without Contents:
+// read for it turns the bot blind while every other secret still shows ✅.
+const DEFAULT_REPO = "tcpzizi/freeai-hunter";
+
+const normRepo = r => String(r || DEFAULT_REPO)
   .trim()
   .replace(/^https?:\/\/github\.com\//i, "")
   .replace(/\.git$/i, "")
@@ -140,7 +166,13 @@ class Budget {
 }
 
 function newRun(e) {
-  return { budget: new Budget(), stats: { sent: 0, skipped: 0, failed: 0, users: 0, enriched: 0 } };
+  return {
+    budget: new Budget(),
+    stats: { sent: 0, skipped: 0, failed: 0, users: 0, enriched: 0 },
+    // Where this invocation got its data. Filled by fetchOffers() so /diag can
+    // say "the token is rejected" instead of only "offers: 0".
+    source: null
+  };
 }
 
 /* ------------------------------ KV layer ---------------------------- */
@@ -477,42 +509,145 @@ function expiresFa(o) {
  * that a stale copy is worth keeping: without it one bad fetch empties /latest
  * and the whole dispatcher. */
 
-async function fetchOffersOnce(e, run) {
-  const repo = normRepo(e.DATA_REPO);
-  const token = String(e.GH_TOKEN || "").trim();
-  const headers = {
+function ghHeaders(e) {
+  const h = {
     accept: "application/vnd.github.raw+json",
     "user-agent": "freeai-hunter-worker/" + VERSION
   };
-  if (token) headers.authorization = `Bearer ${token}`;
-  const url = `https://api.github.com/repos/${repo}/contents/offers.json`;
-  const r = await fetch(url, { headers, signal: AbortSignal.timeout(15000) });
-  const text = await r.text().catch(() => "");
-  if (!r.ok) {
-    const authHint = r.status === 401 ? " (GH_TOKEN rejected)"
-      : r.status === 403 ? " (rate limited? use GH_TOKEN)" : "";
-    throw new Error(`http ${r.status}${authHint} ${text.slice(0, 160)}`);
+  const token = String(e.GH_TOKEN || "").trim();
+  if (token) h.authorization = `Bearer ${token}`;
+  return h;
+}
+
+const jsonFileUrl = repo => `https://api.github.com/repos/${repo}/contents/`;
+
+// Why a read failed, in the language the dashboard speaks. A 401 and a 403 are
+// not the same problem: 401 means GitHub never authenticated the token
+// (expired, revoked, or a truncated paste), 403 means it did and the token may
+// not read this repo. They need different fixes.
+function readHint(status, repo) {
+  switch (status) {
+    case 401: return "GH_TOKEN معتبر نیست یا منقضی شده — توکن تازه بسازید (دسترسی Contents: read روی ریپو)";
+    case 403: return `توکن به ${repo} دسترسی ندارد یا rate limit است — اگر ریپو خصوصی است: Contents: Read-only روی همان ریپو`;
+    case 404: return `ریپو یا فایل پیدا نشد — مقدار DATA_REPO را بسنجید (${repo})`;
+    default: return "شبکه، تایم‌اوت یا خطای موقت GitHub";
   }
+}
+
+function ghFetchError(status, text) {
+  const err = new Error(`http ${status} ${String(text || "").slice(0, 160)}`);
+  err.status = status;
+  return err;
+}
+
+// Where the published JSON can be. The Python workflows write data/offers.json
+// into the (private) data repo and, since this version, also copy it to
+// docs/offers.json in the public repo, so a Worker with no token at all can
+// still read it.
+const DATA_PATHS = {
+  offers: ["docs/offers.json", "offers.json", "data/offers.json"],
+  sites: ["docs/sites.json", "sites.json", "data/sites.json"]
+};
+
+/* Read one JSON file out of DATA_REPO.
+ *
+ * Two transports, in this order, because they fail for different reasons:
+ *   1. raw.githubusercontent.com - no token, no API rate limit, works for a
+ *      public repo from any IP. This is what makes a token optional.
+ *   2. the contents API with GH_TOKEN - the only way into a private repo.
+ * The public copy is tried for every known path (usually the first one hits);
+ * the API is asked once, so a badly configured Worker spends at most four
+ * subrequests before it reports a real error. */
+async function readRepoJson(e, run, kind) {
+  const repo = normRepo(e.DATA_REPO);
+  const paths = DATA_PATHS[kind];
+  let last = null;
+  for (const p of paths) {
+    if (run && !run.budget.takeHttp(1)) break;
+    try {
+      const r = await fetch(`https://raw.githubusercontent.com/${repo}/main/${p}`, {
+        headers: { "user-agent": "freeai-hunter-worker/" + VERSION },
+        signal: AbortSignal.timeout(10000)
+      });
+      if (r.ok) return { text: await r.text(), via: "raw", path: p, repo };
+      last = ghFetchError(r.status, `${p} (raw)`);
+    } catch (err) { last = err; }
+  }
+  // Private repo: the token is the only way in. A 401/403 is final (retrying
+  // other paths with a rejected token is pointless); a 404 just means "not at
+  // this path", so the next one is tried.
+  if (String(e.GH_TOKEN || "").trim()) {
+    for (const p of paths) {
+      if (run && !run.budget.takeHttp(1)) break;
+      try {
+        const r = await fetch(jsonFileUrl(repo) + p, {
+          headers: ghHeaders(e), signal: AbortSignal.timeout(15000)
+        });
+        const text = await r.text().catch(() => "");
+        if (r.ok) return { text, via: "api", path: p, repo };
+        last = ghFetchError(r.status, `${p} (api) ${text}`);
+        if (r.status !== 404) break;
+      } catch (err) { last = err; break; }
+    }
+  }
+  throw last || new Error(`${kind}: no readable copy in ${repo}`);
+}
+
+async function fetchOffersOnce(e, run) {
+  const got = await readRepoJson(e, run, "offers");
   let d;
-  try { d = JSON.parse(text); } catch (_) { throw new Error("offers.json is not JSON"); }
+  try { d = JSON.parse(got.text); } catch (_) { throw new Error(got.path + " is not JSON"); }
   const arr = Array.isArray(d) ? d : (Array.isArray(d?.offers) ? d.offers : []);
-  return arr.filter(o => o && typeof o === "object");
+  return { list: arr.filter(o => o && typeof o === "object"), via: got.via, path: got.path };
 }
 
 async function fetchOffers(e, run) {
   const kvm = kvApi(e, run);
+  const repo = normRepo(e.DATA_REPO);
   if (run && !run.budget.takeHttp(1)) {
     return (await kvm.getJson("cache:offers", CACHE_TTL_S))?.list || [];
   }
   try {
-    const list = await fetchOffersOnce(e, run);
+    const { list, via, path } = await fetchOffersOnce(e, run);
     await kvm.putJson("cache:offers", { at: Date.now(), list }, { expirationTtl: 60 * 60 * 6 });
+    if (run) run.source = { repo, ok: true, status: 200, count: list.length, via, path };
     return list;
   } catch (err) {
     const cached = await kvm.getJson("cache:offers", CACHE_TTL_S);
+    const cachedCount = (cached?.list || []).length;
+    const status = Number(err.status || 0);
+    // A 404 with no token is not a token problem at all: the public copy is
+    // simply not published yet.
+    const hint = status === 404 && !String(e.GH_TOKEN || "").trim()
+      ? "نه نسخهٔ عمومی docs/offers.json هست و نه GH_TOKEN تنظیم شده — فایل را منتشر کنید یا توکن بدهید"
+      : readHint(status, repo);
     await logErr(e, "fetchOffers", err, run);
+    if (run) run.source = {
+      repo, ok: false, status, hint,
+      msg: String(err.message || err).slice(0, 200), cached: cachedCount
+    };
+    // v7 buried this in the error log, so a rejected token looked like
+    // "آفرها: 0" until somebody opened /diag. Once per six hours, with the fix.
+    await alertAdminsOnce(e, run, "read:" + repo, [
+      `⚠️ خواندن آفرها از <code>${esc(repo)}</code> نشد:`,
+      `<code>${esc(String(err.message || err).slice(0, 180))}</code>`,
+      `🔍 ${esc(hint)}`,
+      `کش: ${cachedCount} آفر — تا درست شدن دسترسی، همان‌ها ارسال می‌شوند.`,
+      `DATA_REPO: <code>${esc(repo)}</code> (پیش‌فرض: <code>${DEFAULT_REPO}</code>)`
+    ].join("\n"));
     return cached?.list || [];
   }
+}
+
+// One alert per kind per six hours: a broken token must not become a DM on all
+// 24 runs of the day (nor 24 KV writes).
+async function alertAdminsOnce(e, run, kind, text) {
+  const kvm = kvApi(e, run);
+  const key = "alert:" + String(kind).slice(0, 60);
+  if (await kvm.get(key, CACHE_TTL_S)) return false;
+  await kvm.put(key, String(Date.now()), { expirationTtl: 6 * 3600 });
+  await notifyAdmins(e, run, text);
+  return true;
 }
 
 /* --------------------------- page reading -------------------------- */
@@ -1262,6 +1397,9 @@ async function diagText(e, run) {
     `Gemini: ${e.GEMINI_API_KEY ? "✅" : "❌"} | Groq: ${e.GROQ_API_KEY ? "✅" : "❌"} | GH_TOKEN: ${e.GH_TOKEN ? "✅" : "❌"}`,
     `بودجهٔ این اجرا: http ${budget.httpLeft} | kv ${budget.kvLeft}`,
     `نمونه: ${live[0] ? esc(offerTitle(live[0])) : "-"}`,
+    `منبع آفرها: ${run.source ? (run.source.ok
+      ? `✅ ${esc(run.source.repo)} (${run.source.count} آفر)`
+      : `❌ ${esc(run.source.repo)} — ${esc(run.source.hint || run.source.msg)}`) : "این اجرا آفر نخواند"}`,
     `آخرین خطا: ${errs[0] ? esc(String(errs[0].msg).slice(0, 200)) : "ندارد"}`
   ].join("\n");
 }
@@ -1446,6 +1584,33 @@ export default {
 
     if (url.pathname === "/raw") return json((await fetchOffers(env, run)).slice(0, 3));
 
+    // One request that answers the question /diag only hints at: can this
+    // Worker read the data at all, and if not, what exactly is wrong?
+    if (url.pathname === "/selftest") {
+      const repo = normRepo(env.DATA_REPO);
+      const out = { version: VERSION, data_repo: repo, has_gh_token: Boolean(env.GH_TOKEN) };
+      try {
+        const got = await readRepoJson(env, run, "offers");
+        let d = null;
+        try { d = JSON.parse(got.text); } catch (_) {}
+        const n = Array.isArray(d) ? d.length : Array.isArray(d?.offers) ? d.offers.length : 0;
+        out.ok = true;
+        out.via = got.via;            // "raw" needs no token at all
+        out.path = got.path;          // which copy was found
+        out.offers = n;
+        out.fix = got.via === "raw" ? "" : "برای کار بدون توکن، همان فایل را در docs/offers.json ریپوی عمومی منتشر کنید";
+      } catch (err) {
+        out.ok = false;
+        out.status = Number(err.status || 0);
+        out.hint = readHint(out.status, repo);
+        out.error = String(err.message || err).slice(0, 200);
+        out.fix = out.status === 401 || out.status === 403
+          ? "DATA_REPO را به tcpzizi/freeai-hunter تغییر بدهید (فایل‌ها همان‌جا در docs/ منتشر می‌شوند) یا GH_TOKEN را با Contents: Read-only روی همین ریپو بسازید"
+          : "فایل منتشر نشده — آخرین اجرای workflow را ببینید که docs/offers.json را نوشته باشد";
+      }
+      return json(out);
+    }
+
     if (url.pathname === "/preview") {
       const offs = liveOffers(await fetchOffers(env, run)).slice(0, 3);
       const out = [];
@@ -1521,6 +1686,9 @@ export default {
         sample_title: live[0] ? offerTitle(live[0]) : null,
         sample_verify: live[0] ? offerVerify(live[0]) : null,
         sample_link: live[0] ? offerLink(live[0]) : null,
+        // "offers: 0" alone is not a diagnosis: this says which repo was read
+        // and, when the read failed, what to change in the dashboard.
+        source: run.source,
         last_error: (await recentErrors(env, 1, run))[0] || null
       });
     }

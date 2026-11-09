@@ -50,6 +50,11 @@ function makeFetch({ offers = [], telegram } = {}) {
   const calls = { telegram: [], other: [] };
   const mock = async (url, init = {}) => {
     const u = String(url);
+    // The worker prefers the published public copy (docs/offers.json over raw),
+    // so the mock serves both that and the contents API.
+    if (u.startsWith("https://raw.githubusercontent.com/") && u.endsWith("/docs/offers.json")) {
+      return new Response(JSON.stringify(offers), { status: 200 });
+    }
     if (u.includes("/contents/offers.json")) {
       return new Response(JSON.stringify(offers), { status: 200 });
     }
@@ -382,7 +387,7 @@ test("admin routes require the secret; /health does not and leaks nothing", asyn
   const health = await worker.fetch(new Request("https://x/health"), env(kv), { waitUntil: () => {} });
   assert.equal(health.status, 200);
   const body = await health.text();
-  assert.match(body, /ok v7/);
+  assert.match(body, /ok v8/);
   assert.ok(!body.includes("123456"));
 });
 
@@ -528,6 +533,153 @@ test("an offer with no id or URL keeps a stable identity across fetches", async 
   assert.equal(JSON.parse(kv.store.get("user:7").value).sent[0], firstId);
 });
 
+/* ---- v8: a blind bot says why it is blind --------------------------- */
+
+test("a 401 from GitHub is reported as a token problem, once, to the admins", async () => {
+  worker = await load();
+  const kv = makeKV();
+  kv.store.set("user:7", { value: approvedUser(7) });
+  kv.store.set("user:42", { value: approvedUser(42) });   // 42 is also an admin id
+  const { fetch, calls } = makeFetch({
+    telegram: { handler: () => ok({ message_id: 1 }) }
+  });
+  // GitHub refuses every read the way a revoked fine-grained token does
+  const inner = fetch;
+  globalThis.fetch = async (url, init) => {
+    if (String(url).startsWith("https://raw.githubusercontent.com/")) return new Response("404: Not Found", { status: 404 });
+    if (String(url).includes("api.github.com") && String(url).includes("offers.json")) {
+      return new Response('{"message":"Bad credentials"}', { status: 401 });
+    }
+    return inner(url, init);
+  };
+  const ctx = { waitUntil: () => {} };
+  const body = await (await worker.fetch(new Request("https://x/dispatch?key=hook-secret"), env(kv, { GH_TOKEN: "ghp_expired" }), ctx)).json();
+  assert.equal(body.sent, 0, "nothing to send without offers");
+
+  const alerts = () => calls.telegram.filter(c => c.method === "sendMessage" && String(c.payload.text).includes("GH_TOKEN"));
+  assert.equal(alerts().length, 1, "the admin is told the token is the problem");
+  assert.match(alerts()[0].payload.text, /منقضی|دسترسی/, "the message names a dashboard fix, not just an http code");
+
+  // a second run inside the window must not repeat the DM
+  await worker.fetch(new Request("https://x/dispatch?key=hook-secret"), env(kv, { GH_TOKEN: "ghp_expired" }), ctx);
+  assert.equal(alerts().length, 1, "one alert per six hours, not one per run");
+});
+
+test("/diag says which repo was read, and why it failed", async () => {
+  worker = await load();
+  const kv = makeKV();
+  const { fetch } = makeFetch({ offers: [offer(1)] });
+  globalThis.fetch = fetch;
+  const good = await (await worker.fetch(new Request("https://x/diag?key=hook-secret"), env(kv), { waitUntil: () => {} })).json();
+  assert.equal(good.source.ok, true);
+  assert.equal(good.source.repo, "owner/data");
+  assert.equal(good.source.count, 1);
+
+  globalThis.fetch = async () => new Response('{"message":"Not Found"}', { status: 404 });
+  // (every transport 404s: raw copy missing, and the API says Not Found)
+  const bad = await (await worker.fetch(new Request("https://x/diag?key=hook-secret"), env(kv), { waitUntil: () => {} })).json();
+  assert.equal(bad.source.ok, false);
+  assert.equal(bad.source.status, 404);
+  // no token and no public copy: the hint says which of the two to add
+  assert.match(bad.source.hint, /docs\/offers\.json|GH_TOKEN/);
+});
+
+test("/selftest: the public raw copy is used when it exists, with no token at all", async () => {
+  worker = await load();
+  const kv = makeKV();
+  const seen = [];
+  globalThis.fetch = async url => {
+    seen.push(String(url));
+    if (String(url).includes("raw.githubusercontent.com/") && String(url).endsWith("docs/offers.json")) {
+      return new Response(JSON.stringify([offer(1), offer(2)]), { status: 200 });
+    }
+    return new Response("404: Not Found", { status: 404 });
+  };
+  const out = await (await worker.fetch(new Request("https://x/selftest?key=hook-secret"), env(kv), { waitUntil: () => {} })).json();
+  assert.equal(out.ok, true);
+  assert.equal(out.via, "raw", "a public copy needs no GH_TOKEN");
+  assert.equal(out.path, "docs/offers.json");
+  assert.equal(out.offers, 2);
+  assert.ok(seen.some(u => u.includes("raw.githubusercontent.com")), "raw is tried first");
+});
+
+test("/selftest: a private repo with a rejected token names the dashboard fix", async () => {
+  worker = await load();
+  const kv = makeKV();
+  globalThis.fetch = async url => String(url).includes("api.github.com")
+    ? new Response('{"message":"Bad credentials"}', { status: 401 })
+    : new Response("404: Not Found", { status: 404 });
+  const out = await (await worker.fetch(new Request("https://x/selftest?key=hook-secret"), env(kv, { GH_TOKEN: "ghp_x" }), { waitUntil: () => {} })).json();
+  assert.equal(out.ok, false);
+  assert.equal(out.status, 401);
+  assert.match(out.hint, /GH_TOKEN/);
+  assert.match(out.fix, /DATA_REPO|Contents/, "the answer tells you what to change, not just that it failed");
+});
+
+test("offers are read from the public copy without a token (private data repo)", async () => {
+  worker = await load();
+  const kv = makeKV();
+  const seen = [];
+  globalThis.fetch = async url => {
+    seen.push(String(url));
+    if (String(url).includes("raw.githubusercontent.com/") && String(url).endsWith("docs/offers.json")) {
+      return new Response(JSON.stringify([offer(1)]), { status: 200 });
+    }
+    return new Response("404: Not Found", { status: 404 });
+  };
+  const res = await worker.fetch(new Request("https://x/dispatch?key=hook-secret"), env(kv), { waitUntil: () => {} });
+  const body = await res.json();
+  assert.ok(seen.some(u => u.includes("docs/offers.json")), "the published copy is what gets read");
+  assert.equal(body.users, 0);   // no approved users in this fixture
+  const diag = await (await worker.fetch(new Request("https://x/diag?key=hook-secret"), env(kv), { waitUntil: () => {} })).json();
+  assert.equal(diag.source.via, "raw");
+  assert.equal(diag.source.path, "docs/offers.json");
+  assert.equal(diag.offers, 1);
+});
+
+test("/diag (Telegram) prints the source line instead of only آفرها: 0", async () => {
+  worker = await load();
+  const kv = makeKV();
+  kv.store.set("user:42", { value: approvedUser(42) });
+  const { fetch, calls } = makeFetch({ telegram: { handler: () => ok({ message_id: 1 }) } });
+  const inner = fetch;
+  globalThis.fetch = async (url, init) => {
+    if (String(url).startsWith("https://raw.githubusercontent.com/")) return new Response("404: Not Found", { status: 404 });
+    if (String(url).includes("api.github.com") && String(url).includes("offers.json")) {
+      return new Response('{"message":"Bad credentials"}', { status: 401 });
+    }
+    return inner(url, init);
+  };
+  await worker.fetch(new Request("https://x/tg", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-telegram-bot-api-secret-token": "hook-secret" },
+    body: JSON.stringify({ message: { message_id: 1, from: { id: 42, first_name: "A" }, chat: { id: 42 }, text: "/diag" } })
+  }), env(kv), { waitUntil: () => {} });
+  await new Promise(r => setTimeout(r, 40));
+  const diag = calls.telegram.filter(c => c.method === "sendMessage").map(c => c.payload.text).find(t => t.includes("منبع آفرها"));
+  assert.ok(diag, "the diag reply must carry a source line");
+  assert.match(diag, /❌/, diag);
+  assert.match(diag, /GH_TOKEN/);
+});
+
+test("the default repo is the public one, so an unset DATA_REPO still works", async () => {
+  worker = await load();
+  const kv = makeKV();
+  const seen = [];
+  globalThis.fetch = async url => {
+    seen.push(String(url));
+    if (String(url).includes("raw.githubusercontent.com") && String(url).endsWith("docs/offers.json")) {
+      return new Response(JSON.stringify([offer(1)]), { status: 200 });
+    }
+    return ok();
+  };
+  const e = env(kv);
+  delete e.DATA_REPO;
+  const out = await (await worker.fetch(new Request("https://x/diag?key=hook-secret"), e, { waitUntil: () => {} })).json();
+  assert.equal(out.data_repo, "tcpzizi/freeai-hunter");
+  assert.ok(seen.some(u => u.includes("raw.githubusercontent.com/tcpzizi/freeai-hunter/main/docs/offers.json")), seen.join(" "));
+});
+
 test("bot.paste.js is the current bot.js (dashboard copy stays in sync)", async () => {
   const { readFileSync } = await import("node:fs");
   const { execFileSync } = await import("node:child_process");
@@ -535,7 +687,7 @@ test("bot.paste.js is the current bot.js (dashboard copy stays in sync)", async 
   // dashboard files must be self-contained
   assert.ok(!/^\s*import\s/m.test(paste), "no import statements");
   assert.ok(!/^\s*export\s/m.test(paste.replace(/export default \{[\s\S]*$/, "")), "only the default export");
-  assert.match(paste, /const VERSION = "v7"/);
+  assert.match(paste, /const VERSION = "v8"/);
   assert.match(paste, /export default \{/);
   try {
     execFileSync(process.execPath, [new URL("./tools/build-paste.mjs", import.meta.url).pathname, "--check"], { stdio: "pipe" });

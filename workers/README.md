@@ -1,4 +1,4 @@
-# بات تلگرام روی Cloudflare Workers (v7)
+# بات تلگرام روی Cloudflare Workers (v8)
 
 نسخهٔ ورکر همان `bot.js` است؛ نسخهٔ پایتونی بات در `src/bot/` برای اجرای روی
 GitHub Actions می‌ماند. این دو مستقل‌اند و می‌توانید فقط یکی را فعال نگه دارید.
@@ -29,7 +29,10 @@ GitHub Actions می‌ماند. این دو مستقل‌اند و می‌توا
 4. **Settings → Variables and Secrets** این‌ها را به‌عنوان **Secret** اضافه کنید:
    `TELEGRAM_BOT_TOKEN`، `ADMIN_IDS`، `ADMIN_SECRET`، `WEBHOOK_SECRET`،
    `GH_TOKEN` (و اختیاری `GEMINI_API_KEY`، `GROQ_API_KEY`).
-   `DATA_REPO` می‌تواند Secret یا Variable معمولی باشد (مقدار `tcpzizi/freeai-data`).
+   `GH_TOKEN` **اختیاری است**: اگر `docs/offers.json` در ریپوی عمومی منتشر شده باشد،
+   ورکر آن را از `raw.githubusercontent.com` می‌خواند (بدون توکن، بدون rate limit).
+   `DATA_REPO` می‌تواند Secret یا Variable معمولی باشد، ولی **اگر نگذارید هم کار می‌کند**:
+   پیش‌فرض `tcpzizi/freeai-hunter` است (ریپوی عمومی، همان‌جا که `offers.json` منتشر می‌شود).
 5. **Settings → Trigger Events → Cron Triggers** (اگر می‌خواهید هر ساعت خودکار
    ارسال شود): `0 * * * *`.
 6. یک‌بار وبهوک را ثبت کنید: در مرورگر
@@ -39,8 +42,10 @@ GitHub Actions می‌ماند. این دو مستقل‌اند و می‌توا
    - چون کد در URL است، بعد از یک‌بار استفاده یک `ADMIN_SECRET` تازه بگذارید.
    - `https://<worker>/webhookinfo?key=<ADMIN_SECRET>` نشان می‌دهد تلگرام چه URLی
      را ثبت کرده و چند آپدیت در انتظار است.
-7. سلامت و آمار: `https://<worker>/health` (باید `ok v7` بدهد) و
+7. سلامت و آمار: `https://<worker>/health` (باید `ok v8` بدهد) و
    `https://<worker>/diag?key=<ADMIN_SECRET>`.
+   اگر `source.ok` برابر `false` بود، همان‌جا `source.hint` می‌گوید چه کاری در داشبورد لازم است.
+   برای یک تست یک‌خطی: `https://<worker>/selftest?key=<ADMIN_SECRET>`.
 8. **بدون باز کردن URL هم می‌شود**: در تلگرام به خود بات `/start` بزنید؛ اگر
    وبهوک از قبل روی همین Worker باشد کار می‌کند، ولی برای ثبت یا تغییر وبهوک
    همان گام ۶ لازم است.
@@ -99,9 +104,10 @@ fetch صفحه + یک LLM. اگر همه از کش بخوانند، همان ۲�
 | مسیر | دسترسی | کار |
 |---|---|---|
 | `POST /tg` | فقط با هدر `x-telegram-bot-api-secret-token` | وبهوک تلگرام |
-| `GET /health` | آزاد | پاسخ `ok v7`، هیچ رمزی برنمی‌گرداند |
+| `GET /health` | آزاد | پاسخ `ok v8`، هیچ رمزی برنمی‌گرداند |
 | `GET /setup?key=` | ادمین | setWebhook + setMyCommands |
-| `GET /diag?key=` | ادمین | آفرها، کاربران، بودجهٔ اجرا، آخرین خطا |
+| `GET /diag?key=` | ادمین | آفرها، کاربران، بودجهٔ اجرا، `source` (ریپو + علت خطا)، آخرین خطا |
+| `GET /selftest?key=` | ادمین | یک تست: `raw.githubusercontent` (بدون توکن) و contents API (با `GH_TOKEN`) |
 | `GET /dispatch?key=[&async=1]` | ادمین | ارسال دستی |
 | `GET /errors` `/clearerrors` `/recache` `/raw` `/preview` | ادمین | نگه‌داری و دیباگ |
 
@@ -157,3 +163,7 @@ node --test workers/bot.test.mjs     # ۲۳ تست، بدون شبکه
   بار دوباره ارسال شود؛ تاریخچهٔ هر کاربر منبع حقیقت است، نه کش.
 - ورکر به `state.sqlite` و ورک‌فلوی پایتون کاری ندارد؛ فقط `offers.json` را از
   `DATA_REPO` می‌خواند. اگر آن ریپو خصوصی است `GH_TOKEN` با دسترسی read لازم است.
+- **اگر `آفرها: 0` دیدید**، سه حالت را از هم جدا کنید: (۱) `source.status: 401` یعنی
+  توکن نامعتبر/منقضی است، (۲) `403` یعنی توکن به آن ریپو دسترسی ندارد (توکن fine-grained
+  باید `Contents: Read-only` روی همان ریپو داشته باشد)، (۳) `404` یعنی `DATA_REPO` غلط است.
+  ساده‌ترین راه: `DATA_REPO` را پاک کنید تا پیش‌فرض عمومی `tcpzizi/freeai-hunter` استفاده شود.
