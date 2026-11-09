@@ -5,8 +5,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+# Shared with recheck and expand: all three read and write the same binary
+# data/state.sqlite and git cannot merge it, so they must take turns. The bot
+# is deliberately NOT in this group - it never touches the database.
+# A single pending slot is enough here: the next cron tick replaces a run that
+# is still waiting, which is what we want when GitHub delays runs by minutes.
 concurrency:
-  group: repo-write
+  group: freeai-db
   cancel-in-progress: false
 jobs:
   hunt:
@@ -27,27 +32,30 @@ jobs:
       - run: pip install -r requirements.txt
       - name: run hunter
         env:
+
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python -m src.main
+      # Only the files hunt really writes, so a bot commit that landed in the
+      # meantime (or another run's touches) is not clobbered by this checkout.
       - name: commit data
-        working-directory: data
         run: |
-          git config user.name "freeai-hunter"
-          git config user.email "bot@users.noreply.github.com"
-          git add -A
-          git diff --quiet --cached || git commit -m "hunt data: $(date -u +%FT%TZ)"
-          for i in 1 2 3; do
-            git pull --rebase --autostash -q && git push && break || sleep 6
-          done
+          bash scripts/commit-data.sh data "hunt data: $(date -u +%FT%TZ)" state.sqlite offers.json stats.json
+      # The site and the Cloudflare Worker can only read the public repo, so the
+      # JSON is pushed there over the contents API. This runs after the data
+      # commit on purpose: a rejected push fails here, not in the middle of the
+      # run, so the run's data is still saved.
+      - name: publish to the public repo
+        env:
+          PUBLIC_MIRROR_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
+          PUBLIC_MIRROR_REPO: tcpzizi/freeai-hunter
+          PUBLIC_MIRROR_BRANCH: main
+        run: python -m src.publish_mirror
+      # The Cloudflare Worker and GitHub Pages read the public repo, so the
+      # same JSON files are copied into docs/ here (src/publish.py writes the
+      # bare list and both wrapped shapes the site accepts).
       - name: commit docs
         run: |
-          git config user.name "freeai-hunter"
-          git config user.email "bot@users.noreply.github.com"
-          git add -A docs
-          git diff --quiet --cached || git commit -m "hunt docs: $(date -u +%FT%TZ)"
-          for i in 1 2 3; do
-            git pull --rebase --autostash -q && git push && break || sleep 6
-          done
+          bash scripts/commit-data.sh . "hunt docs: $(date -u +%FT%TZ)" docs

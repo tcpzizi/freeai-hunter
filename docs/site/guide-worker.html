@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>راه‌اندازی بات روی Cloudflare Workers — فقط با داشبورد</title>
+<style>
+  :root { --bg:#0b0f14; --panel:#121821; --line:#243040; --txt:#e6edf3; --muted:#93a4b8;
+          --accent:#4cc2ff; --ok:#35d07f; --warn:#ffcc66; --bad:#ff6b6b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt); line-height:1.85;
+         font-family:"Vazirmatn","Segoe UI",Tahoma,system-ui,sans-serif; }
+  .wrap { max-width:900px; margin:0 auto; padding:24px 16px 72px; }
+  h1 { font-size:1.5rem; margin:0 0 6px; }
+  h2 { font-size:1.12rem; margin:28px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  h3 { font-size:.98rem; margin:18px 0 6px; color:var(--accent); }
+  p, li { color:#cfdae6; font-size:.94rem; }
+  a { color:var(--accent); }
+  code { direction:ltr; unicode-bidi:embed; background:#0e1620; border:1px solid var(--line);
+         border-radius:6px; padding:1px 6px; font-size:.84rem; font-family:ui-monospace,Menlo,monospace; }
+  .box { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:12px 0; }
+  .box.warn { border-color:#4b3d1e; } .box.bad { border-color:#4f2029; } .box.ok { border-color:#1d4b33; }
+  .k { color:var(--muted); font-size:.84rem; }
+  ol li, ul li { margin-bottom:8px; }
+  table { width:100%; border-collapse:collapse; font-size:.88rem; margin:8px 0 4px; }
+  th, td { border:1px solid var(--line); padding:7px 9px; text-align:right; vertical-align:top; }
+  th { background:#0e1620; color:var(--muted); font-weight:600; }
+  td code { white-space:nowrap; }
+  .copyrow { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:10px 0; }
+  .btn { background:var(--accent); color:#04121c; font-weight:700; border:0; border-radius:10px;
+         padding:9px 15px; cursor:pointer; font-family:inherit; font-size:.88rem; }
+  .btn.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  .note { font-size:.85rem; color:var(--muted); }
+  .ok-note { color:var(--ok); font-size:.85rem; } .bad-note { color:var(--bad); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>بات تلگرام، فقط با داشبورد Cloudflare</h1>
+  <p class="note">هیچ دستوری در ترمینال لازم نیست؛ هر مرحله را می‌شود در مرورگر انجام داد. کل زمان: حدود ۱۰ دقیقه.</p>
+
+  <div class="box ok">
+    <b>قبل از شروع</b>
+    <ul>
+      <li>توکن بات از <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a> (فرمت <code>123456:ABC…</code>).</li>
+      <li>آیدی عددی خودتان (از <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a>).</li>
+      <li>یک حساب Cloudflare رایگان. پلن رایگان برای کار این بات کافی است.</li>
+    </ul>
+  </div>
+
+  <h2>۱) کد بات را کپی کنید</h2>
+  <div class="copyrow">
+    <button class="btn" id="copy-code">📋 کپی کل کد</button>
+    <a class="btn ghost" id="open-code" href="#" target="_blank" rel="noopener">باز کردن فایل خام</a>
+    <span class="note" id="copy-state"></span>
+  </div>
+  <p class="note">فایل خودکفاست: هیچ <code>import</code>، <code>wrangler</code> یا فایل دیگری لازم ندارد. اگر دکمهٔ کپی کار نکرد، فایل را باز کنید و <b>Copy raw file contents</b> را بزنید.</p>
+
+  <h2>۲) Worker را بسازید و کد را بچسبانید</h2>
+  <ol>
+    <li>به <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages" target="_blank" rel="noopener">Workers &amp; Pages</a> بروید.</li>
+    <li><b>Create</b> → <b>Workers</b> → <b>Start with Hello World!</b> → نامی مثل <code>freeai-bot</code> → <b>Deploy</b>.</li>
+    <li>روی Worker تازه، <b>Edit code</b> را بزنید؛ کل محتوای ادیتور را پاک کنید و کد کپی‌شده را بچسبانید.</li>
+    <li><b>Deploy</b> بزنید. اگر خطای سینتکس گرفتید، یعنی کد کامل پیست نشده — دوباره از ابتدا کپی کنید.</li>
+  </ol>
+
+  <h2>۳) KV را وصل کنید (بدون این، هیچ کاربری ذخیره نمی‌شود)</h2>
+  <ol>
+    <li><b>Storage &amp; Databases → KV</b> → <b>Create a namespace</b> با نام <code>freeai-hunter-bot</code>.</li>
+    <li>برگردید به Worker → <b>Settings</b> → <b>Bindings</b> → <b>Add</b> → <b>KV namespace</b>.</li>
+    <li><b>Variable name</b> را دقیقاً <code>KV</code> بگذارید (حرف بزرگ) و همان namespace را انتخاب کنید → <b>Save</b>.</li>
+  </ol>
+  <div class="box warn">نام بایندینگ حساس است: کد دنبال <code>env.KV</code> می‌گردد. اگر <code>kv</code> یا <code>MY_KV</code> بگذارید، <code>/diag</code> مقدار <code>kv_binding: "budget"</code> یا خطا نشان می‌دهد.</div>
+
+  <h2>۴) Secretها را اضافه کنید</h2>
+  <p>Worker → <b>Settings</b> → <b>Variables and Secrets</b> → <b>Add</b> → نوع <b>Secret</b> (نه Text).</p>
+  <table>
+    <thead><tr><th>نام</th><th>مقدار</th><th>لازم؟</th></tr></thead>
+    <tbody>
+      <tr><td><code>TELEGRAM_BOT_TOKEN</code></td><td>توکن BotFather</td><td>بله</td></tr>
+      <tr><td><code>ADMIN_IDS</code></td><td>آیدی عددی ادمین‌ها، با کاما: <code>111,222</code></td><td>بله</td></tr>
+      <tr><td><code>WEBHOOK_SECRET</code></td><td>یک رشتهٔ تصادفی؛ فقط <code>A-Za-z0-9_-</code></td><td>بله</td></tr>
+      <tr><td><code>ADMIN_SECRET</code></td><td>یک رشتهٔ تصادفی دیگر؛ برای <code>/setup</code> و <code>/diag</code></td><td>توصیه‌شده</td></tr>
+      <tr><td><code>GH_TOKEN</code></td><td>توکن گیت‌هاب. <b>اختیاری</b>: نسخهٔ عمومی <code>docs/offers.json</code> بدون توکن هم خوانده می‌شود</td><td>خیر</td></tr>
+      <tr><td><code>DATA_REPO</code></td><td>پیش‌فرض <code>tcpzizi/freeai-hunter</code>؛ برای ریپوی دادهٔ خودتان عوض کنید</td><td>خیر</td></tr>
+      <tr><td><code>GEMINI_API_KEY</code></td><td>توضیح فارسی آفرها با Gemini</td><td>خیر</td></tr>
+      <tr><td><code>GROQ_API_KEY</code></td><td>جایگزین دوم</td><td>خیر</td></tr>
+    </tbody>
+  </table>
+  <p class="note">بعد از هر Save یک‌بار <b>Deploy</b> بزنید؛ Secretهای تازه تا Deploy بعدی به کد نمی‌رسند.</p>
+
+  <h2>۵) زمان‌بندی ساعت</h2>
+  <p>Worker → <b>Settings</b> → <b>Trigger Events</b> → <b>Cron Triggers</b> → <b>Add</b> → <code>0 * * * *</code> (هر ساعت).</p>
+  <p class="note">این گام لازم نیست اگر فقط با دکمهٔ <code>/push</code> خودتان ارسال می‌کنید.</p>
+
+  <h2>۶) وبهوک و منوی دستورها</h2>
+  <p>این آدرس را یک‌بار در مرورگر باز کنید (جای <code>…</code> آدرس Worker خودتان):</p>
+  <div class="box"><code>https://freeai-bot.&lt;subdomain&gt;.workers.dev/setup?key=&lt;ADMIN_SECRET&gt;</code></div>
+  <p>باید <code>{"ok":true,…}</code> ببینید. اگر <code>false</code> بود، فیلد <code>description</code> تلگرام را بخوانید (معمولاً توکن نامعتبر یا <code>WEBHOOK_SECRET</code> با کاراکتر غیرمجاز).</p>
+  <p class="note">چون مقدار <code>ADMIN_SECRET</code> در URL است، بهتر است بعد از استفاده یک مقدار تازه بگذارید و دوباره Deploy کنید.</p>
+
+  <h2>۷) بررسی سلامت (به همین ترتیب)</h2>
+  <ol>
+    <li><code>/health</code> → باید <code>ok v8</code> بدهد.</li>
+    <li><code>/diag?key=…</code> → نسخه، تعداد آفر، کاربران، و بلوک <code>source</code>.</li>
+    <li><code>/selftest?key=…</code> → آیا این Worker می‌تواند داده را بخواند؟ دو مسیر را جدا نشان می‌دهد.</li>
+    <li>در تلگرام به بات <code>/start</code> بدهید؛ برای بقیهٔ ادمین‌ها پیام تایید می‌رود.</li>
+  </ol>
+
+  <h2>اگر <code>آفرها: 0</code> بود</h2>
+  <p>سه علت رایج، سه راه‌حل:</p>
+  <table>
+    <thead><tr><th>در <code>/diag</code> چه می‌بینید</th><th>معنی</th><th>چه کنید</th></tr></thead>
+    <tbody>
+      <tr><td><code>source.status: 401</code></td><td>توکن معتبر نیست یا منقضی شده</td><td>توکن تازه بسازید، یا <code>GH_TOKEN</code> را کامل حذف کنید و به مسیر عمومی تکیه کنید</td></tr>
+      <tr><td><code>source.status: 403</code></td><td>توکن به آن ریپو دسترسی ندارد (ریپوی خصوصی)</td><td><code>DATA_REPO</code> را پاک کنید تا پیش‌فرض عمومی استفاده شود</td></tr>
+      <tr><td><code>source.status: 404</code></td><td>فایل منتشر نشده یا مسیر/ریپو غلط است</td><td>آخرین اجرای <code>hunt</code> یا <code>recheck</code> را ببینید که <code>docs/offers.json</code> را ساخته باشد</td></tr>
+    </tbody>
+  </table>
+  <div class="box ok">مسیر پیشنهادی: <b>بدون هیچ توکنی</b> کار کنید. Worker فایل <code>docs/offers.json</code> را از <code>raw.githubusercontent.com</code> می‌خواند؛ نه سقف rate limit دارد، نه به Secret نیاز دارد.</div>
+
+  <h2>نکته‌های پلن رایگان</h2>
+  <ul>
+    <li>سقف KV: ۱٬۰۰۰ نوشتن در روز. با ۳۰ کاربر و ۲۴ اجرا حدود ۷۲۰ نوشتن — کمتر از سقف. اگر کاربر بیشتر شد، cron را هر ۲ ساعت بگذارید.</li>
+    <li>۵۰ subrequest در هر اجرا و ۱٬۰۰۰ عملیات KV در هر اجرا سقف سختی است؛ کد این‌ها را می‌شمارد و به‌جای کرش کردن، کار را به اجرای بعد می‌سپارد.</li>
+    <li>KV نهایتاً سازگار است؛ تاریخچهٔ ارسال هر کاربر در رکورد خودش نگه داشته می‌شود تا آفر تکراری فرستاده نشود.</li>
+  </ul>
+
+  <p class="note" style="margin-top:28px">
+    <a href="./index.html">← برگشت به فهرست آفرها</a> ·
+    راهنمای همیشه‌به‌روز: <a href="https://github.com/tcpzizi/freeai-hunter/blob/main/workers/README.md" target="_blank" rel="noopener">workers/README.md</a>
+  </p>
+</div>
+
+<script>
+(() => {
+  const CODE_URLS = [
+    "https://raw.githubusercontent.com/tcpzizi/freeai-hunter/main/workers/bot.paste.js",
+    "../../workers/bot.paste.js"
+  ];
+  const $ = s => document.querySelector(s);
+  $("#open-code").href = CODE_URLS[0];
+  $("#copy-code").addEventListener("click", async () => {
+    const state = $("#copy-state");
+    state.className = "note";
+    state.textContent = "در حال گرفتن کد…";
+    for (const url of CODE_URLS) {
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        if (!r.ok) continue;
+        const code = await r.text();
+        if (!code.includes("VERSION")) continue;
+        await navigator.clipboard.writeText(code);
+        state.className = "ok-note";
+        state.textContent = `کپی شد (${Math.round(code.length / 1024)} کیلوبایت)`;
+        return;
+      } catch (e) { /* try the next path */ }
+    }
+    state.className = "bad-note";
+    state.textContent = "کپی نشد؛ فایل را باز کنید و Copy raw file contents بزنید.";
+  });
+})();
+</script>
+</body>
+</html>

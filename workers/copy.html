@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>کپی کد بات — freeai-hunter</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px 18px 60px;
+    font: 15px/1.9 system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+    background: #0b0f14; color: #e6edf3;
+  }
+  main { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  p.lead { color: #9aa7b4; margin: 0 0 22px; font-size: 14px; }
+  .bar {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    padding: 12px 0 14px; margin-bottom: 8px;
+    background: linear-gradient(#0b0f14 70%, rgba(11,15,20,.85));
+    border-bottom: 1px solid #1d2733;
+  }
+  button {
+    font: inherit; font-weight: 600; cursor: pointer;
+    border: 1px solid #2c3b4d; border-radius: 10px;
+    background: #16202b; color: #e6edf3; padding: 9px 16px;
+  }
+  button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  button.primary:hover { background: #1d4ed8; }
+  button:hover { border-color: #3b5168; }
+  button:active { transform: translateY(1px); }
+  .status { font-size: 13px; color: #63d68a; min-height: 20px; }
+  .status.err { color: #ff7a7a; }
+  .meta { font-size: 12px; color: #7d8b99; margin-inline-start: auto; }
+  ol { padding-inline-start: 20px; color: #b9c6d3; font-size: 14px; margin: 0 0 18px; }
+  ol b { color: #e6edf3; }
+  code, textarea { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  code { background: #16202b; padding: 1px 5px; border-radius: 5px; font-size: 13px; }
+  textarea {
+    width: 100%; height: 62vh; min-height: 320px; resize: vertical;
+    background: #0e1620; color: #cfe3ff;
+    border: 1px solid #1d2733; border-radius: 12px; padding: 14px;
+    font-size: 12.5px; line-height: 1.55; direction: ltr; text-align: left;
+    white-space: pre; overflow: auto; tab-size: 2;
+  }
+  .fallback-note { display: none; margin-top: 10px; font-size: 13px; color: #ffcf70; }
+  .fallback-note.on { display: block; }
+</style>
+</head>
+<body>
+<main>
+  <h1>کد کامل بات ورکر — کپی یک‌کلیکی</h1>
+  <p class="lead">
+    این همان <code>workers/bot.js</code> است، در یک فایل خودکفا: هیچ import، هیچ
+    نصب و هیچ ترمینالی لازم نیست. فایل را کپی کنید و در ادیتور داشبورد Cloudflare
+    بچسبانید.
+  </p>
+
+  <div class="bar">
+    <button class="primary" id="copy">📋 کپی کل کد</button>
+    <button id="download">⬇️ دانلود فایل .js</button>
+    <span class="status" id="status" role="status" aria-live="polite"></span>
+    <span class="meta" id="meta">در حال بارگذاری…</span>
+  </div>
+
+  <ol>
+    <li>Workers &amp; Pages → Create → Workers (یا Worker موجود → <b>Edit code</b>).</li>
+    <li>کل کد را بچسبانید → <b>Deploy</b>.</li>
+    <li>Settings → <b>Bindings</b> → Add → <b>KV namespace</b>، نام متغیر <code>KV</code>.</li>
+    <li>Settings → <b>Variables and Secrets</b> → Secret: <code>TELEGRAM_BOT_TOKEN</code>،
+        <code>ADMIN_IDS</code>، <code>ADMIN_SECRET</code>، <code>WEBHOOK_SECRET</code>،
+        <code>GH_TOKEN</code> → دوباره Deploy.</li>
+    <li>Settings → <b>Trigger Events</b> → Cron: <code>0 * * * *</code>.</li>
+    <li>یک‌بار <code>https://&lt;worker&gt;/setup?key=&lt;ADMIN_SECRET&gt;</code> را باز کنید.</li>
+  </ol>
+
+  <textarea id="code" spellcheck="false" readonly aria-label="کد کامل بات">در حال بارگذاری…</textarea>
+  <div class="fallback-note" id="fallback">
+    مرورگر اجازهٔ کپی خودکار نداد. متن انتخاب شده است: <b>Ctrl+C</b> (یا ⌘+C) را بزنید.
+  </div>
+</main>
+
+<script>
+(async () => {
+  const ta = document.getElementById("code");
+  const status = document.getElementById("status");
+  const meta = document.getElementById("meta");
+  const fallback = document.getElementById("fallback");
+
+  const setStatus = (text, isErr) => {
+    status.textContent = text;
+    status.className = "status" + (isErr ? " err" : "");
+  };
+
+  // Older browsers still get the file; bot.paste.js is the same text.
+  let code = "";
+  try {
+    const res = await fetch("./bot.paste.js?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    code = await res.text();
+  } catch (err) {
+    setStatus("بارگذاری فایل ممکن نشد: " + err.message, true);
+    meta.textContent = "";
+    ta.value = "";
+    return;
+  }
+  ta.value = code;
+  meta.textContent = `${(code.length / 1024).toFixed(1)} KB · ${code.split("\n").length} خط`;
+  setStatus("");
+
+  const copy = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(code);
+      } else {
+        throw new Error("no clipboard API");
+      }
+      setStatus("✅ کپی شد — حالا در ادیتور Cloudflare بچسبانید");
+      fallback.classList.remove("on");
+    } catch (_) {
+      // www.automated: select the textarea and let the user press Ctrl+C
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      fallback.classList.add("on");
+      setStatus("برای کپی، Ctrl+C را بزنید", true);
+    }
+  };
+
+  document.getElementById("copy").addEventListener("click", copy);
+
+  document.getElementById("download").addEventListener("click", () => {
+    const blob = new Blob([code], { type: "text/javascript;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "freeai-bot.js";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    setStatus("دانلود شد — همان فایل را در ادیتور بچسبانید");
+  });
+
+  // A double click on the textarea selects everything: handy without a button.
+  ta.addEventListener("dblclick", () => { ta.select(); });
+})();
+</script>
+</body>
+</html>

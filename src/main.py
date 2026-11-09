@@ -1,4 +1,4 @@
-import time, hashlib, json, yaml
+import os, time, hashlib, json, yaml
 import urllib.parse as up
 import concurrent.futures as cf
 from . import store, filters, extract, verify, score, publish, dedup
@@ -9,6 +9,9 @@ from .collectors import (model_registry, pagediff, github_watch, rss,
 DROP_Q = ("utm_", "ref", "fbclid", "gclid", "aff", "mc_cid", "mc_eid")
 # an item that keeps failing (bad page, LLM error on it) is dropped after this many tries
 MAX_TRIES = 3
+# VACUUM rewrites the whole file, so run it at most this often. Between vacuum
+# runs deleted pages are reused, so the file does not keep growing either way.
+RETENTION_HOURS = float(os.getenv("RETENTION_HOURS", "12"))
 
 
 def canon(u):
@@ -192,6 +195,14 @@ def run(limit_extract=40):
     publish.build(c)
     c.commit()
     left = store.queue_size(c)
+    last_prune = int(store.meta_get(c, "pruned_at") or 0)
+    if time.time() - last_prune > RETENTION_HOURS * 3600:
+        counts = store.prune_history(c, vacuum=True)
+        store.meta_set(c, "pruned_at", int(time.time()))
+        c.commit()
+        print("retention: " + str(counts["bodies"]) + " bodies cleared, " +
+              str(counts["items"]) + " old items and " + str(counts["snapshots"]) +
+              " page snapshots dropped")
     c.close()
     print("done in " + str(round(time.time() - t0)) + "s, offers touched=" + str(made) +
           ", rejected=" + str(rejected) + ", retry later=" + str(retried) +

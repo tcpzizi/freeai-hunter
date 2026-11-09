@@ -1,9 +1,118 @@
-import json, time, pathlib
+import base64, json, os, time, pathlib
+
+import httpx
+
+# Everything except `status`; status is not published (the Worker treats a
+# missing status as "active"), which is also why it is dropped here.
+PUBLIC_FIELDS = ["id", "vendor", "domain", "offer_type", "target", "value", "limits",
+                 "requires_cc", "requires_edu", "region", "signup_url", "source_url",
+                 "expires_at", "model_class", "why", "score", "verify_status",
+                 "corroborations", "created_at", "updated_at"]
 
 FIELDS = ["id", "vendor", "domain", "offer_type", "target", "value", "limits",
           "requires_cc", "requires_edu", "region", "signup_url", "source_url",
           "expires_at", "model_class", "why", "score", "verify_status",
           "corroborations", "created_at", "updated_at", "status"]
+
+
+# The generated data lives in a private repo, so the site and the Worker cannot
+# read it. If a token with access to the public repo is available, the same
+# JSON is pushed there over the contents API - that works no matter how the
+# public repo was checked out (a plain `actions/checkout` gives read-only
+# contents, which is why the earlier attempt to commit docs/ from a workflow
+# could never work).
+MIRROR_REPO = os.getenv("PUBLIC_MIRROR_REPO", "tcpzizi/freeai-hunter")
+MIRROR_TOKEN = os.getenv("PUBLIC_MIRROR_TOKEN", "")
+MIRROR_BRANCH = os.getenv("PUBLIC_MIRROR_BRANCH", "main")
+MIRROR_FILES = (
+    ("docs/offers.json", "bare"),
+    ("docs/github-pages/offers.json", "wrapped"),
+    ("docs/github-pages/sites.json", "wrapped"),
+    ("docs/sites.json", "bare"),
+)
+
+
+def _mirror_put(path, payload, token, repo):
+    """Create or update one file; returns True when GitHub accepted it."""
+    url = "https://api.github.com/repos/" + repo + "/contents/" + path
+    headers = {"authorization": "Bearer " + token, "accept": "application/vnd.github+json",
+               "user-agent": "freeai-hunter-publish/1.0"}
+    body = json.dumps(payload, ensure_ascii=False, indent=1).encode("utf-8")
+    sha = None
+    try:
+        r = httpx.get(url, headers=headers, params={"ref": MIRROR_BRANCH}, timeout=20)
+        if r.status_code == 200:
+            sha = (r.json() or {}).get("sha")
+    except Exception:
+        pass                    # a missing file is fine: create it below
+    data = {"message": "publish: " + path + " (" + str(len(payload)) + " records)",
+            "content": base64.b64encode(body).decode("ascii"), "branch": MIRROR_BRANCH}
+    if sha:
+        data["sha"] = sha
+    try:
+        r = httpx.put(url, headers=headers, json=data, timeout=25)
+    except Exception as e:
+        print("mirror: " + path + " failed: " + str(e))
+        return False
+    if r.status_code in (200, 201):
+        return True
+    print("mirror: " + path + " -> " + str(r.status_code) + " " + str(r.text)[:200])
+    return False
+
+
+def mirror_public(data, site=None):
+    """Copy the public JSON into the public repo. Returns the paths written.
+
+    `site` is the small state block the site renders (updated_at, availability,
+    shifts, tools). It is merged into the two github-pages files, which are the
+    ones docs/site/index.html reads.
+    """
+    if not MIRROR_TOKEN:
+        print("mirror: no PUBLIC_MIRROR_TOKEN (the Worker can still read data/ from DATA_REPO)")
+        return []
+    written = []
+    for path, shape in MIRROR_FILES:
+        if shape == "bare":
+            payload = data
+        else:
+            payload = dict(site or {})
+            payload["offers"] = data
+            payload["updated_at"] = int(time.time())
+        if _mirror_put(path, payload, MIRROR_TOKEN, MIRROR_REPO):
+            written.append(path)
+    return written
+
+
+def snapshot(c):
+    """Copy what the site and the Worker read into docs/.
+
+    The generated data lives in the private data repo, which the Cloudflare
+    Worker and a GitHub Pages site cannot read without a token. docs/ is in the
+    public repo, so the same files are written there too, in both shapes:
+
+      docs/offers.json           bare list (what a static page fetches)
+      docs/github-pages/offers.json   {"offers": [...]} (what pages/offers.html reads)
+      docs/github-pages/sites.json    {"offers": [...]} (the same tools, for the page)
+      docs/sites.json            list of tools, for a Worker that prefers one file
+
+    Both copies are trimmed: the public repo is public, so only the fields the
+    site renders are included.
+    """
+    tools = []
+    for d in rows(c):
+        tools.append({k: d.get(k) for k in PUBLIC_FIELDS})
+    out = []
+    for target, payload in (
+        ("docs/offers.json", tools),
+        ("docs/github-pages/offers.json", {"offers": tools}),
+        ("docs/github-pages/sites.json", {"offers": tools}),
+        ("docs/sites.json", tools),
+    ):
+        p = pathlib.Path(target)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=1)
+    return len(tools)
 
 
 def rows(c):
@@ -45,4 +154,8 @@ def build(c):
         lines.append("| " + " | ".join(x.replace("|", "/") for x in cells) + " |")
     with open("docs/index.md", "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
-    print("published: " + str(len(data)) + " offers")
+    copied = snapshot(c)
+    print("published: " + str(len(data)) + " offers, " + str(copied) + " in docs/")
+    # The push to the public repo is a separate step (python -m src.publish_mirror)
+    # on purpose: it runs after the data commit, so a rejected push is visible
+    # without throwing away the run's work.

@@ -1,0 +1,31 @@
+name: workers-tests
+# Runs the Cloudflare Worker tests so nobody has to have Node installed just to
+# check a change to workers/bot.js. Path filter keeps it quiet for changes that
+# cannot affect the Worker.
+on:
+  push:
+    paths: ["workers/**", ".github/workflows/workers-tests.yml"]
+  pull_request:
+    paths: ["workers/**", ".github/workflows/workers-tests.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: workers-tests-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax check
+        run: |
+          node --check workers/bot.js
+          node --check workers/bot.paste.js
+      - name: Run worker tests
+        # includes a check that bot.paste.js still matches bot.js
+        run: node --test workers/bot.test.mjs

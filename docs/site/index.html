@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>آفرهای رایگان هوش مصنوعی</title>
+<meta name="description" content="فهرست به‌روز آفرهای رایگان و تریال هوش مصنوعی، وضعیت دسترسی، و راهنمای اتصال به داشبورد.">
+<style>
+  :root {
+    --bg: #0b0f14; --panel: #121821; --panel-2: #18202b; --line: #243040;
+    --txt: #e6edf3; --muted: #93a4b8; --accent: #4cc2ff; --ok: #35d07f;
+    --warn: #ffcc66; --bad: #ff6b6b; --radius: 14px;
+    --font: "Vazirmatn", "Segoe UI", Tahoma, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: radial-gradient(1200px 600px at 80% -10%, #16283a 0%, var(--bg) 55%) fixed;
+    color: var(--txt); font-family: var(--font); line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 20px 16px 64px; }
+  header.top { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 12px var(--ok); }
+  .muted { color: var(--muted); font-size: .86rem; }
+  nav.pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  nav.pills button {
+    background: var(--panel); color: var(--txt); border: 1px solid var(--line);
+    padding: 7px 14px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: .9rem;
+  }
+  nav.pills button[aria-selected="true"] { background: var(--accent); color: #04121c; border-color: var(--accent); font-weight: 700; }
+
+  .avail { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 4px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: .9rem;
+  }
+  .chip .led { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+  .chip.up .led { background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+  .chip.down .led { background: var(--bad); box-shadow: 0 0 10px var(--bad); }
+  .chip.down { border-color: #5a2630; }
+
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 14px; }
+  .toolbar input, .toolbar select {
+    background: var(--panel); color: var(--txt); border: 1px solid var(--line);
+    border-radius: 10px; padding: 9px 12px; font-family: inherit; font-size: .92rem;
+  }
+  .toolbar input { flex: 1 1 240px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .card {
+    background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .card h3 { margin: 0; font-size: 1rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .card .host { color: var(--muted); font-size: .8rem; font-weight: 400; direction: ltr; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { font-size: .74rem; border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; color: var(--muted); }
+  .tag.score { color: var(--warn); border-color: #4b3d1e; }
+  .tag.ok { color: var(--ok); border-color: #1d4b33; }
+  .tag.bad { color: var(--bad); border-color: #4f2029; }
+  .card p { margin: 0; font-size: .9rem; color: #c8d4e2; }
+  .card ul { margin: 4px 0 0; padding-inline-start: 18px; font-size: .85rem; color: #b9c7d8; }
+  .card .foot { margin-top: auto; display: flex; gap: 10px; align-items: center; padding-top: 8px; }
+  .btn {
+    display: inline-block; background: var(--accent); color: #04121c; font-weight: 700;
+    border: 0; border-radius: 10px; padding: 8px 14px; cursor: pointer; font-family: inherit; font-size: .85rem;
+  }
+  .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+
+  section[hidden] { display: none; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; margin-bottom: 16px; }
+  .panel h2 { margin: 0 0 10px; font-size: 1.05rem; }
+  ol.steps { margin: 0; padding-inline-start: 20px; }
+  ol.steps li { margin-bottom: 10px; }
+  code, kbd {
+    direction: ltr; unicode-bidi: embed; background: #0e1620; border: 1px solid var(--line);
+    border-radius: 6px; padding: 1px 6px; font-size: .84rem; font-family: ui-monospace, Menlo, monospace;
+  }
+  pre { direction: ltr; text-align: left; background: #0e1620; border: 1px solid var(--line); border-radius: 10px; padding: 12px; overflow: auto; }
+  .copyrow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
+  .ok-note { color: var(--ok); font-size: .85rem; }
+  .bad-note { color: var(--bad); font-size: .85rem; }
+  footer { margin-top: 32px; color: var(--muted); font-size: .82rem; border-top: 1px solid var(--line); padding-top: 14px; }
+  .skeleton { height: 128px; border-radius: var(--radius); background: linear-gradient(90deg, #121821, #1a2430, #121821); background-size: 200% 100%; animation: pulse 1.4s infinite; }
+  @keyframes pulse { 0% { background-position: 0 0; } 100% { background-position: -200% 0; } }
+  @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand"><span class="dot"></span> آفرهای رایگان هوش مصنوعی</div>
+    <div class="muted" id="updated">در حال خواندن داده…</div>
+  </header>
+
+  <!-- وضعیت دسترسی: از فیلد availability در sites.json پر می‌شود -->
+  <div class="avail" id="avail" aria-label="وضعیت دسترسی"></div>
+
+  <nav class="pills" role="tablist" aria-label="بخش‌ها">
+    <button role="tab" aria-selected="true" data-tab="offers">آفرها</button>
+    <button role="tab" aria-selected="false" data-tab="guides">راهنماها</button>
+    <button role="tab" aria-selected="false" data-tab="bot">بات تلگرام</button>
+  </nav>
+
+  <section id="tab-offers">
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="جست‌وجو: نام شرکت، نوع آفر، مبلغ…" aria-label="جست‌وجو">
+      <select id="type" aria-label="نوع آفر"><option value="">همهٔ نوع‌ها</option></select>
+      <select id="min" aria-label="حداقل امتیاز">
+        <option value="0">همهٔ امتیازها</option>
+        <option value="15">امتیاز ۱۵+</option>
+        <option value="20" selected>امتیاز ۲۰+</option>
+        <option value="30">امتیاز ۳۰+</option>
+      </select>
+      <select id="verify" aria-label="وضعیت تایید">
+        <option value="">همه</option>
+        <option value="verified">تاییدشده</option>
+        <option value="likely">محتمل</option>
+      </select>
+    </div>
+    <div class="grid" id="offers"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+  </section>
+
+  <section id="tab-guides" hidden>
+    <div class="panel">
+      <h2>راهنماها</h2>
+      <p class="muted">هر ابزار یا آفر می‌تواند یک راهنمای کوتاه داشته باشد: چطور کار می‌کند، سهم رایگان چقدر است، و برای چه کسی مناسب نیست. این بخش از <code>sites.json</code> خوانده می‌شود.</p>
+    </div>
+    <div class="grid" id="guides"></div>
+  </section>
+
+  <section id="tab-bot" hidden>
+    <div class="panel">
+      <h2>راه‌اندازی بات تلگرام روی Cloudflare Workers</h2>
+      <p class="muted">هیچ نصبی لازم نیست. کد زیر را با یک کلیک کپی کنید و در داشبورد Cloudflare بچسبانید.</p>
+      <div class="copyrow">
+        <button class="btn" id="copy-code">📋 کپی کل کد بات</button>
+        <a class="btn ghost" id="open-code" href="#" target="_blank" rel="noopener">باز کردن فایل کد</a>
+        <span class="muted" id="copy-state"></span>
+      </div>
+      <ol class="steps">
+        <li>در <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages" target="_blank" rel="noopener">Workers &amp; Pages</a> یک Worker بسازید (یا Worker موجود را <b>Edit code</b> کنید)، کل کد کپی‌شده را بچسبانید و <b>Deploy</b> بزنید.</li>
+        <li><b>Settings → Bindings → Add → KV namespace</b>؛ <i>Variable name</i> را دقیقاً <code>KV</code> بگذارید.</li>
+        <li><b>Settings → Variables and Secrets</b> و این‌ها را به‌عنوان Secret اضافه کنید: <code>TELEGRAM_BOT_TOKEN</code>، <code>ADMIN_IDS</code>، <code>ADMIN_SECRET</code>، <code>WEBHOOK_SECRET</code>، <code>ADMIN_IDS</code> با کاما برای چند ادمین. <code>GH_TOKEN</code> اختیاری است.</li>
+        <li><b>Settings → Trigger Events → Cron Triggers</b> و زمان‌بندی <code>0 * * * *</code> را اضافه کنید.</li>
+        <li>یک‌بار <code>/setup?key=&lt;ADMIN_SECRET&gt;</code> را در مرورگر باز کنید تا وبهوک و منوی دستورها ثبت شود.</li>
+        <li>سلامت: <code>/health</code> باید <code>ok v8</code> بدهد. اگر <code>/diag</code> گفت آفرها صفر است، <code>/selftest?key=…</code> علت و راه‌حل را می‌گوید.</li>
+      </ol>
+      <p class="muted">راهنمای کامل با همان جزئیات در <a href="./guide-worker.html">guide-worker.html</a> و <a href="https://github.com/tcpzizi/freeai-hunter/blob/main/workers/README.md" target="_blank" rel="noopener">workers/README.md</a> هست.</p>
+    </div>
+  </section>
+
+  <footer>
+    داده‌ها از <code>docs/github-pages/offers.json</code> و <code>docs/github-pages/sites.json</code> خوانده می‌شوند؛
+    ساعت‌ها به وقت <span id="tz">Asia/Tehran</span> هستند. این صفحه بدون وابستگی بیرونی کار می‌کند.
+  </footer>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ---------------- helpers ---------------- */
+  const $ = sel => document.querySelector(sel);
+  const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  const OFFER_TYPE_FA = {
+    free_credits: "کردیت رایگان", free_credit: "کردیت رایگان", credit: "کردیت رایگان",
+    trial: "تریال رایگان", free_trial: "تریال رایگان",
+    permanent_free_tier: "فری‌تیر دائمی", always_free: "رایگان دائمی", freemium: "پلن رایگان محدود",
+    free_api: "API رایگان", free_model: "مدل رایگان", open_weights: "وزن‌های متن‌باز",
+    student: "پلن دانشجویی", startup: "پلن استارتاپی", aggregator: "سرویس چندهوشه",
+    lifetime_deal: "لایف‌تایم", grant: "گرنت پژوهشی", hackathon: "هکاتون",
+    promo: "پروموشن", discount: "تخفیف", beta: "بتا", waitlist: "لیست انتظار", other: "سایر"
+  };
+  const VERIFY = {
+    verified: ["✅ تاییدشده", "ok"], likely: ["🟡 محتمل", ""], unconfirmed: ["⚪️ تاییدنشده", ""],
+    unverifiable: ["⚪️ نامشخص", ""], suspicious: ["🔴 مشکوک", "bad"], dead_link: ["❌ لینک مرده", "bad"],
+    expired: ["❌ منقضی", "bad"], not_offer: ["🚫 آفر نیست", "bad"]
+  };
+  const fa = (map, v, fallback = "") => {
+    const k = String(v ?? "").trim().toLowerCase().replace(/[\s-]+/g, "_");
+    return map[k] || fallback || String(v ?? "");
+  };
+  const daysLeft = iso => {
+    if (!iso) return null;
+    const d = new Date(String(iso).length === 10 ? iso + "T23:59:59Z" : iso);
+    return isNaN(d) ? null : Math.ceil((d - Date.now()) / 86400000);
+  };
+  const hostOf = url => { try { return new URL(url).host.replace(/^www\./, ""); } catch { return ""; } };
+
+  /* ---------------- data ---------------- */
+  async function firstJson(paths) {
+    for (const p of paths) {
+      try {
+        const r = await fetch(p, { cache: "no-cache" });
+        if (!r.ok) continue;
+        const d = await r.json();
+        if (d) return { data: d, path: p };
+      } catch { /* try the next path */ }
+    }
+    return null;
+  }
+  const listOf = d => Array.isArray(d) ? d : Array.isArray(d?.offers) ? d.offers : [];
+
+  async function load() {
+    // The same file can live in docs/ or docs/github-pages/; both shapes work.
+    const offers = await firstJson(["../github-pages/offers.json", "../offers.json"]);
+    const sites = await firstJson(["../github-pages/sites.json", "../sites.json"]);
+    const offersList = offers ? listOf(offers.data) : [];
+    const siteDoc = sites ? (Array.isArray(sites.data) ? { offers: sites.data } : sites.data) : {};
+    return { offers: offersList, site: siteDoc };
+  }
+
+  /* ---------------- render ---------------- */
+  function renderAvail(site) {
+    const box = $("#avail");
+    const list = Array.isArray(site.availability) ? site.availability : [];
+    if (!list.length) {
+      box.innerHTML = ["سایت", "چت", "API"]
+        .map(label => `<span class="chip"><span class="led"></span>${esc(label)} <span class="muted">نامشخص</span></span>`)
+        .join("");
+      return;
+    }
+    box.innerHTML = list.slice(0, 3).map((s, i) => {
+      const down = s.down === true || /^(down|1|true|yes|قطع|خیر)$/i.test(String(s.down));
+      const name = String(s.label || ["سایت", "چت", "API"][i]);
+      const letter = String.fromCharCode(65 + i);
+      const href = /^https?:\/\//i.test(String(s.url || "")) ? ` href="${esc(s.url)}" target="_blank" rel="noopener"` : "";
+      return `<a class="chip ${down ? "down" : "up"}"${href}><span class="led"></span>${esc(letter)} — ${esc(name)} · ${down ? "قطع" : "برقرار"}</a>`;
+    }).join("");
+  }
+
+  function offerCard(o) {
+    const title = o.vendor || o.domain || "آفر";
+    const type = fa(OFFER_TYPE_FA, o.offer_type, "");
+    const [vlabel, vclass] = VERIFY[String(o.verify_status || "unconfirmed").toLowerCase()] || VERIFY.unconfirmed;
+    const left = daysLeft(o.expires_at);
+    const link = /^https?:\/\//i.test(String(o.signup_url || o.source_url || "")) ? (o.signup_url || o.source_url) : "";
+    const tags = [];
+    if (type) tags.push(`<span class="tag">${esc(type)}</span>`);
+    if (o.score) tags.push(`<span class="tag score">⭐️ ${esc(Math.round(Number(o.score)))}</span>`);
+    tags.push(`<span class="tag ${vclass}">${esc(vlabel)}</span>`);
+    if (left !== null) tags.push(`<span class="tag ${left < 0 ? "bad" : ""}">${left < 0 ? "منقضی" : left === 0 ? "امروز" : left + " روز"}</span>`);
+    if (o.requires_cc === true || o.requires_cc === "true") tags.push(`<span class="tag">💳 کارت لازم</span>`);
+    if (o.requires_edu === true || o.requires_edu === "true") tags.push(`<span class="tag">🎓 ایمیل دانشگاهی</span>`);
+
+    const desc = [o.value && `🎁 ${o.value}`, o.why && `💡 ${o.why}`, o.limits && `📉 ${o.limits}`]
+      .filter(Boolean).map(x => `<p>${esc(x)}</p>`).join("");
+
+    return `<article class="card" data-s="${esc(o.score || 0)}" data-v="${esc(o.verify_status || "")}" data-t="${esc(o.offer_type || "")}">
+      <h3>${esc(title)} <span class="host">${esc(hostOf(link) || o.domain || "")}</span></h3>
+      <div class="tags">${tags.join("")}</div>
+      ${desc}
+      <div class="foot">${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">دریافت</a>` : ""}
+      ${o.source_url && o.source_url !== link ? `<a class="muted" href="${esc(o.source_url)}" target="_blank" rel="noopener">منبع</a>` : ""}</div>
+    </article>`;
+  }
+
+  function guideCard(t) {
+    const link = /^https?:\/\//i.test(String(t.url || t.signup_url || "")) ? (t.url || t.signup_url) : "";
+    const items = (arr, icon) => Array.isArray(arr) && arr.length
+      ? `<ul>${arr.slice(0, 6).map(x => `<li>${icon} ${esc(x)}</li>`).join("")}</ul>` : "";
+    return `<article class="card">
+      <h3>${esc(t.title || t.vendor || "ابزار")} <span class="host">${esc(hostOf(link))}</span></h3>
+      <div class="tags">
+        ${t.status ? `<span class="tag">${esc(t.status)}</span>` : ""}
+        ${t.tag ? `<span class="tag">${esc(t.tag)}</span>` : ""}
+        ${t.region ? `<span class="tag">🌍 ${esc(t.region)}</span>` : ""}
+      </div>
+      ${t.summary || t.why ? `<p>📝 ${esc(t.summary || t.why)}</p>` : ""}
+      ${t.free ? `<p>🎁 ${esc(t.free)}</p>` : ""}
+      ${items(t.how_to, "🚀")}${items(t.limitations, "📉")}
+      ${t.best_for ? `<p>✅ خوب برای: ${esc(t.best_for)}</p>` : ""}
+      ${t.not_for ? `<p>⚠️ مناسب نیست برای: ${esc(t.not_for)}</p>` : ""}
+      <div class="foot">${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">باز کردن</a>` : ""}</div>
+    </article>`;
+  }
+
+  function fillTypes(offers) {
+    const sel = $("#type");
+    const types = [...new Set(offers.map(o => o.offer_type).filter(Boolean))];
+    sel.innerHTML = `<option value="">همهٔ نوع‌ها</option>` +
+      types.map(t => `<option value="${esc(t)}">${esc(fa(OFFER_TYPE_FA, t))}</option>`).join("");
+  }
+
+  function applyFilters() {
+    const q = $("#q").value.trim().toLowerCase();
+    const type = $("#type").value;
+    const min = Number($("#min").value) || 0;
+    const verify = $("#verify").value;
+    let shown = 0;
+    for (const card of document.querySelectorAll("#offers .card")) {
+      const hay = card.textContent.toLowerCase();
+      const ok = (!q || hay.includes(q)) &&
+        (!type || card.dataset.t === type) &&
+        Number(card.dataset.s) >= min &&
+        (!verify || card.dataset.v === verify);
+      card.hidden = !ok;
+      if (ok) shown++;
+    }
+    let empty = $("#offers .empty");
+    if (!shown && !empty) {
+      empty = document.createElement("p");
+      empty.className = "empty muted";
+      empty.textContent = "با این فیلترها چیزی پیدا نشد. حداقل امتیاز را کم کنید.";
+      $("#offers").appendChild(empty);
+    } else if (shown && empty) empty.remove();
+  }
+
+  async function render() {
+    const { offers, site } = await load();
+    renderAvail(site);
+
+    const stamp = site.updated_at || "";
+    const live = offers.filter(o => !["dead_link", "expired", "suspicious", "not_offer"].includes(String(o.verify_status || "")))
+      .sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
+    $("#updated").textContent = live.length
+      ? `${live.length} آفر فعال${stamp ? " · آخرین به‌روزرسانی: " + stamp : ""}`
+      : "هنوز داده‌ای منتشر نشده — اولین اجرای hunt را ببینید";
+    $("#offers").innerHTML = live.length
+      ? live.map(offerCard).join("")
+      : `<p class="muted">آفر فعالی برای نمایش نیست.</p>`;
+    fillTypes(live);
+    applyFilters();
+
+    // Guides: the site's tool registry when it exists, otherwise the offers
+    // themselves (a card still explains what the free thing is).
+    const tools = Array.isArray(site.tools) && site.tools.length ? site.tools : live;
+    $("#guides").innerHTML = tools.slice(0, 24).map(guideCard).join("") ||
+      `<p class="muted">هنوز راهنمایی ثبت نشده.</p>`;
+  }
+
+  /* ---------------- tabs + filters ---------------- */
+  document.querySelectorAll("nav.pills button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("nav.pills button").forEach(b => b.setAttribute("aria-selected", String(b === btn)));
+      for (const tab of ["offers", "guides", "bot"]) {
+        $("#tab-" + tab).hidden = tab !== btn.dataset.tab;
+      }
+      if (location.hash.slice(1) !== btn.dataset.tab) history.replaceState(null, "", "#" + btn.dataset.tab);
+    });
+  });
+  const initial = location.hash.slice(1);
+  if (["guides", "bot"].includes(initial)) document.querySelector(`nav.pills button[data-tab="${initial}"]`)?.click();
+
+  $("#q").addEventListener("input", applyFilters);
+  ["#type", "#min", "#verify"].forEach(s => $(s).addEventListener("change", applyFilters));
+
+  /* ---------------- copy the worker code ---------------- */
+  const CODE_URLS = [
+    "https://raw.githubusercontent.com/tcpzizi/freeai-hunter/main/workers/bot.paste.js",
+    "../../workers/bot.paste.js"
+  ];
+  $("#open-code").href = CODE_URLS[0];
+  $("#copy-code").addEventListener("click", async () => {
+    const state = $("#copy-state");
+    state.textContent = "در حال گرفتن کد…";
+    for (const url of CODE_URLS) {
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        if (!r.ok) continue;
+        const code = await r.text();
+        if (!code.includes("VERSION")) continue;
+        await navigator.clipboard.writeText(code);
+        state.className = "ok-note";
+        state.textContent = `کپی شد (${Math.round(code.length / 1024)} کیلوبایت) — در ادیتور Cloudflare بچسبانید`;
+        return;
+      } catch { /* next url */ }
+    }
+    state.className = "bad-note";
+    state.textContent = "کپی نشد؛ با دکمهٔ «باز کردن فایل کد» و دکمهٔ Copy raw file contents بگیرید.";
+  });
+
+  render().catch(err => {
+    $("#updated").textContent = "خواندن داده ممکن نشد";
+    $("#offers").innerHTML = `<p class="bad-note">${esc(String(err))}</p>`;
+  });
+})();
+</script>
+</body>
+</html>
