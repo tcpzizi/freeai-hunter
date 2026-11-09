@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: "22"
       - name: Syntax check
-        run: node --check workers/bot.js
+        run: |
+          node --check workers/bot.js
+          node --check workers/bot.paste.js
       - name: Run worker tests
+        # includes a check that bot.paste.js still matches bot.js
         run: node --test workers/bot.test.mjs

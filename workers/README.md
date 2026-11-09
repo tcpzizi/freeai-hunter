@@ -55,6 +55,26 @@ npx wrangler deploy
 curl "https://<worker>/setup?key=$ADMIN_SECRET"
 ```
 
+## کپی/پیست در داشبورد (فایل خودکفا)
+
+`workers/bot.paste.js` همان `bot.js` است، ولی یک فایل مستقل: بدون import، بدون
+`wrangler.toml`، بدون هیچ وابستگی. کل فایل را کپی کنید و در ادیتور داشبورد بچسبانید.
+
+- **صفحهٔ کپی یک‌کلیکی**: `workers/copy.html` را باز کنید و دکمهٔ «📋 کپی کل کد»
+  را بزنید (دکمهٔ دانلود هم دارد). این صفحه فایل را با `fetch("./bot.paste.js")`
+  می‌خواند، پس هر دو فایل باید کنار هم باشند.
+- **از ترمینال**: `cat workers/bot.paste.js` (یا در GitHub: فایل → دکمهٔ *Copy raw
+  file contents*).
+- `bot.paste.js` دستی ویرایش نمی‌شود؛ از `bot.js` ساخته می‌شود:
+
+```bash
+node workers/tools/build-paste.mjs          # بازسازی
+node workers/tools/build-paste.mjs --check  # خطا اگر قدیمی باشد
+```
+
+تست `bot.paste.js is the current bot.js` در همان مجموعه اجرا می‌شود، پس این دو
+هیچ‌وقت از هم جدا نمی‌افتند.
+
 ## سقف‌های پلن رایگان که کد با آن‌ها کار می‌کند
 
 | محدودیت | مقدار | کاری که کد می‌کند |

@@ -527,3 +527,19 @@ test("an offer with no id or URL keeps a stable identity across fetches", async 
   assert.equal((await res.json()).sent, 0, "not re-announced (v6 used Math.random())");
   assert.equal(JSON.parse(kv.store.get("user:7").value).sent[0], firstId);
 });
+
+test("bot.paste.js is the current bot.js (dashboard copy stays in sync)", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { execFileSync } = await import("node:child_process");
+  const paste = readFileSync(new URL("./bot.paste.js", import.meta.url), "utf8");
+  // dashboard files must be self-contained
+  assert.ok(!/^\s*import\s/m.test(paste), "no import statements");
+  assert.ok(!/^\s*export\s/m.test(paste.replace(/export default \{[\s\S]*$/, "")), "only the default export");
+  assert.match(paste, /const VERSION = "v7"/);
+  assert.match(paste, /export default \{/);
+  try {
+    execFileSync(process.execPath, [new URL("./tools/build-paste.mjs", import.meta.url).pathname, "--check"], { stdio: "pipe" });
+  } catch (err) {
+    assert.fail("bot.paste.js is stale: run node workers/tools/build-paste.mjs\n" + String(err.stdout || err.message));
+  }
+});
